@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8468911E2E9820E5001491BC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8468911D2E9820E5001491BC /* FirebaseAnalytics */; };
+		846891202E9820E5001491BC /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8468911F2E9820E5001491BC /* FirebaseAnalyticsCore */; };
+		846891222E9820E5001491BC /* FirebaseAnalyticsIdentitySupport in Frameworks */ = {isa = PBXBuildFile; productRef = 846891212E9820E5001491BC /* FirebaseAnalyticsIdentitySupport */; };
+		846891242E9820E5001491BC /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 846891232E9820E5001491BC /* FirebaseAppCheck */; };
+		846891272E9824A6001491BC /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 846891262E9824A6001491BC /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		840EE7492E8A91960004D495 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846891222E9820E5001491BC /* FirebaseAnalyticsIdentitySupport in Frameworks */,
+				846891272E9824A6001491BC /* FirebaseAuth in Frameworks */,
+				8468911E2E9820E5001491BC /* FirebaseAnalytics in Frameworks */,
+				846891202E9820E5001491BC /* FirebaseAnalyticsCore in Frameworks */,
+				846891242E9820E5001491BC /* FirebaseAppCheck in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +91,7 @@
 				840EE73A2E8A91940004D495 /* PushLearn */,
 				840EE74B2E8A91960004D495 /* PushLearnTests */,
 				840EE7552E8A91960004D495 /* PushLearnUITests */,
+				846891252E9824A6001491BC /* Frameworks */,
 				840EE7392E8A91940004D495 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +104,13 @@
 				840EE7522E8A91960004D495 /* PushLearnUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		846891252E9824A6001491BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +133,11 @@
 			);
 			name = PushLearn;
 			packageProductDependencies = (
+				8468911D2E9820E5001491BC /* FirebaseAnalytics */,
+				8468911F2E9820E5001491BC /* FirebaseAnalyticsCore */,
+				846891212E9820E5001491BC /* FirebaseAnalyticsIdentitySupport */,
+				846891232E9820E5001491BC /* FirebaseAppCheck */,
+				846891262E9824A6001491BC /* FirebaseAuth */,
 			);
 			productName = PushLearn;
 			productReference = 840EE7382E8A91940004D495 /* PushLearn.app */;
@@ -195,6 +221,9 @@
 			);
 			mainGroup = 840EE72F2E8A91940004D495;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8468911A2E9820E5001491BC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 840EE7392E8A91940004D495 /* Products */;
 			projectDirPath = "";
@@ -399,11 +428,13 @@
 				DEVELOPMENT_TEAM = Q3ZBJKTDC2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -411,9 +442,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mxtp.PushLearn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -428,11 +463,13 @@
 				DEVELOPMENT_TEAM = Q3ZBJKTDC2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -440,9 +477,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mxtp.PushLearn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -558,6 +599,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8468911A2E9820E5001491BC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8468911D2E9820E5001491BC /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8468911A2E9820E5001491BC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		8468911F2E9820E5001491BC /* FirebaseAnalyticsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8468911A2E9820E5001491BC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+		846891212E9820E5001491BC /* FirebaseAnalyticsIdentitySupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8468911A2E9820E5001491BC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsIdentitySupport;
+		};
+		846891232E9820E5001491BC /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8468911A2E9820E5001491BC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		846891262E9824A6001491BC /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8468911A2E9820E5001491BC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 840EE7302E8A91940004D495 /* Project object */;
 }
