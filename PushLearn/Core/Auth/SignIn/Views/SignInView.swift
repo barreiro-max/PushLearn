@@ -24,20 +24,32 @@ struct SignInView: View {
             
             VStack(spacing: 35) {
                 Spacer().frame(height: 150)
-                // мне все еще не нравится как выводятся ошибки, нужно найти готовое решение и переписать все к чертям собачьим
                 
-                AuthEmailField(
-                    prompt: "Введіть електронну пошту",
-                    email: $email,
-                    signInVM: signInVM
-                )
-                
-                AuthSecureField(
-                    prompt: "Введіть пароль",
-                    password: $password,
-                    signInVM: signInVM
-                )
-                
+                switch signInVM.state {
+                case .loading:
+                    ProgressView()
+
+                case .failure(_, _, let globalError):
+                    makeAuthFields(
+                        email: $email,
+                        password: $password,
+                        signInVM: signInVM
+                    )
+                    if let globalError {
+                        Text(globalError)
+                            .foregroundStyle(.red)
+                            .font(.system(size: 14))
+                            .multilineTextAlignment(.center)
+                    }
+                    
+                default:
+                    makeAuthFields(
+                        email: $email,
+                        password: $password,
+                        signInVM: signInVM
+                    )
+                }
+                    
                 ForgotPasswordButton()
                 
                 SignInButton(
@@ -46,15 +58,27 @@ struct SignInView: View {
                     password: $password
                 )
                 
-                if let globalError = signInVM.globalError {
-                    Text(globalError)
-                        .foregroundStyle(.red)
-                        .font(.headline)
-                }
-                
                 ShowSignUpSheet()
             }
         }
+    }
+}
+
+extension SignInView {
+    @ViewBuilder
+    private func makeAuthFields(
+        email: Binding<String>,
+        password: Binding<String>,
+        signInVM: SignInVM
+    ) -> some View {
+        AuthEmailField(
+            email: $email,
+            signInVM: signInVM
+        )
+        AuthSecureField(
+            password: $password,
+            signInVM: signInVM
+        )
     }
 }
 

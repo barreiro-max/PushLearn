@@ -14,6 +14,7 @@ public class SignInVM {
     }
     
     func signIn(email: String, password: String) async {
+        state = .idle
         guard authValidator.isEmailValid(email) else {
             state = .failure(email: "Невалідна електронна пошта")
             return
@@ -30,29 +31,30 @@ public class SignInVM {
             state = .success(user: result.user)
             UserDefaults.setLoggedIn()
         } catch {
-            state = .failure(
-                global: error.localizedDescription
-            )
-            
+            state = .failure(global: error.localizedDescription)
         }
+        
     }
     
     
     func signOut() {
+        state = .loading
         do {
             try Auth.auth().signOut()
             UserDefaults.setLoggedOut()
+            state = .out
         } catch {
-            
+            state = .failure(global: error.localizedDescription)
         }
+        
     }
     
     func resetPassword(email: String) async {
+        state = .loading
         do {
             try await Auth.auth().sendPasswordReset(withEmail: email)
-            
         } catch {
-            
+            state = .failure(global: error.localizedDescription)
         }
     }
 

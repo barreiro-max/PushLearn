@@ -1,14 +1,16 @@
 import SwiftUI
 
 struct AuthSecureField: View {
-    let prompt: String
+    let prompt: String = "Введіть пароль"
     @Binding var password: String
     @Bindable var signInVM: SignInVM
-
+    let passwordError: String? = nil
+    
     var body: some View {
-        if let error = signInVM.pwError {
-            makeSecureField(password: password, pwError: error)
-        } else {
+        switch signInVM.state {
+        case .failure(_, let pwError, _):
+            makeSecureField(password: password, pwError: pwError)
+        default:
             makeSecureField(password: password)
         }
     }
@@ -43,6 +45,3 @@ extension AuthSecureField {
     }
 }
 
-#Preview {
-    AuthSecureField(prompt: "", password: .constant(""), signInVM: SignInVM())
-}

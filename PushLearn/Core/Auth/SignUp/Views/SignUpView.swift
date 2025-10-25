@@ -23,16 +23,8 @@ struct SignUpView: View {
             VStack(spacing: 35) {
                 Spacer().frame(height: 150)
 #warning("Добавить вывод ошибок при невалидном вводе данных")
-                AuthEmailField(
-                    prompt: "Введіть електронну пошту",
-                    email: $email,
-                    signInVM: SignInVM() // вот с этим чето надо придумать
-                )
-                AuthSecureField(
-                    prompt: "Введіть пароль",
-                    password: $password,
-                    signInVM: SignInVM()  // вот с этим тоже чето надо придумать
-                )
+                
+                // поля регистрации
             
                 // error
                 

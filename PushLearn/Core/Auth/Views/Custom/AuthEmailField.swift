@@ -1,14 +1,16 @@
 import SwiftUI
 
 struct AuthEmailField: View {
-    let prompt: String
+    let prompt: String = "Введіть електронну пошту"
     @Binding var email: String
     @Bindable var signInVM: SignInVM
+    let emailError: String? = nil
     
     var body: some View {
-        if let error = signInVM.emailError {
-            makeEmailField(email: email, emailError: error)
-        } else {
+        switch signInVM.state {
+        case .failure(let emailError, _, _):
+            makeEmailField(email: email, emailError: emailError)
+        default:
             makeEmailField(email: email)
         }
     }
@@ -39,13 +41,4 @@ extension AuthEmailField {
             TextFieldLine()
         }
     }
-}
-
-
-#Preview {
-    AuthEmailField(
-        prompt: "Custom prompt",
-        email: .constant("Custom_valuegm.test"),
-        signInVM: SignInVM()
-    )
 }
