@@ -5,11 +5,7 @@ import FirebaseAuth
 public class SignInVM {
     private var authValidator: AuthValidated
     
-    var user: User? = Auth.auth().currentUser
-    
-    var emailError: String?
-    var pwError: String?
-    var globalError: String?
+    var state: SignInState = .idle
     
     init(
         authValidator: AuthValidated = AuthValidator()
@@ -18,37 +14,29 @@ public class SignInVM {
     }
     
     func signIn(email: String, password: String) async {
+        guard authValidator.isEmailValid(email) else {
+            state = .failure(email: "Невалідна електронна пошта")
+            return
+        }
+        guard authValidator.isPasswordValid(password) else {
+            state = .failure(password: "Невалідний пароль")
+            return
+        }
+        
+        state = .loading
+        
         do {
-            clearErrors()
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            user = result.user
+            state = .success(user: result.user)
             UserDefaults.setLoggedIn()
+        } catch {
+            state = .failure(
+                global: error.localizedDescription
+            )
             
-        } catch let error as NSError {
-            if let authCode = AuthErrorCode(rawValue: error.code) {
-#if DEBUG
-                print("NSError:", error)
-                print("err.code:", error.code)
-                print("err.domain:", error.domain)
-                print("err.userInfo:", error.userInfo)
-                print("err.ld: ", error.localizedDescription)
-#endif
-                
-                switch authCode {
-                case .invalidCredential:
-                    pwError = "Неправильний пароль"
-                case .invalidEmail:
-                    emailError = "Невалідна електронна пошта"
-                case .networkError:
-                    globalError = "Проблеми з мережею"
-                case .userDisabled, .userNotFound, .userMismatch:
-                    globalError = "Проблеми з користувачем"
-                default:
-                    globalError = "Невідома помилка"
-                }
-            }
         }
     }
+    
     
     func signOut() {
         do {
@@ -66,12 +54,6 @@ public class SignInVM {
         } catch {
             
         }
-    }
-    
-    private func clearErrors() {
-        emailError = nil
-        pwError = nil
-        globalError = nil
     }
 
 }
