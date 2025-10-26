@@ -8,11 +8,9 @@ struct SignInButton: View {
     
     var body: some View {
         Button(action:  {
-            Task {
-                await signInVM.signIn(email: email, password: password)
-                email = ""
-                password = ""
-            }
+            signInVM.signIn(email: email, password: password)
+            email = ""
+            password = ""
         }, label: {
             Text("Вхід")
                 .font(.system(size: 20))
@@ -22,6 +20,8 @@ struct SignInButton: View {
         .padding(.horizontal, 16)
         .buttonStyle(.borderedProminent)
     }
+    
+    
 }
 
 

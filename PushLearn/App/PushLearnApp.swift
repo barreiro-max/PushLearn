@@ -7,6 +7,8 @@ struct PushLearnApp: App {
     @AppStorage("isLoggedIn") private var isLoggedIn = false
     @AppStorage("isDarkMode") private var isDarkMode = false
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+     
     var body: some Scene {
         WindowGroup {
             Group {
@@ -19,15 +21,21 @@ struct PushLearnApp: App {
             .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
+}
 
-    init() {
+class AppDelegate: NSObject, UIApplicationDelegate {
+    @AppStorage("isLoggedIn") private var isLoggedIn = false
+    
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+    ) -> Bool {
         FirebaseApp.configure()
-
-        #warning("Обезопасить авторизацию и проверки связанные с ней")
         if let _ = Auth.auth().currentUser {
             isLoggedIn = true
         } else {
             isLoggedIn = false
         }
+        return true
     }
 }

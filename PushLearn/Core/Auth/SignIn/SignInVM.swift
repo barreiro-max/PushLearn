@@ -13,7 +13,7 @@ public class SignInVM {
         self.authValidator = authValidator
     }
     
-    func signIn(email: String, password: String) async {
+    func signIn(email: String, password: String) {
         state = .idle
         guard authValidator.isEmailValid(email) else {
             state = .failure(email: "Невалідна електронна пошта")
@@ -25,17 +25,17 @@ public class SignInVM {
         }
         
         state = .loading
-        
-        do {
-            let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            state = .success(user: result.user)
-            UserDefaults.setLoggedIn()
-        } catch {
-            state = .failure(global: error.localizedDescription)
+        Task {
+            do {
+                let result = try await Auth.auth().signIn(withEmail: email, password: password)
+                state = .success(user: result.user)
+                UserDefaults.setLoggedIn()
+            } catch {
+                state = .failure(global: error.authErrorCodeDescription)
+            }
         }
         
     }
-    
     
     func signOut() {
         state = .loading
@@ -44,7 +44,7 @@ public class SignInVM {
             UserDefaults.setLoggedOut()
             state = .out
         } catch {
-            state = .failure(global: error.localizedDescription)
+            state = .failure(global: error.authErrorCodeDescription)
         }
         
     }
@@ -54,8 +54,7 @@ public class SignInVM {
         do {
             try await Auth.auth().sendPasswordReset(withEmail: email)
         } catch {
-            state = .failure(global: error.localizedDescription)
+            state = .failure(global: error.authErrorCodeDescription)
         }
     }
-
 }
