@@ -32,10 +32,7 @@ struct SignUpView: View {
                                state: $signUpVM.state
                     )
                     
-                    Text(globalError)
-                        .foregroundStyle(.red)
-                        .font(.system(size: 14))
-                        .multilineTextAlignment(.center)
+                    ErrorView(globalError: globalError)
                     
                 default:
                     AuthFields(email: $email,
