@@ -14,16 +14,16 @@ struct SignUpButton: View {
                 await signUpVM.signUp(email: email, password: password)
                 email = ""
                 password = ""
-                dismiss()
+                if case .success(user: _) = signUpVM.state {
+                    dismiss()
+                }
             }
         }, label: {
             Text("Створити")
                 .font(.system(size: 20))
                 .frame(width: 90, height: 50)
         })
-        .disabled(
-            password.count < 8
-        )
+        .disabled( password.count < 8)
         .padding(.horizontal, 16)
         .buttonStyle(.borderedProminent)
     }

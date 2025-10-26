@@ -22,11 +22,29 @@ struct SignUpView: View {
             
             VStack(spacing: 35) {
                 Spacer().frame(height: 150)
-#warning("Добавить вывод ошибок при невалидном вводе данных")
+
+                switch signUpVM.state {
+                case .loading:
+                    ProgressView()
+                case .failure(_, _, global: let globalError):
+                    AuthFields(email: $email,
+                               password: $password,
+                               state: $signUpVM.state
+                    )
+                    
+                    Text(globalError)
+                        .foregroundStyle(.red)
+                        .font(.system(size: 14))
+                        .multilineTextAlignment(.center)
+                    
+                default:
+                    AuthFields(email: $email,
+                               password: $password,
+                               state: $signUpVM.state
+                    )
+                }
                 
-                // поля регистрации
-            
-                // error
+                
                 
                 SignUpButton(
                     signUpVM: signUpVM,
@@ -38,6 +56,3 @@ struct SignUpView: View {
     }
 }
 
-#Preview {
-    SignUpView(signUpVM: SignUpVM())
-}

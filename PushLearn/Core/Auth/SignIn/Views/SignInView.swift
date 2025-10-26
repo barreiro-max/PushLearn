@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct SignInView: View {
-    @State var signInVM = SignInVM()
+    @State var signInVM = SignInVM(
+        authValidator: AuthValidator()
+    )
     
     @State private var email = ""
     @State private var password = ""
@@ -30,23 +32,22 @@ struct SignInView: View {
                     ProgressView()
 
                 case .failure(_, _, let globalError):
-                    makeAuthFields(
+                    AuthFields(
                         email: $email,
                         password: $password,
-                        signInVM: signInVM
+                        state: $signInVM.state
                     )
-                    if let globalError {
-                        Text(globalError)
-                            .foregroundStyle(.red)
-                            .font(.system(size: 14))
-                            .multilineTextAlignment(.center)
-                    }
+                    
+                    Text(globalError)
+                        .foregroundStyle(.red)
+                        .font(.system(size: 14))
+                        .multilineTextAlignment(.center)
                     
                 default:
-                    makeAuthFields(
+                    AuthFields(
                         email: $email,
                         password: $password,
-                        signInVM: signInVM
+                        state: $signInVM.state
                     )
                 }
                     
@@ -62,24 +63,6 @@ struct SignInView: View {
             }
         }
         
-    }
-}
-
-extension SignInView {
-    @ViewBuilder
-    private func makeAuthFields(
-        email: Binding<String>,
-        password: Binding<String>,
-        signInVM: SignInVM
-    ) -> some View {
-        AuthEmailField(
-            email: $email,
-            signInVM: signInVM
-        )
-        AuthSecureField(
-            password: $password,
-            signInVM: signInVM
-        )
     }
 }
 

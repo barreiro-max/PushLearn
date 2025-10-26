@@ -3,11 +3,11 @@ import SwiftUI
 struct AuthSecureField: View {
     let prompt: String = "Введіть пароль"
     @Binding var password: String
-    @Bindable var signInVM: SignInVM
+    @Binding var state: AuthState
     let passwordError: String? = nil
     
     var body: some View {
-        switch signInVM.state {
+        switch state {
         case .failure(_, let pwError, _):
             makeSecureField(password: password, pwError: pwError)
         default:

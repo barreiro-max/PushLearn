@@ -5,7 +5,7 @@ import FirebaseAuth
 public class SignInVM {
     private var authValidator: AuthValidated
     
-    var state: SignInState = .idle
+    var state: AuthState = .idle
     
     init(
         authValidator: AuthValidated = AuthValidator()
@@ -23,7 +23,6 @@ public class SignInVM {
             state = .failure(password: "Невалідний пароль")
             return
         }
-        
         state = .loading
         Task {
             do {
@@ -31,7 +30,7 @@ public class SignInVM {
                 state = .success(user: result.user)
                 UserDefaults.setLoggedIn()
             } catch {
-                state = .failure(global: error.authErrorCodeDescription)
+                state = .failure(global: error.signInErrorDescription)
             }
         }
         
@@ -44,9 +43,8 @@ public class SignInVM {
             UserDefaults.setLoggedOut()
             state = .out
         } catch {
-            state = .failure(global: error.authErrorCodeDescription)
+            state = .failure(global: error.signInErrorDescription)
         }
-        
     }
     
     func resetPassword(email: String) async {
@@ -54,7 +52,7 @@ public class SignInVM {
         do {
             try await Auth.auth().sendPasswordReset(withEmail: email)
         } catch {
-            state = .failure(global: error.authErrorCodeDescription)
+            state = .failure(global: error.signInErrorDescription)
         }
     }
 }

@@ -3,11 +3,12 @@ import SwiftUI
 struct AuthEmailField: View {
     let prompt: String = "Введіть електронну пошту"
     @Binding var email: String
-    @Bindable var signInVM: SignInVM
+    
+    @Binding var state: AuthState
     let emailError: String? = nil
     
     var body: some View {
-        switch signInVM.state {
+        switch state {
         case .failure(let emailError, _, _):
             makeEmailField(email: email, emailError: emailError)
         default:
