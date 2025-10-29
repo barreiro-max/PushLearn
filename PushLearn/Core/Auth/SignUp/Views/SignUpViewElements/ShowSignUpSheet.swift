@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ShowSignUpSheet: View {
-    @State var showSignUp: Bool = false
+    @State var showSignUp = false
     var body: some View {
         Button("Створити обліковий запис") {
             showSignUp.toggle()
