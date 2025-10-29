@@ -11,7 +11,7 @@ struct SignUpButton: View {
     var body: some View {
         Button(action: {
             Task {
-                await signUpVM.signUp(email: email, password: password)
+                signUpVM.signUp(email: email, password: password)
                 email = ""
                 password = ""
                 if case .success(user: _) = signUpVM.state {

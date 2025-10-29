@@ -11,7 +11,7 @@ public class SignUpVM {
         self.authValidator = authValidator
     }
         
-    func signUp(email: String, password: String) async {
+    func signUp(email: String, password: String) {
         state = .idle
         guard authValidator.isEmailValid(email) else {
             state = .failure(email: "Невалідна електронна пошта")

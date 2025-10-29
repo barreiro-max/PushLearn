@@ -46,13 +46,4 @@ public class SignInVM {
             state = .failure(global: error.signInErrorDescription)
         }
     }
-    
-    func resetPassword(email: String) async {
-        state = .loading
-        do {
-            try await Auth.auth().sendPasswordReset(withEmail: email)
-        } catch {
-            state = .failure(global: error.signInErrorDescription)
-        }
-    }
 }
