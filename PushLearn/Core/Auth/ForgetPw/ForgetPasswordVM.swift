@@ -14,12 +14,12 @@ public class ForgetPasswordVM {
     }
     
     func resetPassword(email: String) {
-        state = .loading
+        state = .idle
         Task {
             do {
                 try await Auth.auth().sendPasswordReset(withEmail: email)
             } catch {
-                state = .failure(global: error.signInErrorDescription)
+                state = .failure(global: error.resetPasswordDescription)
             }
         }
     }

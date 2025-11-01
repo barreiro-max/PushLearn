@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ForgetPasswordView: View {
     @State private var email = ""
-    @State var forgetPasswordvVM = ForgetPasswordVM()
+    @State var forgetPasswordVM = ForgetPasswordVM()
     var body: some View {
         ZStack {
             Color.backgroundPrimary.ignoresSafeArea()
@@ -19,14 +19,24 @@ struct ForgetPasswordView: View {
             
             VStack(spacing: 80) {
                 Spacer().frame(height: 175)
-                AuthEmailField(email: $email, state: $forgetPasswordvVM.state)
+                switch forgetPasswordVM.state {
+                case .failure(_, _, let globalError):
+                    ErrorView(globalError: globalError)
+#warning("в этой секции явно что то не то")
+                default:
+                    EmptyView()
+                }
+                AuthEmailField(
+                    email: $email,
+                    state: $forgetPasswordVM.state
+                )
                 
-                ResetPasswordButton(forgetPasswordVM: forgetPasswordvVM, email: $email)
+                ResetPasswordButton(forgetPasswordVM: forgetPasswordVM, email: $email)
             }
         }
     }
 }
 
 #Preview {
-    ForgetPasswordView(forgetPasswordvVM: ForgetPasswordVM())
+    ForgetPasswordView(forgetPasswordVM: ForgetPasswordVM())
 }
