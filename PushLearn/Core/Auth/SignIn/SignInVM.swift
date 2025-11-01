@@ -40,8 +40,8 @@ public class SignInVM {
         state = .loading
         do {
             try Auth.auth().signOut()
-            UserDefaults.setLoggedOut()
             state = .out
+            UserDefaults.setLoggedOut()
         } catch {
             state = .failure(global: error.signInErrorDescription)
         }

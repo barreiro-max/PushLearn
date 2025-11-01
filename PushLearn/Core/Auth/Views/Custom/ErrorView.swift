@@ -7,5 +7,10 @@ struct ErrorView: View {
             .foregroundStyle(.red)
             .font(.system(size: 14))
             .multilineTextAlignment(.center)
+            .frame(width: 300, height: 15)
     }
+}
+
+#Preview {
+    ErrorView(globalError: "Test error for preview mode")
 }

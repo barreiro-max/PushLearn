@@ -17,23 +17,29 @@ struct ForgetPasswordView: View {
                 .font(.system(size: 36).bold())
                 .offset(y: -120)
             
-            VStack(spacing: 80) {
-                Spacer().frame(height: 175)
-                switch forgetPasswordVM.state {
-                case .failure(_, _, let globalError):
-                    ErrorView(globalError: globalError)
-#warning("в этой секции явно что то не то")
-                default:
-                    EmptyView()
-                }
+            VStack(spacing: 15) {
+                Spacer().frame(height: 150)
+                
                 AuthEmailField(
                     email: $email,
                     state: $forgetPasswordVM.state
                 )
                 
-                ResetPasswordButton(forgetPasswordVM: forgetPasswordVM, email: $email)
+                switch forgetPasswordVM.state {
+                case .failure(_, _, let globalError):
+                    ErrorView(globalError: globalError)
+                default:
+                    EmptyView()
+                }
+                
+                
+                Spacer().frame(height: 50)
+                ResetPasswordButton(
+                    forgetPasswordVM: forgetPasswordVM,
+                    email: $email
+                )
             }
-        }
+        } // End of ZStack
     }
 }
 

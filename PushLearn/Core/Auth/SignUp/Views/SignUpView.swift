@@ -27,21 +27,16 @@ struct SignUpView: View {
                 case .loading:
                     ProgressView()
                 case .failure(_, _, global: let globalError):
-                    AuthFields(email: $email,
-                               password: $password,
-                               state: $signUpVM.state
-                    )
-                    
                     ErrorView(globalError: globalError)
-                    
                 default:
-                    AuthFields(email: $email,
-                               password: $password,
-                               state: $signUpVM.state
-                    )
+                    EmptyView()
                 }
                 
-                
+                AuthFields(
+                    email: $email,
+                    password: $password,
+                    state: $signUpVM.state
+                )
                 
                 SignUpButton(
                     signUpVM: signUpVM,
@@ -53,3 +48,6 @@ struct SignUpView: View {
     }
 }
 
+#Preview {
+    SignUpView()
+}

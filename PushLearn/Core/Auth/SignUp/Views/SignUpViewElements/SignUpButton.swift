@@ -23,7 +23,7 @@ struct SignUpButton: View {
                 .font(.system(size: 20))
                 .frame(width: 90, height: 50)
         })
-        .disabled( password.count < 8)
+        .disabled(password.count < 8 || email.isEmpty)
         .padding(.horizontal, 16)
         .buttonStyle(.borderedProminent)
     }

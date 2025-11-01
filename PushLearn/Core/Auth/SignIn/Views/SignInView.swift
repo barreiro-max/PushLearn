@@ -32,22 +32,18 @@ struct SignInView: View {
                     ProgressView()
 
                 case .failure(_, _, let globalError):
-                    AuthFields(
-                        email: $email,
-                        password: $password,
-                        state: $signInVM.state
-                    )
-                    
                     ErrorView(globalError: globalError)
                     
                 default:
-                    AuthFields(
-                        email: $email,
-                        password: $password,
-                        state: $signInVM.state
-                    )
+                    EmptyView()
                 }
                     
+                AuthFields(
+                    email: $email,
+                    password: $password,
+                    state: $signInVM.state
+                )
+                
                 ForgotPasswordButton()
                 
                 SignInButton(

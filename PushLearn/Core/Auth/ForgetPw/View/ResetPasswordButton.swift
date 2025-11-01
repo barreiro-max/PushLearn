@@ -8,10 +8,11 @@ struct ResetPasswordButton: View {
             forgetPasswordVM.resetPassword(email: email)
             email = ""
         }) {
-            Text("Скинути пароль")
+            Text("Скинути")
                 .font(.system(size: 20))
                 .frame(width: 90, height: 50)
         }
+        .disabled(email.count < 8)
         .padding(.horizontal, 16)
         .buttonStyle(.borderedProminent)
     }
