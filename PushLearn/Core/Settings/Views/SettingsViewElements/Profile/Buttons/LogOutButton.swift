@@ -5,7 +5,6 @@ struct LogOutButton: View {
     var body: some View {
         Button("Вийти") {
             signInVM.signOut()
-            print("Ви вийшли з акаунту")
         }
         .bold()
     }

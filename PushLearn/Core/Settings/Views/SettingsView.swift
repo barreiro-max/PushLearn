@@ -23,8 +23,13 @@ struct SettingsView: View {
                     Section("Повідомлення") {
                         NotificationToggle()
                         if isNotificationEnabled {
-                            NotificationFrequencyPicker(notificationVM: notificationVM)
-                            NotificationQuietModeSheet()
+                           
+                            NotificationFrequencyPicker(
+                                notificationVM: notificationVM
+                            )
+                            NotificationQuietModeView(
+                                notificationVM: notificationVM
+                            )
                         }
                     }
                     Section("Зовнішний вигляд") {
