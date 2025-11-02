@@ -1,21 +1,21 @@
 import SwiftUI
 
-struct NotificationQuietModeView: View {
-    @Bindable var notificationVM: NotificationVM
+struct UNQuietModeView: View {
+    @Bindable var notificationVM: UserNotificationVM
     
     var body: some View {
         VStack(alignment: .center) {
             Text("Тихий режим").bold()
             DatePicker(
                 "З цього часу: ",
-                selection: $notificationVM.startQuietDate,
+                selection: $notificationVM.quietInterval.startQuietDate,
                 displayedComponents: .hourAndMinute
             )
             .padding()
             
             DatePicker(
                 "До цього часу: ",
-                selection: $notificationVM.endQuietDate,
+                selection: $notificationVM.quietInterval.endQuietDate,
                 displayedComponents: .hourAndMinute
             )
             .padding()
@@ -25,7 +25,7 @@ struct NotificationQuietModeView: View {
 }
 
 #Preview {
-    NotificationQuietModeView(
-        notificationVM: NotificationVM()
+    UNQuietModeView(
+        notificationVM: UserNotificationVM()
     )
 }

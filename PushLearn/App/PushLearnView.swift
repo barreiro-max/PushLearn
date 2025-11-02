@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: — PushLearnView
 
 struct PushLearnView: View {
-    @State var notificationVM  = NotificationVM()
+    @State var notificationVM  = UserNotificationVM()
     @State var tabBarVM = TabBarVM()
 
     var body: some View {
@@ -33,7 +33,7 @@ extension PushLearnView {
     if #available(iOS 18, *) {
         NewTabView(
             tabBarVM: TabBarVM(),
-            notificationVM: NotificationVM()
+            notificationVM: UserNotificationVM()
         )
     }
 }
@@ -41,7 +41,7 @@ extension PushLearnView {
 #Preview("IOS 17 and less PushLearnView") {
     OldTabView(
         tabBarVM: TabBarVM(),
-        notificationVM: NotificationVM()
+        notificationVM: UserNotificationVM()
     )
 }
 

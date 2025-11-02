@@ -6,7 +6,7 @@ struct SettingsView: View {
     @AppStorage("isNotificationEnabled") private var isNotificationEnabled = false
 
     @Bindable var signInVM: SignInVM
-    @Bindable var notificationVM: NotificationVM
+    @Bindable var notificationVM: UserNotificationVM
 
     var body: some View {
         NavigationStack {
@@ -21,13 +21,13 @@ struct SettingsView: View {
                         LanguagePicker()
                     }
                     Section("Повідомлення") {
-                        NotificationToggle()
+                        UNToggle()
                         if isNotificationEnabled {
                            
-                            NotificationFrequencyPicker(
+                            UNFrequencyPicker(
                                 notificationVM: notificationVM
                             )
-                            NotificationQuietModeView(
+                            UNQuietModeView(
                                 notificationVM: notificationVM
                             )
                         }
@@ -67,5 +67,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(signInVM: SignInVM(), notificationVM: NotificationVM())
+    SettingsView(signInVM: SignInVM(), notificationVM: UserNotificationVM())
 }

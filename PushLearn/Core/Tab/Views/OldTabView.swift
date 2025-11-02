@@ -4,7 +4,7 @@ import SwiftUI
 
 struct OldTabView: View {
     @Bindable var tabBarVM: TabBarVM
-    @Bindable var notificationVM: NotificationVM
+    @Bindable var notificationVM: UserNotificationVM
 
     var body: some View {
         TabView(selection: $tabBarVM.currentScreen) {
@@ -28,5 +28,5 @@ struct OldTabView: View {
 }
 
 #Preview {
-    OldTabView(tabBarVM: TabBarVM(), notificationVM: NotificationVM())
+    OldTabView(tabBarVM: TabBarVM(), notificationVM: UserNotificationVM())
 }

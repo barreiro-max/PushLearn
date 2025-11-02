@@ -5,7 +5,7 @@ import SwiftUI
 @available(iOS, introduced: 18.0)
 struct NewTabView: View {
     @Bindable var tabBarVM: TabBarVM
-    @Bindable var notificationVM: NotificationVM
+    @Bindable var notificationVM: UserNotificationVM
 
     var body: some View {
         TabView(selection: $tabBarVM.currentScreen) {
@@ -24,6 +24,6 @@ struct NewTabView: View {
 
 #Preview {
     if #available(iOS 18, *) {
-        NewTabView(tabBarVM: TabBarVM(), notificationVM: NotificationVM())
+        NewTabView(tabBarVM: TabBarVM(), notificationVM: UserNotificationVM())
     }
 }

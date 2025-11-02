@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct NotificationToggle: View {
+struct UNToggle: View {
     @AppStorage("isNotificationEnabled") private var isNotificationEnabled = false
     
     var body: some View {
@@ -13,5 +13,5 @@ struct NotificationToggle: View {
 }
 
 #Preview {
-    NotificationToggle()
+    UNToggle()
 }

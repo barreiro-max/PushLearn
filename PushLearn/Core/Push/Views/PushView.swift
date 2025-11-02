@@ -6,6 +6,13 @@ struct PushView: View {
     @State var pushVM = PushVM()
         
     @State var currentText = ""
+
+    let background: [Color] = [
+        .backgroundSecondary,
+        .backgroundSecondary,
+        .backgroundPrimary
+    ]
+    
     var body: some View {
         VStack(spacing: 45) {
             PushTextField(pushVM: pushVM, currentText: $currentText)
@@ -14,11 +21,7 @@ struct PushView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             LinearGradient(
-                colors: [
-                    .backgroundSecondary,
-                    .backgroundSecondary,
-                    .backgroundPrimary
-                ],
+                colors: background,
                 startPoint: .top,
                 endPoint: .bottom
             ),
