@@ -7,7 +7,6 @@ struct PushLearnView: View {
     @State var tabBarVM = TabBarVM()
 
     var body: some View {
-#warning("Нужно с помощью PreferenceKey достать signInVM и через tabviews передать куда нужно для синхронизации данных")
         makeTabView()
     }
 }

@@ -21,7 +21,7 @@ struct SettingsView: View {
                         LanguagePicker()
                     }
                     Section("Повідомлення") {
-                        UNToggle()
+                        UNToggle(notificationVM: notificationVM)
                         if isNotificationEnabled {
                            
                             UNFrequencyPicker(

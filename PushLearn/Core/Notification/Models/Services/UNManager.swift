@@ -3,14 +3,14 @@ import UserNotifications
 protocol Notificated {
     func requestAuthorization() -> Bool
 
-    func authStatus() async -> UNAuthorizationStatus
+    func authStatus() -> UNAuthorizationStatus
 
     func schedule(notification: LocalNotification)
 
     func cancelAll()
     func cancel(by id: String)
     
-    func pendingRequests() async -> [UNNotificationRequest]
+    func pendingRequests() -> [UNNotificationRequest]
 }
 
 public struct UNManager: Notificated {
@@ -30,8 +30,12 @@ public struct UNManager: Notificated {
         return false
     }
     
-    func authStatus() async -> UNAuthorizationStatus {
-        return await center.notificationSettings().authorizationStatus
+    func authStatus() -> UNAuthorizationStatus {
+        var status: UNAuthorizationStatus = .notDetermined
+        Task {
+            status = await center.notificationSettings().authorizationStatus
+        }
+        return status
     }
     
     func schedule(notification: LocalNotification) {
@@ -64,19 +68,25 @@ public struct UNManager: Notificated {
     
     func cancelAll() {
         center.removeAllPendingNotificationRequests()
+        center.removeAllDeliveredNotifications()
     }
     
     func cancel(by id: String) {
         center.removePendingNotificationRequests(withIdentifiers: [id])
+        center.removeDeliveredNotifications(withIdentifiers: [id])
     }
     
-    func pendingRequests() async -> [UNNotificationRequest] {
-        return await center.pendingNotificationRequests()
+    func pendingRequests() -> [UNNotificationRequest] {
+        var result: [UNNotificationRequest] = .init()
+        Task {
+             result = await center.pendingNotificationRequests()
+        }
+        return result
     }
 }
 
 extension UNManager {
-    func makeContent(
+    static func makeContent(
         title: String,
         body: String,
         categoryIdentifier: String
