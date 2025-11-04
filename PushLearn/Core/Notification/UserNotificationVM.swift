@@ -4,19 +4,16 @@ import UserNotifications
 @Observable
 public class UserNotificationVM {
     private let manager: Notificated
-    private let factory: LocalNotificationFactoryProtocol
     
     var frequeuncy: UNFrequency
     var quietInterval: UNInterval
     
     init(
         manager: Notificated = UNManager(),
-        factory: LocalNotificationFactoryProtocol = LocalNotificationFactory(),
         frequeuncy: UNFrequency = .sixHours,
         quietInterval: UNInterval =  .init()
     ) {
         self.manager = manager
-        self.factory = factory
         self.frequeuncy = frequeuncy
         self.quietInterval = quietInterval
     }
@@ -28,12 +25,12 @@ public class UserNotificationVM {
         return manager.authStatus()
     }
     
-    func schedule() {
-        let notification = factory.makeNotification(
+    func schedule(type: UNType) {
+        manager.schedule(
+            type: type,
             frequency: frequeuncy,
-            in: quietInterval
+            interval: quietInterval
         )
-        manager.schedule(notification: notification)
     }
     
     func cancellAll() {

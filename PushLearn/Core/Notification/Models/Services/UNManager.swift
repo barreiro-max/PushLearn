@@ -2,11 +2,15 @@ import UserNotifications
 
 protocol Notificated {
     func requestAuthorization() -> Bool
-
+    
     func authStatus() -> UNAuthorizationStatus
-
-    func schedule(notification: LocalNotification)
-
+    
+    func schedule(
+        type: UNType,
+        frequency: UNFrequency,
+        interval: UNInterval
+    )
+    
     func cancelAll()
     func cancel(by id: String)
     
@@ -15,10 +19,10 @@ protocol Notificated {
 
 public struct UNManager: Notificated {
     private let center = UNUserNotificationCenter.current()
-
+    
     func requestAuthorization() -> Bool {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-
+        
         Task {
             do {
                 let granted = try await center.requestAuthorization(options: options)
@@ -38,20 +42,27 @@ public struct UNManager: Notificated {
         return status
     }
     
-    func schedule(notification: LocalNotification) {
-        let start = notification.quietInterval.startQuietDate
-        let end = notification.quietInterval.endQuietDate
+    func schedule(
+        type: UNType,
+        frequency: UNFrequency,
+        interval: UNInterval
+    ) {
+        let start = interval.startQuietDate
+        let end = interval.endQuietDate
         
         guard !(start...end).contains(.now) else { return }
         
         let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: TimeInterval(notification.frequency.hours * 3600),
+            timeInterval: TimeInterval(frequency.hours * 3600),
             repeats: true
         )
         
+        let template = type.mappedValue
+        let content = template.content
+        
         let request = UNNotificationRequest(
-            identifier: notification.content.categoryIdentifier,
-            content: notification.content,
+            identifier: content.categoryIdentifier,
+            content: content,
             trigger: trigger
         )
         
@@ -79,7 +90,7 @@ public struct UNManager: Notificated {
     func pendingRequests() -> [UNNotificationRequest] {
         var result: [UNNotificationRequest] = .init()
         Task {
-             result = await center.pendingNotificationRequests()
+            result = await center.pendingNotificationRequests()
         }
         return result
     }
