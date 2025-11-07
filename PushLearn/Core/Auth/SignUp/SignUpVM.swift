@@ -4,32 +4,44 @@ import FirebaseAuth
 @Observable
 public class SignUpVM {
     private var authValidator: AuthValidated
+    private var service: SignUpProtocol
     
     var state: AuthState = .idle
     
-    init(authValidator: AuthValidated = AuthValidator()) {
+    init(
+        authValidator: AuthValidated = AuthValidator(),
+        service: SignUpProtocol = SignUpService()
+    ) {
         self.authValidator = authValidator
-    }
-        
-    func signUp(email: String, password: String) {
-        state = .idle
-        guard authValidator.isEmailValid(email) else {
-            state = .failure(email: "Невалідна електронна пошта")
-            return
-        }
-        guard authValidator.isPasswordValid(password) else {
-            state = .failure(password: "Пароль занадто слабкий")
-            return
-        }
-        state = .loading
-        Task {
-            do {
-                let result = try await Auth.auth().createUser(withEmail: email, password: password)
-                state = .success(user: result.user)
-            } catch {
-                state = .failure(global: error.signUpErrorDescription)
-            }
-        }
+        self.service = service
     }
     
+    func signUp(email: String, password: String) {
+        state = .idle
+        
+        state = authValidator.getValidationState(
+            email: email,
+            password: password
+        )
+        
+        guard case .validationSuccess = state else {
+            return
+        }
+        
+        state = .loading
+        
+        AsyncExecutor.run {
+            let result = try await self.service.signUp(
+                email: email,
+                password: password
+            )
+            await MainActor.run {
+                self.state = .success(user: result.user)
+            }
+        } handleError: { error in
+            self.state = .failure(global: error.signUpErrorDescription)
+        }
+    }
 }
+
+

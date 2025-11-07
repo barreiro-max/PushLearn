@@ -27,22 +27,20 @@ public class SignInVM {
         guard case .validationSuccess = state else {
             return
         }
-
+        
         state = .loading
         
-        Task {
-            do {
-                let result = try await service.signIn(
-                    email: email,
-                    password: password
-                )
-                await MainActor.run {
-                    state = .success(user: result.user)
-                }
-                UserDefaults.setLoggedIn()
-            } catch {
-                state = .failure(global: error.signInErrorDescription)
+        AsyncExecutor.run {
+            let result = try await self.service.signIn(
+                email: email,
+                password: password
+            )
+            await MainActor.run {
+                self.state = .success(user: result.user)
             }
+            UserDefaults.setLoggedIn()
+        } handleError: { error in
+            self.state = .failure(global: error.signInErrorDescription)
         }
         
     }
@@ -58,4 +56,3 @@ public class SignInVM {
         }
     }
 }
-#warning("Сделать чище именно делегацию сервисов и вмки")
