@@ -12,7 +12,6 @@ protocol Notificated {
     )
     
     func cancelAll()
-    func cancel(by id: String)
     
     func pendingRequests() -> [UNNotificationRequest]
 }
@@ -82,31 +81,11 @@ public struct UNManager: Notificated {
         center.removeAllDeliveredNotifications()
     }
     
-    func cancel(by id: String) {
-        center.removePendingNotificationRequests(withIdentifiers: [id])
-        center.removeDeliveredNotifications(withIdentifiers: [id])
-    }
-    
     func pendingRequests() -> [UNNotificationRequest] {
         var result: [UNNotificationRequest] = .init()
         Task {
             result = await center.pendingNotificationRequests()
         }
         return result
-    }
-}
-
-extension UNManager {
-    static func makeContent(
-        title: String,
-        body: String,
-        categoryIdentifier: String
-    ) -> UNMutableNotificationContent {
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
-        content.categoryIdentifier = categoryIdentifier
-        content.sound = .default
-        return content
     }
 }
