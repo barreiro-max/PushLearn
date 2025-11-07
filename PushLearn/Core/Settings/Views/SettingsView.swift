@@ -67,5 +67,8 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(signInVM: SignInVM(), notificationVM: UserNotificationVM())
+    SettingsView(
+        signInVM: SignInVM(),
+        notificationVM: UserNotificationVM()
+    )
 }

@@ -47,3 +47,4 @@ public class SignInVM {
         }
     }
 }
+#warning("Делегировать работу вмки в сервисы")
