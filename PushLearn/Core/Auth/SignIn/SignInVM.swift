@@ -4,30 +4,41 @@ import FirebaseAuth
 @Observable
 public class SignInVM {
     private var authValidator: AuthValidated
+    private var service: SignInProtocol
     
     var state: AuthState = .idle
     
     init(
-        authValidator: AuthValidated = AuthValidator()
+        authValidator: AuthValidated = AuthValidator(),
+        service: SignInProtocol = SignInService()
     ) {
         self.authValidator = authValidator
+        self.service = service
     }
     
     func signIn(email: String, password: String) {
         state = .idle
-        guard authValidator.isEmailValid(email) else {
-            state = .failure(email: "Невалідна електронна пошта")
+        
+        state = authValidator.getValidationState(
+            email: email,
+            password: password
+        )
+        
+        guard case .validationSuccess = state else {
             return
         }
-        guard authValidator.isPasswordValid(password) else {
-            state = .failure(password: "Невалідний пароль")
-            return
-        }
+
         state = .loading
+        
         Task {
             do {
-                let result = try await Auth.auth().signIn(withEmail: email, password: password)
-                state = .success(user: result.user)
+                let result = try await service.signIn(
+                    email: email,
+                    password: password
+                )
+                await MainActor.run {
+                    state = .success(user: result.user)
+                }
                 UserDefaults.setLoggedIn()
             } catch {
                 state = .failure(global: error.signInErrorDescription)
@@ -39,7 +50,7 @@ public class SignInVM {
     func signOut() {
         state = .loading
         do {
-            try Auth.auth().signOut()
+            try service.signOut()
             state = .out
             UserDefaults.setLoggedOut()
         } catch {
@@ -47,4 +58,4 @@ public class SignInVM {
         }
     }
 }
-#warning("Делегировать работу вмки в сервисы")
+#warning("Сделать чище именно делегацию сервисов и вмки")

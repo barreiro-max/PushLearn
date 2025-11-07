@@ -3,6 +3,7 @@ import Foundation
 
 enum AuthState {
     case idle
+    case validationSuccess
     case loading
     case success(user: User)
     
