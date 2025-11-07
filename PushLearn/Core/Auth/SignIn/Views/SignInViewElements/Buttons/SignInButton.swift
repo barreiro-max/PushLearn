@@ -20,8 +20,6 @@ struct SignInButton: View {
         .padding(.horizontal, 16)
         .buttonStyle(.borderedProminent)
     }
-    
-    
 }
 
 

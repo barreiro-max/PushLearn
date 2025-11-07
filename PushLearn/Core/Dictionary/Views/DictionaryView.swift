@@ -20,7 +20,6 @@ struct DictionaryView: View {
                 ),
                 ignoresSafeAreaEdges: .top
             )
-            
     }
 }
 

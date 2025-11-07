@@ -42,7 +42,6 @@ public class SignInVM {
         } handleError: { error in
             self.state = .failure(global: error.signInErrorDescription)
         }
-        
     }
     
     func signOut() {
