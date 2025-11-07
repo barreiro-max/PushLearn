@@ -25,24 +25,13 @@ public class UserNotificationVM {
         return manager.authStatus()
     }
     
-    func schedule(type: UNType) {
+    func cancelAllAndSchedule(type: UNType) {
+        manager.cancelAll(clearDelivered: false)
         manager.schedule(
             type: type,
             frequency: frequeuncy,
             interval: quietInterval
         )
-    }
-    
-    func cancellAll() {
-        manager.cancelAll()
-    }
-    
-    func cancel(by id: String) {
-        manager.cancel(by: id)
-    }
-    
-    func pendingRequest() -> [UNNotificationRequest] {
-        return manager.pendingRequests()
     }
 }
 

@@ -14,6 +14,16 @@ struct UNFrequencyPicker: View {
             Text("Раз на добу")
                 .tag(UNFrequency.twentyFourHours)
         }
+        .onChange(of: notificationVM.frequeuncy) { _, choosenFrequency in
+            switch choosenFrequency {
+            case .oneHour:
+                notificationVM.cancelAllAndSchedule(type: .randomType)
+            case .sixHours:
+                notificationVM.cancelAllAndSchedule(type: .randomType)
+            case .twentyFourHours:
+                notificationVM.cancelAllAndSchedule(type: .randomType)
+            }
+        }
     }
 }
 

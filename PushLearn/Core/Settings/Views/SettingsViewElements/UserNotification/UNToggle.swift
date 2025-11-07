@@ -10,9 +10,11 @@ struct UNToggle: View {
             systemImage: "bell.badge",
             isOn: $isNotificationEnabled
         )
-        .onChange(of: isNotificationEnabled) { _, newValue in
-            if newValue {
-                _ = notificationVM.requestAuth()
+        .onChange(of: isNotificationEnabled) { _, activated in
+            if activated {
+                if notificationVM.authStatus() == .notDetermined {
+                   _ = notificationVM.requestAuth()
+                }
             }
         }
     }

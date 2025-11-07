@@ -11,9 +11,7 @@ protocol Notificated {
         interval: UNInterval
     )
     
-    func cancelAll()
-    
-    func pendingRequests() -> [UNNotificationRequest]
+    func cancelAll(clearDelivered: Bool) 
 }
 
 public struct UNManager: Notificated {
@@ -52,7 +50,7 @@ public struct UNManager: Notificated {
         guard !(start...end).contains(.now) else { return }
         
         let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: TimeInterval(frequency.hours * 3600),
+            timeInterval: TimeInterval(frequency.seconds),
             repeats: true
         )
         
@@ -76,16 +74,11 @@ public struct UNManager: Notificated {
         }
     }
     
-    func cancelAll() {
+    func cancelAll(clearDelivered: Bool = false) {
         center.removeAllPendingNotificationRequests()
-        center.removeAllDeliveredNotifications()
-    }
-    
-    func pendingRequests() -> [UNNotificationRequest] {
-        var result: [UNNotificationRequest] = .init()
-        Task {
-            result = await center.pendingNotificationRequests()
+
+        if clearDelivered {
+            center.removeAllDeliveredNotifications()
         }
-        return result
     }
 }

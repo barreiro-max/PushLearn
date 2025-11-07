@@ -12,4 +12,8 @@ public enum UNType: CaseIterable {
         case .comeBack:   return .comebackMessage
         }
     }
+    
+    static var randomType: Self {
+        return .allCases.randomElement() ?? .daily
+    }
 }

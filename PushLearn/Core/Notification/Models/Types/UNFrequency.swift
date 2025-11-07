@@ -3,11 +3,11 @@ enum UNFrequency {
     case sixHours
     case twentyFourHours
     
-    var hours: Int {
+    var seconds: Int {
         switch self {
-        case .oneHour: return 1
-        case .sixHours: return 6
-        case .twentyFourHours: return 24
+        case .oneHour: return 3600
+        case .sixHours: return 6 * 3600
+        case .twentyFourHours: return 24 * 3600
         }
     }
 }
