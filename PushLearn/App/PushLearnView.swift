@@ -3,8 +3,8 @@ import SwiftUI
 // MARK: — PushLearnView
 
 struct PushLearnView: View {
-    @State var notificationVM  = UserNotificationVM()
-    @State var tabBarVM = TabBarVM()
+    @State private var notificationVM  = UserNotificationVM()
+    @State private var tabBarVM = TabBarVM()
 
     var body: some View {
         makeTabView()

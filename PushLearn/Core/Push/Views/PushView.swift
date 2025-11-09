@@ -3,9 +3,9 @@ import SwiftUI
 // MARK: — PushView
 
 struct PushView: View {
-    @State var pushVM = PushVM()
+    @State private var pushVM = PushVM()
         
-    @State var currentText = ""
+    @State private var currentText = ""
 
     let background: [Color] = [
         .backgroundSecondary,
@@ -32,5 +32,5 @@ struct PushView: View {
 }
 
 #Preview {
-    PushView(pushVM: PushVM())
+    PushView()
 }

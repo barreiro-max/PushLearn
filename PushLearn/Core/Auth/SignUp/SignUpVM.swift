@@ -1,6 +1,7 @@
 import Foundation
 import FirebaseAuth
 
+@MainActor
 @Observable
 public class SignUpVM {
     private var authValidator: AuthValidated
@@ -35,9 +36,7 @@ public class SignUpVM {
                 email: email,
                 password: password
             )
-            await MainActor.run {
-                self.state = .success(user: result.user)
-            }
+            self.state = .success(user: result.user)
         } handleError: { error in
             self.state = .failure(global: error.signUpErrorDescription)
         }

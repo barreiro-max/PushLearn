@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: — DictionaryView
 
 struct DictionaryView: View {
-    @State var dictVM = DictionaryVM()
+    @State private var dictVM = DictionaryVM()
 
     var body: some View {
         Text("Dict")
@@ -24,5 +24,5 @@ struct DictionaryView: View {
 }
 
 #Preview {
-    DictionaryView(dictVM: DictionaryVM())
+    DictionaryView()
 }

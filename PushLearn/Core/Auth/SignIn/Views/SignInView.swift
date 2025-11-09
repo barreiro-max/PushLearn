@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct SignInView: View {
-    @State var signInVM = SignInVM(
+    @State private var signInVM = SignInVM(
         authValidator: AuthValidator()
     )
     
     @State private var email = ""
     @State private var password = ""
     
-    @State var showSignUp = false
+    @State private var showSignUp = false
     
     var body: some View {
         ZStack {

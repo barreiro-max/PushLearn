@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ForgotPasswordButton: View {
-    @State var showForgetPw = false
+    @State private var showForgetPw = false
     var body: some View {
         Button(action: {
             showForgetPw.toggle()

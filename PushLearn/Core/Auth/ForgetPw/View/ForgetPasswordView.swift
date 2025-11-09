@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ForgetPasswordView: View {
     @State private var email = ""
-    @State var forgetPasswordVM = ForgetPasswordVM()
+    @State private var forgetPasswordVM = ForgetPasswordVM()
     var body: some View {
         ZStack {
             Color.backgroundPrimary.ignoresSafeArea()
@@ -44,5 +44,5 @@ struct ForgetPasswordView: View {
 }
 
 #Preview {
-    ForgetPasswordView(forgetPasswordVM: ForgetPasswordVM())
+    ForgetPasswordView()
 }

@@ -1,6 +1,7 @@
 import Foundation
 import FirebaseAuth
 
+@MainActor
 @Observable
 public class SignInVM {
     private var authValidator: AuthValidated
@@ -15,6 +16,7 @@ public class SignInVM {
         self.authValidator = authValidator
         self.service = service
     }
+    
     
     func signIn(email: String, password: String) {
         state = .idle
@@ -35,9 +37,7 @@ public class SignInVM {
                 email: email,
                 password: password
             )
-            await MainActor.run {
-                self.state = .success(user: result.user)
-            }
+            self.state = .success(user: result.user)
             UserDefaults.setLoggedIn()
         } handleError: { error in
             self.state = .failure(global: error.signInErrorDescription)
