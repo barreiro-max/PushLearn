@@ -17,7 +17,7 @@ public class SignInVM {
         self.service = service
     }
     
-    
+    // MARK: - Sign Methods
     func signIn(email: String, password: String) {
         state = .idle
         
@@ -32,14 +32,17 @@ public class SignInVM {
         
         state = .loading
         
-        AsyncExecutor.run {
+        AsyncExecutor.run { [weak self] in
+            guard let self else { return }
+            
             let result = try await self.service.signIn(
                 email: email,
                 password: password
             )
             self.state = .success(user: result.user)
             UserDefaults.setLoggedIn()
-        } handleError: { error in
+        } handleError: { [weak self] error in
+            guard let self else { return }
             self.state = .failure(global: error.signInErrorDescription)
         }
     }
