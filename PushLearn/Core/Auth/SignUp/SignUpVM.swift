@@ -4,11 +4,14 @@ import FirebaseAuth
 @MainActor
 @Observable
 public class SignUpVM {
-    private var authValidator: AuthValidated
-    private var service: SignUpProtocol
+    // MARK: - Dependencies
+    private let authValidator: AuthValidated
+    private let service: SignUpProtocol
     
+    // MARK: - UI State
     var state: AuthState = .idle
     
+    // MARK: - Init
     init(
         authValidator: AuthValidated = AuthValidator(),
         service: SignUpProtocol = SignUpService()
@@ -17,7 +20,7 @@ public class SignUpVM {
         self.service = service
     }
     
-    // MARK: - Auth Methods
+    // MARK: - Methods
     func signUp(email: String, password: String) {
         state = .idle
         
@@ -34,14 +37,14 @@ public class SignUpVM {
         
         AsyncExecutor.run { [weak self] in
             guard let self else { return }
-            let result = try await self.service.signUp(
+            let result = try await service.signUp(
                 email: email,
                 password: password
             )
-            self.state = .success(user: result.user)
+            state = .success(user: result.user)
         } handleError: { [weak self] error in
             guard let self else { return }
-            self.state = .failure(global: error.signUpErrorDescription)
+            state = .failure(global: error.signUpErrorDescription)
         }
     }
 }

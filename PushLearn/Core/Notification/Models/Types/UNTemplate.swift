@@ -19,27 +19,23 @@ struct UNTemplate {
     }
 }
 
-// MARK: - Шаблони повідомлень
 extension UNTemplate {
-    /// Нагадування про практику
+    // MARK: - Notification Templates
     static let dailyMessage = UNTemplate(
         title: "Час для практики!",
         body: "Виділи кілька хвилин на нові слова — маленькі кроки дають результат."
     )
     
-    /// Мотиваційне повідомлення
     static let motivationMessage = UNTemplate(
         title: "Ти просуваєшся!",
         body: "Ще один урок — і ти ближче до нової мови."
     )
     
-    /// Досягнення в прогресі
     static let progressMessage = UNTemplate(
         title: "Новий рівень!",
         body: "Ти завершив черговий етап. Продовжуй у тому ж темпі!"
     )
 
-    /// Повернення до навчання
     static let comebackMessage = UNTemplate(
         title: "Повернись до занять",
         body: "Ти пропустив кілька уроків. Не дай прогресу зникнути!"

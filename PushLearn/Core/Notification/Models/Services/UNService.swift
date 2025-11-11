@@ -14,10 +14,11 @@ protocol Notificated {
     func cancelAll(clearDelivered: Bool) 
 }
 
-#warning("Вероятно нужно будет поменять на actor")
-public struct UNManager: Notificated {
+public struct UNService: Notificated {
+    // MARK: - Singleton
     private let center = UNUserNotificationCenter.current()
     
+    // MARK: - API Calls
     func requestAuthorization() -> Bool {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
         
