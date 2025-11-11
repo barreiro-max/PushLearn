@@ -5,9 +5,9 @@ protocol SignInProtocol {
     func signOut() throws
 }
 
-class SignInService: SignInProtocol {
+struct SignInService: SignInProtocol {
     
-    private var authValidator: AuthValidated
+    private let authValidator: AuthValidated
     
     init(
         authValidator: AuthValidated = AuthValidator()

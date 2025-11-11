@@ -3,9 +3,9 @@ protocol SignUpProtocol {
     func signUp(email: String, password: String) async throws -> AuthDataResult
 }
 
-class SignUpService: SignUpProtocol {
+struct SignUpService: SignUpProtocol {
     
-    private var authValidator: AuthValidated
+    private let authValidator: AuthValidated
     
     init(
         authValidator: AuthValidated = AuthValidator()

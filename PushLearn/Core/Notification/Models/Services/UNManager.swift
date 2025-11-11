@@ -14,6 +14,7 @@ protocol Notificated {
     func cancelAll(clearDelivered: Bool) 
 }
 
+#warning("Вероятно нужно будет поменять на actor")
 public struct UNManager: Notificated {
     private let center = UNUserNotificationCenter.current()
     

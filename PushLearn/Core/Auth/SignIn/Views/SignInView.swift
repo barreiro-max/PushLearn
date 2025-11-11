@@ -27,6 +27,7 @@ struct SignInView: View {
             VStack(spacing: 35) {
                 Spacer().frame(height: 150)
                 
+#warning("Стоило бы переделать подобный подход в более чистый")
                 switch signInVM.state {
                 case .loading:
                     ProgressView()
