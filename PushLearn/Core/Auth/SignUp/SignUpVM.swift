@@ -2,8 +2,7 @@ import Foundation
 import FirebaseAuth
 
 @MainActor
-@Observable
-public class SignUpVM {
+@Observable public class SignUpVM {
     // MARK: - Dependencies
     private let authValidator: AuthValidated
     private let service: SignUpProtocol
