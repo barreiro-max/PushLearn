@@ -4,7 +4,7 @@ import SwiftUI
 
 @available(iOS 18.0, *)
 struct ModernDictionaryView: View {
-    @State private var translationVM = TranslationVM()
+    @State private var translationVM = TranslationVM() 
     @Bindable var dictVM: DictionaryVM
     
     private let background: [Color] = [

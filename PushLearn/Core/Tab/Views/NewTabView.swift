@@ -6,6 +6,7 @@ import SwiftUI
 struct NewTabView: View {
     @Bindable var tabBarVM: TabBarVM
     @Bindable var notificationVM: UserNotificationVM
+    @Bindable var signInVM: SignInVM
 
     var body: some View {
         TabView(selection: $tabBarVM.currentScreen) {
@@ -16,14 +17,8 @@ struct NewTabView: View {
                 PushView()
             }
             Tab("Settings", systemImage: "gearshape", value: 2) {
-                SettingsView(signInVM: SignInVM(), notificationVM: notificationVM)
+                SettingsView(signInVM: signInVM, notificationVM: notificationVM)
             }
         }
-    }
-}
-
-#Preview {
-    if #available(iOS 18, *) {
-        NewTabView(tabBarVM: TabBarVM(), notificationVM: UserNotificationVM())
     }
 }

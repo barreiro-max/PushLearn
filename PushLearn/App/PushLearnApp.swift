@@ -7,15 +7,21 @@ struct PushLearnApp: App {
     @AppStorage("isLoggedIn") private var isLoggedIn = false
     @AppStorage("isDarkMode") private var isDarkMode = false
     
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-     
+    
+    @State private var signInVM = SignInVM(
+        authValidator: AuthValidator()
+    )
+    @State private var notificationVM  = UserNotificationVM()
+
     var body: some Scene {
         WindowGroup {
             Group {
                 if isLoggedIn {
-                    PushLearnView()
+                    PushLearnView(notificationVM: notificationVM, signInVM: signInVM)
                 } else {
-                    SignInView()
+                    SignInView(signInVM: signInVM)
                 }
             }
             .preferredColorScheme(isDarkMode ? .dark : .light)

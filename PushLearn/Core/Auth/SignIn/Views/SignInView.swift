@@ -1,9 +1,7 @@
 import SwiftUI
 
 struct SignInView: View {
-    @State private var signInVM = SignInVM(
-        authValidator: AuthValidator()
-    )
+    @Bindable var signInVM: SignInVM
     
     @State private var email = ""
     @State private var password = ""
@@ -59,8 +57,3 @@ struct SignInView: View {
         
     }
 }
-
-#Preview {
-    SignInView()
-}
-

@@ -5,6 +5,7 @@ import SwiftUI
 struct OldTabView: View {
     @Bindable var tabBarVM: TabBarVM
     @Bindable var notificationVM: UserNotificationVM
+    @Bindable var signInVM: SignInVM
 
     var body: some View {
         TabView(selection: $tabBarVM.currentScreen) {
@@ -18,15 +19,11 @@ struct OldTabView: View {
                     Label("Push", systemImage: "paperplane")
                 }
                 .tag(1)
-            SettingsView(signInVM: SignInVM(), notificationVM: notificationVM)
+            SettingsView(signInVM: signInVM, notificationVM: notificationVM)
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }
                 .tag(2)
         }
     }
-}
-
-#Preview {
-    OldTabView(tabBarVM: TabBarVM(), notificationVM: UserNotificationVM())
 }

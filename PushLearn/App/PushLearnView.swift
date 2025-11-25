@@ -3,9 +3,12 @@ import SwiftUI
 // MARK: — PushLearnView
 
 struct PushLearnView: View {
-    @State private var notificationVM  = UserNotificationVM()
+    @Bindable var notificationVM: UserNotificationVM
+    
     @State private var tabBarVM = TabBarVM()
 
+    @Bindable var signInVM: SignInVM
+    
     var body: some View {
         makeTabView()
     }
@@ -17,30 +20,34 @@ extension PushLearnView {
         if #available(iOS 18.0, *) {
             NewTabView(
                 tabBarVM: tabBarVM,
-                notificationVM: notificationVM
+                notificationVM: notificationVM,
+                signInVM: signInVM
             )
         } else {
             OldTabView(
                 tabBarVM: tabBarVM,
-                notificationVM: notificationVM
+                notificationVM: notificationVM,
+                signInVM: signInVM
             )
         }
     }
 }
 
-#Preview("IOS 18 PushLearnView") {
+#Preview("Modern PushLearnView") {
     if #available(iOS 18, *) {
         NewTabView(
             tabBarVM: TabBarVM(),
-            notificationVM: UserNotificationVM()
+            notificationVM: UserNotificationVM(),
+            signInVM: SignInVM()
         )
     }
 }
 
-#Preview("IOS 17 and less PushLearnView") {
+#Preview("Legacy PushLearnView") {
     OldTabView(
         tabBarVM: TabBarVM(),
-        notificationVM: UserNotificationVM()
+        notificationVM: UserNotificationVM(),
+        signInVM: SignInVM()
     )
 }
 
