@@ -7,6 +7,11 @@ struct SettingsView: View {
 
     @Bindable var signInVM: SignInVM
     @Bindable var notificationVM: UserNotificationVM
+    
+    private let background: [Color] = [
+        .backgroundSecondary,
+        .backgroundPrimary
+    ]
 
     var body: some View {
         NavigationStack {
@@ -51,10 +56,7 @@ struct SettingsView: View {
             )
             .background(
                 .linearGradient(
-                    colors: [
-                        .backgroundSecondary,
-                        .backgroundPrimary
-                    ],
+                    colors: background,
                     startPoint: .top,
                     endPoint: .bottom
                 ),

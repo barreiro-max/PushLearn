@@ -7,7 +7,7 @@ struct PushView: View {
         
     @State private var currentText = ""
 
-    let background: [Color] = [
+    private let background: [Color] = [
         .backgroundSecondary,
         .backgroundSecondary,
         .backgroundPrimary
