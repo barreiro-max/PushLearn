@@ -1,28 +1,20 @@
 import SwiftUI
 
-// MARK: — DictionaryView
-
 struct DictionaryView: View {
     @State private var dictVM = DictionaryVM()
-
+    
     var body: some View {
-        Text("Dict")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(
-                LinearGradient(
-                    colors: [
-                        .backgroundSecondary,
-                        .backgroundSecondary,
-                        .backgroundPrimary
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                ),
-                ignoresSafeAreaEdges: .top
-            )
+        makeDictionaryView()
     }
 }
 
-#Preview {
-    DictionaryView()
+extension DictionaryView {
+    @ViewBuilder
+    func makeDictionaryView() -> some View {
+        if #available(iOS 18.0, *) {
+            ModernDictionaryView(dictVM: dictVM)
+        } else {
+            LegacyDictionaryView(dictVM: dictVM)
+        }
+    }
 }

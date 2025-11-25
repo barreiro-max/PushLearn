@@ -1,6 +1,6 @@
 import Foundation
 
-@Observable
-public class DictionaryVM {
-    var countNewWords = 0
+@MainActor
+@Observable final public class DictionaryVM {
+    var words: [String] = []
 }
