@@ -1,6 +1,6 @@
 import Translation
 
-@available(iOS 18.0, *)
+@available(iOS, introduced: 18.0)
 extension TranslationSession.Configuration {
     init(sourceId: String ,targetId: String) {
         self.init(
