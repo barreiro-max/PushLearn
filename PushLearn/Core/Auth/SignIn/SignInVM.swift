@@ -4,16 +4,16 @@ import FirebaseAuth
 @MainActor
 @Observable public class SignInVM {
     // MARK: - Dependencies
-    private let authValidator: AuthValidated
-    private let service: SignInProtocol
+    private let authValidator: any AuthValidated
+    private let service: any SignInProtocol
     
     // MARK: - UI State
     var state: AuthState = .idle
     
     // MARK: - Init
     init(
-        authValidator: AuthValidated = AuthValidator(),
-        service: SignInProtocol = SignInService()
+        authValidator: some AuthValidated = AuthValidator(),
+        service: some SignInProtocol = SignInService()
     ) {
         self.authValidator = authValidator
         self.service = service

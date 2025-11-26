@@ -3,12 +3,12 @@ import FirebaseAuth
 
 @Observable
 public class ForgetPasswordVM {
-    private var authValidator: AuthValidator
+    private var authValidator: any AuthValidated
     
     var state: AuthState = .idle
     
     init(
-        authValidator: AuthValidator = AuthValidator()
+        authValidator: some AuthValidated = AuthValidator()
     ) {
         self.authValidator = authValidator
     }
