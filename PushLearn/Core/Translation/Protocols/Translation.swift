@@ -1,0 +1,4 @@
+import Translation
+protocol Translation {
+    
+}
