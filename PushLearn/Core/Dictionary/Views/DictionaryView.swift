@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct DictionaryView: View {
-    @State private var dictVM = DictionaryVM()
+    @State private var dictVM = DictionaryVM(
+        service: TranslationFactory.makeService()
+    )
     
     var body: some View {
         makeDictionaryView()

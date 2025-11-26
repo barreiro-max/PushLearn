@@ -7,9 +7,3 @@ struct LegacyDictionaryView: View {
         List { }
     }
 }
-
-#Preview {
-    LegacyDictionaryView(
-        dictVM: DictionaryVM()
-    )
-}

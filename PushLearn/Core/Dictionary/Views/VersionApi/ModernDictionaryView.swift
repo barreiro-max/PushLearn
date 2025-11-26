@@ -1,10 +1,9 @@
 import SwiftUI
 
-// MARK: — NewDictionaryView
+// MARK: — ModernDictionaryView
 
-@available(iOS 18.0, *)
+@available(iOS, introduced: 18.0)
 struct ModernDictionaryView: View {
-    @State private var translationVM = TranslationVM() 
     @Bindable var dictVM: DictionaryVM
     
     private let background: [Color] = [
@@ -15,11 +14,11 @@ struct ModernDictionaryView: View {
     
     var body: some View {
         List {
-            ForEach(translationVM.source, id: \.self) { sourceUnit in
+            ForEach(dictVM.source, id: \.self) { sourceUnit in
                 Text(sourceUnit)
             }
         }
-        .translateTextOnPage(with: translationVM)
+        .translateTextOnPage(with: dictVM)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             LinearGradient(
