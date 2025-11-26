@@ -4,11 +4,9 @@ import FirebaseAuth
 
 @main
 struct PushLearnApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @AppStorage("isLoggedIn") private var isLoggedIn = false
     @AppStorage("isDarkMode") private var isDarkMode = false
-    
-    
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @State private var signInVM = SignInVM(
         authValidator: AuthValidator()
@@ -17,14 +15,17 @@ struct PushLearnApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Group {
-                if isLoggedIn {
-                    PushLearnView(notificationVM: notificationVM, signInVM: signInVM)
-                } else {
-                    SignInView(signInVM: signInVM)
-                }
-            }
-            .preferredColorScheme(isDarkMode ? .dark : .light)
+            mainView
+                .preferredColorScheme(isDarkMode ? .dark : .light)
+        }
+    }
+    
+    @ViewBuilder
+    private var mainView: some View {
+        if isLoggedIn {
+            PushLearnView(notificationVM: notificationVM, signInVM: signInVM)
+        } else {
+            SignInView(signInVM: signInVM)
         }
     }
 }
