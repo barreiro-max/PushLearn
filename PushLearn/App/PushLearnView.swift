@@ -18,13 +18,13 @@ extension PushLearnView {
     @ViewBuilder
     private func makeTabView() -> some View {
         if #available(iOS 18.0, *) {
-            NewTabView(
+            ModernTabView(
                 tabBarVM: tabBarVM,
                 notificationVM: notificationVM,
                 signInVM: signInVM
             )
         } else {
-            OldTabView(
+            LegacyTabView(
                 tabBarVM: tabBarVM,
                 notificationVM: notificationVM,
                 signInVM: signInVM
@@ -35,7 +35,7 @@ extension PushLearnView {
 
 #Preview("Modern PushLearnView") {
     if #available(iOS 18, *) {
-        NewTabView(
+        ModernTabView(
             tabBarVM: TabBarVM(),
             notificationVM: UserNotificationVM(),
             signInVM: SignInVM()
@@ -44,7 +44,7 @@ extension PushLearnView {
 }
 
 #Preview("Legacy PushLearnView") {
-    OldTabView(
+    LegacyTabView(
         tabBarVM: TabBarVM(),
         notificationVM: UserNotificationVM(),
         signInVM: SignInVM()

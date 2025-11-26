@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: — NewTabView
 
 @available(iOS, introduced: 18.0)
-struct NewTabView: View {
+struct ModernTabView: View {
     @Bindable var tabBarVM: TabBarVM
     @Bindable var notificationVM: UserNotificationVM
     @Bindable var signInVM: SignInVM

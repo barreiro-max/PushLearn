@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: — OldTabView
 
-struct OldTabView: View {
+struct LegacyTabView: View {
     @Bindable var tabBarVM: TabBarVM
     @Bindable var notificationVM: UserNotificationVM
     @Bindable var signInVM: SignInVM
