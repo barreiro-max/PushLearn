@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct LegacyDictionaryView: View {
-    @Bindable var dictVM: DictionaryVM
+    @State var dictVM = LegacyDictionaryVM(
+        service: TranslationFactory.makeService()
+    )
     
     var body: some View {
         List { }
