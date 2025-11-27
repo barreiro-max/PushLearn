@@ -3,8 +3,8 @@ import Translation
 
 extension View {
     @available(iOS, introduced: 18.0)
-    func translateTextOnPage(with viewModel: DictionaryVM) -> some View {
-        translationTask { session in
+    func translateTextOnPage(with viewModel: ModernDictionaryVM) -> some View {
+        translationTask(viewModel.configuration) { session in
                AsyncExecutor.run {
                    let requests: [TranslationSession.Request] = viewModel.source.map {
                        TranslationSession.Request(sourceText: $0)
