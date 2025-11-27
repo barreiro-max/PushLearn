@@ -1,7 +1,10 @@
 import Translation
 
+@available(iOS 18.0, *)
+protocol ConfiguratableTranslation: Translation { }
+
 @available(iOS, introduced: 18.0)
-final public class ModernTranslationService: Translation {
+public struct ModernTranslationService: ConfiguratableTranslation {
     
 }
 
