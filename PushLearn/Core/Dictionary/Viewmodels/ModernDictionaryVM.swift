@@ -6,18 +6,18 @@ import Translation
 @Observable final public class ModernDictionaryVM: DictionaryVMProtocol {
     var source: [String] = []
     var target: [String] = []
-    
-    var sourceLanguage: Locale.Language = Locale.current.language
-    var targetLanguage: Locale.Language?
 
     var configuration: TranslationSession.Configuration?
     
     private let service: any Translation
+    private let store: any StoreSettings
     
     init(
-        service: some Translation
+        service: some Translation,
+        store: some StoreSettings = LanguageStore()
     ) {
         self.service = service
+        self.store = store
     }
     
     public func triggerTranslation() {
@@ -25,7 +25,7 @@ import Translation
             configuration?.invalidate()
             return
         }
-        configuration = .init(target: targetLanguage)
+        configuration = .init(target: store.selectedLanguage)
     }
     
     public func translateAll(using session: TranslationSession) async {
