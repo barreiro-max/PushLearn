@@ -12,7 +12,11 @@ struct LanguagePicker: View {
     ]
     
     var body: some View {
-        Picker("Вибір мови", systemImage: "globe", selection: $selectedLanguage) {
+        Picker(
+            "Вибір мови",
+            systemImage: "globe",
+            selection: $selectedLanguage
+        ) {
             ForEach(languages, id: \.code) { language in
                 Text(language.name)
                     .tag(language.code)
