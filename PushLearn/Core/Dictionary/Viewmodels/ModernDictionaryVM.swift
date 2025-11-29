@@ -7,7 +7,7 @@ import Translation
     var source: [String] = []
     var target: [String] = []
     
-    var sourceLanguage: Locale.Language?
+    var sourceLanguage: Locale.Language = Locale.current.language
     var targetLanguage: Locale.Language?
 
     var configuration: TranslationSession.Configuration?
