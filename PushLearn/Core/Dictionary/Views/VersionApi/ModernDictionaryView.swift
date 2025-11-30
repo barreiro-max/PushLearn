@@ -4,7 +4,7 @@ import SwiftUI
 
 @available(iOS, introduced: 18.0)
 struct ModernDictionaryView: View {
-    @State var dictVM = ModernDictionaryVM(
+    @State private var dictVM = ModernDictionaryVM(
         service: TranslationFactory.makeService()
     )
     
@@ -20,7 +20,6 @@ struct ModernDictionaryView: View {
                 Text(sourceUnit)
             }
         }
-        .translateTextOnPage(with: dictVM)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             LinearGradient(
@@ -30,5 +29,12 @@ struct ModernDictionaryView: View {
             ),
             ignoresSafeAreaEdges: .top
         )
+        .checkChangeConfiguration(with: dictVM)
+        .translateTextOnPage(with: dictVM)
     }
+}
+
+@available(iOS 18, *)
+#Preview {
+    ModernDictionaryView()
 }

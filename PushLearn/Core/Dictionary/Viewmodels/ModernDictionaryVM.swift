@@ -28,6 +28,11 @@ import Translation
         configuration = .init(target: store.selectedLanguage)
     }
     
+    public func rebuildConfiguration() {
+        configuration?.invalidate()
+        configuration = .init(target: store.selectedLanguage)
+    }
+    
     public func translateAll(using session: TranslationSession) async {
         AsyncExecutor.run { [weak self] in
             guard let self else { return }
