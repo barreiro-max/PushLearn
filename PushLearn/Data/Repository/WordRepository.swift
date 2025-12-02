@@ -1,10 +1,8 @@
-import FirebaseFirestore
-
 struct WordRepository: WordRepositoryProtocool {
-    private let database: Firestore
+    private let database: any Firestored
     
     init(
-        database: Firestore
+        database: some Firestored
     ) {
         self.database = database
     }
