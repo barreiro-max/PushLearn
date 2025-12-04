@@ -1,3 +1,9 @@
 struct UserProfile {
-    var id: String
+    var id: String?
+}
+
+extension UserProfile {
+    init(dto: UserProfileDTO) {
+        self.id = dto.id
+    }
 }

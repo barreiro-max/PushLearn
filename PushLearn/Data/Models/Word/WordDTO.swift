@@ -9,7 +9,9 @@ public struct WordDTO: Codable {
         case source
         case target
     }
-    
+}
+
+extension WordDTO {
     init(domain: Word) {
         self.id = domain.id
         self.source = domain.source
