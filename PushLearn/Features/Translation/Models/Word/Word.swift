@@ -1,3 +1,5 @@
+import Foundation
+
 public struct Word {
     var id: String?
     var source: String
