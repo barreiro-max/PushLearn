@@ -1,11 +1,9 @@
 import SwiftUI
 
 struct AuthEmailField: View {
-    let prompt: String = "Введіть електронну пошту"
     @Binding var email: String
     
     @Binding var state: AuthState
-    let emailError: String? = nil
     
     var body: some View {
         switch state {
@@ -30,7 +28,7 @@ extension AuthEmailField {
             TextField(
                 "Email",
                 text: $email,
-                prompt: Text(prompt)
+                prompt: Text("Введіть електронну пошту")
             )
             .textFieldStyle(.plain)
             .multilineTextAlignment(.center)
