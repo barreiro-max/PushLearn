@@ -15,8 +15,8 @@ struct PushView: View {
     
     var body: some View {
         VStack(spacing: 45) {
-            PushTextField(pushVM: pushVM, currentText: $currentText)
-            PushButtonView(pushVM: pushVM, currentText: $currentText)
+            pushTextField
+            pushButton
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
@@ -27,7 +27,20 @@ struct PushView: View {
             ),
             ignoresSafeAreaEdges: .top
         )
-        
+    }
+    
+    private var pushTextField: some View {
+        PushTextField(
+            pushVM: pushVM,
+            currentText: $currentText
+        )
+    }
+    
+    private var pushButton: some View {
+        PushButtonView(
+            pushVM: pushVM,
+            currentText: $currentText
+        )
     }
 }
 
