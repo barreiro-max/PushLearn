@@ -3,50 +3,27 @@ import SwiftUI
 // MARK: — SettingsView
 
 struct SettingsView: View {
-    @AppStorage("isNotificationEnabled") private var isNotificationEnabled = false
+    @AppStorage("isNotificationEnabled") private var isNotificationEnabled =
+        false
 
     @Bindable var signInVM: SignInVM
     @Bindable var notificationVM: UserNotificationVM
-    
+
     private let background: [Color] = [
         .backgroundSecondary,
-        .backgroundPrimary
+        .backgroundPrimary,
     ]
 
     var body: some View {
         NavigationStack {
             Form {
                 Group {
-                    Section("Профіль") {
-                        UserInfo(signInVM: signInVM)
-                        LogOutButton(signInVM: signInVM)
-                    }
-                    
-                    Section("Мова") {
-                        LanguagePicker()
-                    }
-                    Section("Повідомлення") {
-                        UNToggle(notificationVM: notificationVM)
-                        if isNotificationEnabled {
-                           
-                            UNFrequencyPicker(
-                                notificationVM: notificationVM
-                            )
-                            UNQuietModeView(
-                                notificationVM: notificationVM
-                            )
-                        }
-                    }
-                    Section("Зовнішний вигляд") {
-                        ThemeToggle()
-                    }
-                    Section("Приватність") {
-                        // Потім змінити на лінку в системні налаштування
-                        Label("Переглянути надані дозволи", systemImage: "lock")
-                    }
-                    VersionProgramView()
-                    RateLink()
-                    PrivacyPolicyLink()
+                    sectionProfile
+                    sectionLanguage
+                    sectionNotification
+                    sectionTheme
+                    sectionPrivacy
+                    sectionInfo
                 }
                 .listRowBackground(Color.clear)
             }
@@ -62,8 +39,53 @@ struct SettingsView: View {
                 ),
                 ignoresSafeAreaEdges: .top
             )
-            
-            
+        }
+    }
+
+    private var sectionProfile: some View {
+        Section("Профіль") {
+            UserInfo(signInVM: signInVM)
+            LogOutButton(signInVM: signInVM)
+        }
+    }
+
+    private var sectionLanguage: some View {
+        Section("Мова") {
+            LanguagePicker()
+        }
+    }
+
+    private var sectionNotification: some View {
+        Section("Повідомлення") {
+            UNToggle(notificationVM: notificationVM)
+            if isNotificationEnabled {
+                UNFrequencyPicker(
+                    notificationVM: notificationVM
+                )
+                UNQuietModeView(
+                    notificationVM: notificationVM
+                )
+            }
+        }
+    }
+
+    private var sectionTheme: some View {
+        Section("Зовнішний вигляд") {
+            ThemeToggle()
+        }
+    }
+
+    private var sectionPrivacy: some View {
+        Section("Приватність") {
+            Label("Переглянути надані дозволи", systemImage: "lock")
+        }
+    }
+
+    private var sectionInfo: some View {
+        Section("Додаткова інформація") {
+            VersionProgramView()
+            RateLink()
+            PrivacyPolicyLink()
         }
     }
 }
