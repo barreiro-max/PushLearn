@@ -10,50 +10,75 @@ struct SignInView: View {
     
     var body: some View {
         ZStack {
-            Color.backgroundPrimary.ignoresSafeArea()
-            
-            BackgroundRadialGradient(
-                startRadius: 50,
-                endRadius: 450,
-                alignment: .topLeading
-            )
-                
-            Text("Авторизація")
-                .font(.system(size: 36).bold())
-                .offset(y: -170)
-            
+            background
+            headerView
             VStack(spacing: 35) {
                 Spacer().frame(height: 150)
-                
-#warning("Стоило бы переделать подобный подход в более чистый")
-                switch signInVM.state {
-                case .loading:
-                    ProgressView()
-
-                case .failure(_, _, let globalError):
-                    ErrorView(globalError: globalError)
-                    
-                default:
-                    EmptyView()
-                }
-                    
-                AuthFields(
-                    email: $email,
-                    password: $password,
-                    state: $signInVM.state
-                )
-                
-                ForgotPasswordButton()
-                
-                SignInButton(
-                    signInVM: signInVM,
-                    email: $email,
-                    password: $password
-                )
-                
-                ShowSignUpSheet()
+                stateErrorView
+                authFields
+                forgetPasswordButton
+                signInButton
+                showSignUpSheet
             }
         }
-        
     }
+    
+    @ViewBuilder
+    private var background: some View {
+        Color.backgroundPrimary.ignoresSafeArea()
+        
+        BackgroundRadialGradient(
+            startRadius: 50,
+            endRadius: 450,
+            alignment: .topLeading
+        )
+    }
+    
+    private var headerView: some View {
+        Text("Авторизація")
+            .font(.system(size: 36).bold())
+            .offset(y: -170)
+    }
+    
+    @ViewBuilder
+    private var stateErrorView: some View {
+        switch signInVM.state {
+        case .loading:
+            ProgressView()
+        case .failure(_, _, let globalError):
+            ErrorView(globalError: globalError)
+        default:
+            EmptyView()
+        }
+    }
+    
+    private var authFields: some View {
+        AuthFields(
+            email: $email,
+            password: $password,
+            state: $signInVM.state
+        )
+    }
+    
+    private var forgetPasswordButton: some View {
+        ForgotPasswordButton()
+    }
+    
+    private var signInButton: some View {
+        SignInButton(
+            signInVM: signInVM,
+            email: $email,
+            password: $password
+        )
+    }
+    
+    private var showSignUpSheet: some View {
+        ShowSignUpSheet()
+    }
+}
+
+#Preview("Success SignIn") {
+    SignInView(
+        signInVM: SignInVM()
+    )
 }
