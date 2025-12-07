@@ -1,7 +1,7 @@
 import FirebaseAuth
 import Foundation
 
-enum AuthState {
+enum AuthState: Equatable {
     case idle
     case validationSuccess
     case loading

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SignUpButton: View {
     @Bindable var signUpVM: SignUpVM
-
+    
     @Binding var email: String
     @Binding var password: String
     
@@ -10,21 +10,38 @@ struct SignUpButton: View {
     
     var body: some View {
         Button(action: {
-            Task {
-                signUpVM.signUp(email: email, password: password)
-                email = ""
-                password = ""
-                if case .success(user: _) = signUpVM.state {
-                    dismiss()
-                }
-            }
+            signUpVM.signUp(email: email, password: password)
         }, label: {
-            Text("Створити")
-                .font(.system(size: 20))
-                .frame(width: 90, height: 50)
+            buttonLabel
         })
         .disabled(password.count < 8 || email.isEmpty)
         .padding(.horizontal, 16)
         .buttonStyle(.borderedProminent)
+        .onChange(of: signUpVM.state) { _, newState in
+            if case .success(user: _) = newState {
+                cleanFields()
+                dismiss()
+            }
+        }
     }
+    
+    private var buttonLabel: some View {
+        Text("Створити")
+            .font(.system(size: 20))
+            .frame(width: 90, height: 50)
+        
+    }
+    
+    private func cleanFields() {
+        email = ""
+        password = ""
+    }
+}
+
+#Preview {
+    SignUpButton(
+        signUpVM: SignUpVM(),
+        email: Binding.constant("dsfdsf@dfsfd.sdfs"),
+        password: Binding.constant("fsefsf3f2")
+    )
 }
