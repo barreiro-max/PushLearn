@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct BackgroundRadialGradient: View {
-    let startRadius: CGFloat
-    let endRadius: CGFloat
-    let alignment: UnitPoint
+    private let startRadius: CGFloat
+    private let endRadius: CGFloat
+    private let alignment: UnitPoint
     
     init(
         startRadius: CGFloat = 0,
@@ -15,13 +15,15 @@ struct BackgroundRadialGradient: View {
         self.alignment = alignment
     }
     
+    private let colors: [Color] = [
+        .backgroundSecondary,
+        .clear
+    ]
+    
     var body: some View {
         VStack {
             RadialGradient(
-                colors: [
-                    .backgroundSecondary,
-                    .clear
-                ],
+                colors: colors,
                 center: alignment,
                 startRadius: startRadius,
                 endRadius: endRadius
