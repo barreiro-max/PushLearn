@@ -8,12 +8,16 @@ struct ResetPasswordButton: View {
             forgetPasswordVM.resetPassword(email: email)
             email = ""
         }) {
-            Text("Скинути")
-                .font(.system(size: 20))
-                .frame(width: 90, height: 50)
+            buttonLabel
         }
         .disabled(email.count < 8)
         .padding(.horizontal, 16)
         .buttonStyle(.borderedProminent)
+    }
+    
+    private var buttonLabel: some View {
+        Text("Скинути")
+            .font(.system(size: 20))
+            .frame(width: 90, height: 50)
     }
 }
