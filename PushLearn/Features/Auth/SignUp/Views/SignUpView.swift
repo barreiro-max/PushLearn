@@ -8,43 +8,59 @@ struct SignUpView: View {
     
     var body: some View {
         ZStack {
-            Color.backgroundPrimary.ignoresSafeArea()
-            
-            BackgroundRadialGradient(
-                startRadius: 25,
-                endRadius: 750,
-                alignment: .topTrailing
-            )
-            
-            Text("Реєстрація")
-                .font(.system(size: 36).bold())
-                .offset(x: 0, y: -150)
-            
+            background
+            headerView
             VStack(spacing: 35) {
                 Spacer().frame(height: 150)
-
-                switch signUpVM.state {
-                case .loading:
-                    ProgressView()
-                case .failure(_, _, global: let globalError):
-                    ErrorView(globalError: globalError)
-                default:
-                    EmptyView()
-                }
-                
-                AuthFields(
-                    email: $email,
-                    password: $password,
-                    state: $signUpVM.state
-                )
-                
-                SignUpButton(
-                    signUpVM: signUpVM,
-                    email: $email,
-                    password: $password
-                )
+                stateErrorView
+                authFields
+                signUpButton
             }
-        } // End of ZStack
+        }
+    }
+    
+    @ViewBuilder
+    private var background: some View {
+        Color.backgroundPrimary.ignoresSafeArea()
+        BackgroundRadialGradient(
+            startRadius: 25,
+            endRadius: 750,
+            alignment: .topTrailing
+        )
+    }
+    
+    private var headerView: some View {
+        Text("Реєстрація")
+            .font(.system(size: 36).bold())
+            .offset(x: 0, y: -150)
+    }
+    
+    @ViewBuilder
+    private var stateErrorView: some View {
+        switch signUpVM.state {
+        case .loading:
+            ProgressView()
+        case .failure(_, _, global: let globalError):
+            ErrorView(globalError: globalError)
+        default:
+            EmptyView()
+        }
+    }
+    
+    private var authFields: some View {
+        AuthFields(
+            email: $email,
+            password: $password,
+            state: $signUpVM.state
+        )
+    }
+    
+    private var signUpButton: some View {
+        SignUpButton(
+            signUpVM: signUpVM,
+            email: $email,
+            password: $password
+        )
     }
 }
 
