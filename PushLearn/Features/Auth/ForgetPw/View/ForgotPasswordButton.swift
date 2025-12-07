@@ -1,19 +1,24 @@
 import SwiftUI
 
 struct ForgotPasswordButton: View {
-    @State private var showForgetPw = false
+    @State private var showForgetPassword = false
+    
     var body: some View {
         Button(action: {
-            showForgetPw.toggle()
+            showForgetPassword.toggle()
         }, label: {
-            Text("Забули пароль?")
-                .font(.system(size: 24))
-                .frame(width: 200, height: 50)
+            buttonLabel
         })
         .padding(.horizontal, 16)
-        .sheet(isPresented: $showForgetPw) {
+        .sheet(isPresented: $showForgetPassword) {
             ForgetPasswordView()
         }
+    }
+    
+    private var buttonLabel: some View {
+        Text("Забули пароль?")
+            .font(.system(size: 24))
+            .frame(width: 200, height: 50)
     }
 }
 
