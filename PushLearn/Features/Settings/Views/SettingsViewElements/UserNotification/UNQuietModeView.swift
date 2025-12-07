@@ -5,22 +5,32 @@ struct UNQuietModeView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("Тихий режим").bold()
-            DatePicker(
-                "З цього часу: ",
-                selection: $notificationVM.quietInterval.startQuietDate,
-                displayedComponents: .hourAndMinute
-            )
-            .padding()
-            
-            DatePicker(
-                "До цього часу: ",
-                selection: $notificationVM.quietInterval.endQuietDate,
-                displayedComponents: .hourAndMinute
-            )
-            .padding()
+            headerView
+            startHourDatePicker
+            endHourDatePicker
         }
-        
+    }
+    
+    private var headerView: some View {
+        Text("Тихий режим").bold()
+    }
+    
+    private var startHourDatePicker: some View {
+        DatePicker(
+            "З цього часу: ",
+            selection: $notificationVM.quietInterval.startQuietDate,
+            displayedComponents: .hourAndMinute
+        )
+        .padding()
+    }
+    
+    private var endHourDatePicker: some View {
+        DatePicker(
+            "До цього часу: ",
+            selection: $notificationVM.quietInterval.endQuietDate,
+            displayedComponents: .hourAndMinute
+        )
+        .padding()
     }
 }
 
