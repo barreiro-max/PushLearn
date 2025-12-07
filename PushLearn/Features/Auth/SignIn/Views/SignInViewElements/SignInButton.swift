@@ -9,16 +9,24 @@ struct SignInButton: View {
     var body: some View {
         Button(action:  {
             signInVM.signIn(email: email, password: password)
-            email = ""
-            password = ""
+            cleanFields()
         }, label: {
-            Text("Вхід")
-                .font(.system(size: 20))
-                .frame(width: 90, height: 50)
+            buttonLabel
         })
         .disabled(password.count < 8)
         .padding(.horizontal, 16)
         .buttonStyle(.borderedProminent)
+    }
+    
+    private var buttonLabel: some View {
+        Text("Вхід")
+            .font(.system(size: 20))
+            .frame(width: 90, height: 50)
+    }
+    
+    private func cleanFields() {
+        email = ""
+        password = ""
     }
 }
 
