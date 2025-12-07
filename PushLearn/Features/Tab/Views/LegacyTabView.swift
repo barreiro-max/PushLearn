@@ -9,21 +9,33 @@ struct LegacyTabView: View {
 
     var body: some View {
         TabView(selection: $tabBarVM.currentScreen) {
-            DictionaryView()
-                .tabItem {
-                    Label("Learn", systemImage: "list.bullet.clipboard")
-                }
-                .tag(0)
-            PushView()
-                .tabItem {
-                    Label("Push", systemImage: "paperplane")
-                }
-                .tag(1)
-            SettingsView(signInVM: signInVM, notificationVM: notificationVM)
-                .tabItem {
-                    Label("Settings", systemImage: "gearshape")
-                }
-                .tag(2)
+            dictionaryScreen
+            pushScreen
+            settingsScreen
         }
+    }
+    
+    private var dictionaryScreen: some View {
+        DictionaryView()
+            .tabItem {
+                Label("Learn", systemImage: "list.bullet.clipboard")
+            }
+            .tag(0)
+    }
+
+    private var pushScreen: some View {
+        PushView()
+            .tabItem {
+                Label("Push", systemImage: "paperplane")
+            }
+            .tag(1)
+    }
+
+    private var settingsScreen: some View {
+        SettingsView(signInVM: signInVM, notificationVM: notificationVM)
+            .tabItem {
+                Label("Settings", systemImage: "gearshape")
+            }
+            .tag(2)
     }
 }
