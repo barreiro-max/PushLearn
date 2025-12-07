@@ -9,16 +9,14 @@ struct PushButtonView: View {
             pushVM.push(word: currentText)
             currentText.removeAll()
         } label: {
-            labelPushButton
+            labelButton
         }
         .tint(.white)
         .buttonStyle(.borderedProminent)
         .shadow(radius: 1.5)
     }
-}
-
-extension PushButtonView {
-    var labelPushButton: some View {
+    
+    private var labelButton: some View {
         Text("Push")
             .font(.largeTitle.bold())
             .frame(width: 150, height: 50)
