@@ -12,15 +12,8 @@ struct UNFrequencyPicker: View {
             sixHoursOption
             twentyFourHoursOption
         }
-        .onChange(of: notificationVM.frequeuncy) { _, choosenFrequency in
-            switch choosenFrequency {
-            case .oneHour:
-                notificationVM.cancelAllAndSchedule(type: .randomType)
-            case .sixHours:
-                notificationVM.cancelAllAndSchedule(type: .randomType)
-            case .twentyFourHours:
-                notificationVM.cancelAllAndSchedule(type: .randomType)
-            }
+        .onChange(of: notificationVM.frequeuncy) { _, _ in
+            notificationVM.cancelAllAndSchedule(type: .randomType)
         }
     }
     
