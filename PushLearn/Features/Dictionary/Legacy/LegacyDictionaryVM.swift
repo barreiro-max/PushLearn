@@ -2,8 +2,8 @@ import Foundation
 
 @MainActor
 @Observable final public class LegacyDictionaryVM: DictionaryVMProtocol {
-    var source: [String] = []
-    var target: [String] = []
+    var sources: [String] = []
+    var targets: [String] = []
     
     private let service: any Translation
     
