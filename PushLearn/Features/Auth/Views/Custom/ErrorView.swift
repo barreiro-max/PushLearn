@@ -7,7 +7,8 @@ struct ErrorView: View {
             .foregroundStyle(.red)
             .font(.system(size: 14))
             .multilineTextAlignment(.center)
-            .frame(width: 300, height: 15)
+            .frame(width: 300)
+            .lineLimit(nil)
     }
 }
 
