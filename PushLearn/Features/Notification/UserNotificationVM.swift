@@ -18,8 +18,8 @@ public class UserNotificationVM {
         self.quietInterval = quietInterval
     }
     
-    func requestAuth() -> Bool {
-        return manager.requestAuthorization()
+    func requestAuth() {
+        _ = manager.requestAuthorization()
     }
     func authStatus() -> UNAuthorizationStatus {
         return manager.authStatus()
