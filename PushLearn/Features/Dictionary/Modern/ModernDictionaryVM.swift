@@ -8,16 +8,21 @@ import Translation
     var target: [String] = []
 
     var configuration: TranslationSession.Configuration?
+    var isLanguageAvailable: Bool?
     
     private let service: any Translation
     private let store: any StoreSettings
+    private let checker: any LanguageAvailabilityChecking
     
     init(
         service: some Translation,
-        store: some StoreSettings = LanguageStore()
+        store: some StoreSettings = LanguageStore(),
+        checker: some LanguageAvailabilityChecking = LanguageAvailabilityChecker()
+        
     ) {
         self.service = service
         self.store = store
+        self.checker = checker
     }
     
     public func triggerTranslation() {

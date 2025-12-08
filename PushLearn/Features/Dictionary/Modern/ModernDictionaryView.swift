@@ -29,7 +29,7 @@ struct ModernDictionaryView: View {
             ),
             ignoresSafeAreaEdges: .top
         )
-        .checkChangeConfiguration(with: dictVM)
+        .onChangeConfiguration(with: dictVM)
         .translateTextOnPage(with: dictVM)
     }
 }
