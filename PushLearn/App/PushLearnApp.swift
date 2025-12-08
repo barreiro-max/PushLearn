@@ -15,13 +15,13 @@ struct PushLearnApp: App {
 
     var body: some Scene {
         WindowGroup {
-            mainView
+            rootView
                 .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
     
     @ViewBuilder
-    private var mainView: some View {
+    private var rootView: some View {
         if isLoggedIn {
             PushLearnView(notificationVM: notificationVM, signInVM: signInVM)
         } else {
@@ -37,12 +37,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
-        FirebaseApp.configure()
-        if let _ = Auth.auth().currentUser {
-            isLoggedIn = true
-        } else {
-            isLoggedIn = false
-        }
+        configureFirebaseApp()
         return true
+    }
+    
+    private func configureFirebaseApp() {
+        FirebaseApp.configure()
+        updateAuthState()
+    }
+    
+    private func updateAuthState() {
+        let firebaseUser = Auth.auth().currentUser
+        isLoggedIn = firebaseUser != nil
     }
 }
