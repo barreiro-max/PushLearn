@@ -4,11 +4,12 @@ struct UNQuietModeView: View {
     @Bindable var notificationVM: UserNotificationVM
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack {
             headerView
             startHourDatePicker
             endHourDatePicker
         }
+        .padding()
     }
     
     private var headerView: some View {
@@ -21,7 +22,6 @@ struct UNQuietModeView: View {
             selection: $notificationVM.quietInterval.startQuietDate,
             displayedComponents: .hourAndMinute
         )
-        .padding()
     }
     
     private var endHourDatePicker: some View {
@@ -30,7 +30,6 @@ struct UNQuietModeView: View {
             selection: $notificationVM.quietInterval.endQuietDate,
             displayedComponents: .hourAndMinute
         )
-        .padding()
     }
 }
 
