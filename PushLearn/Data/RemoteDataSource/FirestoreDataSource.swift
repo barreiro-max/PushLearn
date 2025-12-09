@@ -14,7 +14,9 @@ struct FirestoreDataSource: Database {
     }
     // MARK: - UserProfile
     func createUserProfile(_ profileDTO: UserProfileDTO) async throws {
-        try await usersRef.addDocument(from: profileDTO)
+        guard let id = profileDTO.id else { return }
+        let profileDocumentRef = usersRef.document(id)
+        try await profileDocumentRef.setData(from: profileDTO)
     }
 
     func getUserProfile(by id: String) async throws -> UserProfileDTO {
@@ -24,9 +26,7 @@ struct FirestoreDataSource: Database {
     }
     
     func updateUserProfile(_ profileDTO: UserProfileDTO) async throws {
-        guard let id = profileDTO.id else {
-            return
-        }
+        guard let id = profileDTO.id else { return }
         let profileDocumentRef = usersRef.document(id)
         try await profileDocumentRef.setData(from: profileDTO)
     }
@@ -43,7 +43,9 @@ struct FirestoreDataSource: Database {
     }
     
     func addWord(_ wordDTO: WordDTO, to profileId: String) async throws {
-        try await wordsRef(for: profileId).addDocument(from: wordDTO)
+        guard let id = wordDTO.id else { return }
+        let wordRef = wordsRef(for: profileId).document(id)
+        try await wordRef.setData(from: wordDTO)
     }
 
     func getWords(for profileId: String) async throws -> [WordDTO] {
