@@ -13,7 +13,7 @@ struct LanguagePicker: View {
     
     var body: some View {
         Picker(
-            "Вибір мови",
+            "Вибір мови перекладу",
             systemImage: "globe",
             selection: $selectedLanguage
         ) {
@@ -29,7 +29,8 @@ struct LanguagePicker: View {
     }
     
     private func isCurrentLanguage(for code: String) -> Bool {
-        Locale.current.language.languageCode?.identifier == code
+        let preferredLanguageCode = Locale.preferredLanguages[0].prefix(2).description
+        return preferredLanguageCode == code
     }
 }
 
