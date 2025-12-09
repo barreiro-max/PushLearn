@@ -7,6 +7,7 @@ public struct WordDTO: Codable {
 
 extension WordDTO {
     init(domain: Word) {
+        self.id = domain.id
         self.source = domain.source
         self.target = domain.target
     }

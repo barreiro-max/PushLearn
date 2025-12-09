@@ -7,6 +7,7 @@ struct UserProfileDTO: Codable {
 
 extension UserProfileDTO {
     init(domain: UserProfile) {
+        self.id = domain.id
         self.username = domain.username
         self.email = domain.email
     }
