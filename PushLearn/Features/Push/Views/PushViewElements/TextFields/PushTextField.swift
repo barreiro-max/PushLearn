@@ -13,7 +13,7 @@ struct PushTextField: View {
             prompt: Text("Push the word")
         )
         .focused($pushWordinFocus)
-        .font(.system(size: 36, weight: .medium))
+        .font(.system(size: 42, weight: .medium))
         .frame(
             width: 350,
             height: 200,
@@ -27,15 +27,15 @@ struct PushTextField: View {
         .lineLimit(1)
         .textFieldStyle(.roundedBorder)
         .autocorrectionDisabled(true)
-        .textInputAutocapitalization(.never)
+        .textInputAutocapitalization(.words)
         .submitLabel(.send)
         .onSubmit {
             pushVM.push(word: currentText)
             currentText.removeAll()
-            pushWordinFocus.toggle()
         }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        .task {
+            try? await Task.sleep(nanoseconds: 200_000_000)
+            await MainActor.run {
                 pushWordinFocus.toggle()
             }
         }
