@@ -7,8 +7,8 @@ struct UserWordsRepository: UserWordsRepositoryProtocol {
         self.database = database
     }
     // MARK: - UserProfile
-    func createUserProfile(_ profile: UserProfile) async throws {
-        let profileDTO = UserMapper.toDTO(domain: profile)
+    func create(userProfile: UserProfile) async throws {
+        let profileDTO = UserMapper.toDTO(domain: userProfile)
         try await database.createUserProfile(profileDTO)
     }
     
@@ -17,17 +17,17 @@ struct UserWordsRepository: UserWordsRepositoryProtocol {
         return UserMapper.toDomain(dto: fetchProfileDTO)
     }
 
-    func updateUserProfile(_ profile: UserProfile) async throws {
-        let profileDTO = UserMapper.toDTO(domain: profile)
+    func update(userProfile: UserProfile) async throws {
+        let profileDTO = UserMapper.toDTO(domain: userProfile)
         try await database.updateUserProfile(profileDTO)
     }
 
-    func deleteUserProfile(by id: String) async throws {
-        try await database.deleteUserProfile(by: id)
+    func delete(by userProfileId: String) async throws {
+        try await database.deleteUserProfile(by: userProfileId)
     }
     
     // MARK: - Words
-    func addWord(_ word: Word, to profileId: String) async throws {
+    func add(word: Word, to profileId: String) async throws {
         let wordDTO = WordMapper.toDTO(domain: word)
         try await database.addWord(wordDTO, to: profileId)
     }
@@ -37,12 +37,12 @@ struct UserWordsRepository: UserWordsRepositoryProtocol {
         return WordMapper.toDomains(dto: fetchedWordDTOs)
     }
     
-    func updateWord(_ word: Word, for profileId: String) async throws {
+    func update(word: Word, for profileId: String) async throws {
         let wordDTO = WordMapper.toDTO(domain: word)
         try await database.updateWord(wordDTO, for: profileId)
     }
     
-    func deleteWord(wordId: String, for profileId: String) async throws {
+    func delete(wordId: String, for profileId: String) async throws {
         try await database.deleteWord(wordId: wordId, for: profileId)
     }
 }
