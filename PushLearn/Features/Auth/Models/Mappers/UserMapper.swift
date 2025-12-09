@@ -1,4 +1,5 @@
 import Foundation
+import FirebaseAuth
 
 enum UserMapper: Mapper {
     typealias Domain = UserProfile
@@ -10,6 +11,14 @@ enum UserMapper: Mapper {
     
     static func toDTO(domain: UserProfile) -> UserProfileDTO {
         UserProfileDTO(domain: domain)
+    }
+    
+    static func toDomain(firebaseUser: User) -> UserProfile {
+        UserProfile(
+            id: firebaseUser.uid,
+            username: firebaseUser.displayName,
+            email: firebaseUser.email
+        )
     }
     
     static func toDomains(dto: [UserProfileDTO]) -> [UserProfile] {
