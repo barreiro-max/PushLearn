@@ -1,10 +1,8 @@
 import Foundation
 
-@Observable
-public class PushVM {
-    var isPushed = false
-    
-    public func push(word: String) {
+@MainActor
+@Observable final public class PushVM {
+    func push(word: String) {
         
     }
 }
