@@ -6,6 +6,7 @@ import FirebaseAuth
     // MARK: - Dependencies
     private let authValidator: any AuthValidated
     private let service: any SignUpProtocol
+    private let repository: any UserWordsRepositoryProtocol
     
     // MARK: - UI State
     var state: AuthState = .idle
@@ -13,10 +14,12 @@ import FirebaseAuth
     // MARK: - Init
     init(
         authValidator: some AuthValidated = AuthValidator(),
-        service: some SignUpProtocol = SignUpService()
+        service: some SignUpProtocol = SignUpService(),
+        repository: some UserWordsRepositoryProtocol = UserWordsRepository()
     ) {
         self.authValidator = authValidator
         self.service = service
+        self.repository = repository
     }
     
     // MARK: - Methods
@@ -40,11 +43,19 @@ import FirebaseAuth
                 email: email,
                 password: password
             )
-            state = .success(user: result.user)
+            let user = result.user
+            state = .success(user: user)
+            try await create(user: user)
         } handleError: { [weak self] error in
             guard let self else { return }
             state = .failure(global: error.signUpErrorDescription)
         }
+    }
+    
+    private func create(user: User) async throws {
+        let userProfile = UserMapper.toDomain(firebaseUser: user)
+        try await repository.create(userProfile: userProfile)
+
     }
 }
 
