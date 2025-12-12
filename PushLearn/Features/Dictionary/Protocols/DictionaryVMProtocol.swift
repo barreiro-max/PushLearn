@@ -1,5 +1,5 @@
 @MainActor
 protocol DictionaryVMProtocol {
-    var sources: [String] { get }
-    var targets: [String] { get }
+    var sources: [String] { get set }
+    var targets: [String] { get set }
 }
