@@ -44,7 +44,7 @@ struct SettingsView: View {
 
     private var sectionProfile: some View {
         Section("Профіль") {
-            UserInfo(signInVM: signInVM)
+            UserInfo()
             LogOutButton(signInVM: signInVM)
         }
     }

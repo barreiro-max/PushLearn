@@ -1,25 +1,36 @@
 import SwiftUI
+import FirebaseAuth
 
 struct UserInfo: View {
-    @Bindable var signInVM: SignInVM
     var body: some View {
-        switch signInVM.state {
-        case .success(let user):
+        if let user {
             LabeledContent(
                 "Ім'я",
-                value: user.uid
+                value: user.displayName ?? "Ім'я відсутнє"
             )
             LabeledContent(
                 "Електронна пошта",
                 value: user.email ?? "Невідома електронна пошта"
             )
-        default:
-            Text("Помилка завантаження даних")
         }
-        
+        else {
+            Text("Помилка завантаження даних").bold()
+                .foregroundStyle(.red)
+        }
+    }
+    
+    private var user: User? {
+        if isLoggedIn {
+            return Auth.auth().currentUser
+        }
+        return nil
+    }
+    
+    private var isLoggedIn: Bool {
+        UserDefaults.standard.bool(forKey: "isLoggedIn")
     }
 }
 
 #Preview {
-    UserInfo(signInVM: SignInVM())
+    UserInfo()
 }
