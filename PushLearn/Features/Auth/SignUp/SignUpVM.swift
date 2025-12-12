@@ -1,4 +1,3 @@
-import Foundation
 import FirebaseAuth
 
 @MainActor
@@ -37,25 +36,25 @@ import FirebaseAuth
         
         state = .loading
         
-        AsyncExecutor.run { [weak self] in
-            guard let self else { return }
-            let result = try await service.signUp(
-                email: email,
-                password: password
-            )
-            let user = result.user
-            state = .success(user: user)
-            try await create(user: user)
-        } handleError: { [weak self] error in
-            guard let self else { return }
-            state = .failure(global: error.signUpErrorDescription)
+        Task { @MainActor in
+            do {
+                let authDataResult = try await service.signUp(
+                    email: email,
+                    password: password
+                )
+                try await createAndUpdateStatus(user: authDataResult.user)
+            } catch {
+                state = .failure(global: error.signUpErrorDescription)
+            }
         }
     }
     
-    private func create(user: User) async throws {
+    
+    private func createAndUpdateStatus(user: User) async throws {
         let userProfile = UserMapper.toDomain(firebaseUser: user)
         try await repository.create(userProfile: userProfile)
 
+        state = .success(user: user)
     }
 }
 

@@ -2,7 +2,7 @@ import Foundation
 import FirebaseAuth
 
 @MainActor
-@Observable public class SignInVM {
+@Observable final public class SignInVM {
     // MARK: - Dependencies
     private let authValidator: any AuthValidated
     private let service: any SignInProtocol
@@ -34,18 +34,17 @@ import FirebaseAuth
         
         state = .loading
         
-        AsyncExecutor.run { [weak self] in
-            guard let self else { return }
-            
-            let result = try await service.signIn(
-                email: email,
-                password: password
-            )
-            state = .success(user: result.user)
+        Task { @MainActor in
+            do {
+                let result = try await service.signIn(
+                    email: email,
+                    password: password
+                )
+                state = .success(user: result.user)
+            } catch {
+                state = .failure(global: error.signInErrorDescription)
+            }
             UserDefaults.setLoggedIn()
-        } handleError: { [weak self] error in
-            guard let self else { return }
-            state = .failure(global: error.signInErrorDescription)
         }
     }
     
