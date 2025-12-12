@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct LanguagePicker: View {
-    @AppStorage("selectedLanguage") private var selectedLanguage = "en"
+    @AppStorage("sourceLanguage") private var sourceLanguage = "nil"
+    @AppStorage("selectedLanguage") private var selectedLanguage = "nil"
     
-    private let languages: [(name: String, code: String)] = [
+    typealias LanguageTuple = (name: String, code: String)
+    private let languages: [LanguageTuple] = [
         ("Українська", "uk"),
         ("Англійська", "en"),
         ("Іспанська", "es"),
@@ -12,25 +14,50 @@ struct LanguagePicker: View {
     ]
     
     var body: some View {
+        VStack {
+            sourcePicker
+            targetPicker
+        }
+    }
+    
+    private var sourcePicker: some View {
+        Picker(
+            "Вибір мови оригіналу",
+            systemImage: "globe",
+            selection: $sourceLanguage
+        ) {
+            ForEach(filteredLanguages(with: selectedLanguage), id: \.code) { language in
+                Text(language.name)
+                    .tag(language.code)
+            }
+        }
+        
+    }
+    
+    private var targetPicker: some View {
         Picker(
             "Вибір мови перекладу",
             systemImage: "globe",
             selection: $selectedLanguage
         ) {
-            ForEach(filteredlanguages, id: \.code) { language in
+            ForEach(filteredLanguages(with: sourceLanguage), id: \.code) { language in
                 Text(language.name)
                     .tag(language.code)
             }
         }
     }
     
-    private var filteredlanguages: [(name: String, code: String)] {
-        languages.filter { !isCurrentLanguage(for: $0.code) }
+    private func filteredLanguages(with languageCode: String) -> [LanguageTuple] {
+        languages.filter {
+            !isCurrentLanguage(
+                for: $0.code,
+                with: languageCode
+            )
+        }
     }
     
-    private func isCurrentLanguage(for code: String) -> Bool {
-        let preferredLanguageCode = Locale.preferredLanguages[0].prefix(2).description
-        return preferredLanguageCode == code
+    private func isCurrentLanguage(for code: String, with languageCode: String) -> Bool {
+        languageCode == code
     }
 }
 
