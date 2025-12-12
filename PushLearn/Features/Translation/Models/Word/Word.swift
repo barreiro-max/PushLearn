@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Word {
+public struct Word: Hashable {
     var id: String?
     var source: String
     var target: String
