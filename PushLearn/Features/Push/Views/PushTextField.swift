@@ -30,7 +30,7 @@ struct PushTextField: View {
         .textInputAutocapitalization(.words)
         .submitLabel(.send)
         .onSubmit {
-            pushVM.push(word: currentText)
+            pushVM.push(sourceText: currentText)
             currentText.removeAll()
         }
         .task {
