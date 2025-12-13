@@ -39,20 +39,21 @@ struct TranslationFacade: TranslationFacadeProtocol {
     }
     
     // MARK: - Translation
-    func translate(for words: [Word], using session: TranslationSession) async throws -> [Word] {
-        let isAvailable = await languageChecker.checkLanguageSupport(
+    func translate(
+        for words: [Word],
+        using session: TranslationSession
+    ) async throws -> [Word] {
+        guard let isAvailable = await languageChecker.checkLanguageSupport(
             from: languageStore.source,
             to: languageStore.target
-        )
-        if isAvailable == true {
-            try await prepareTranslator.prepareTranslation(using: session)
-            let responses = try await translator.translate(for: words, using: session)
-            let translatedSources = zip(words, responses).map { original, response in
-                Word(source: original.source, target: response.targetText)
-            }
-            return translatedSources
+        ), isAvailable else { return [] }
+        
+        try await prepareTranslator.prepareTranslation(using: session)
+        let responses = try await translator.translate(for: words, using: session)
+        let translatedSources = zip(words, responses).map { original, response in
+            Word(source: original.source, target: response.targetText)
         }
-        return []
+        return translatedSources
     }
 }
 
