@@ -46,7 +46,7 @@ struct ModernDictionaryView: View {
     }
     
     private var isEmptyDictionary: Bool {
-        dictVM.sources.isEmpty && dictVM.targets.isEmpty
+        dictVM.words.isEmpty
     }
     
     private var dictionary: some View {
@@ -54,26 +54,20 @@ struct ModernDictionaryView: View {
             if let error = dictVM.errorTranslationMessage {
                 ErrorView(globalError: error)
             } else {
-                sourcesView
-                targetsView
+                wordsView
             }
         }
+        .listStyle(.inset)
     }
     
-    private var sourcesView: some View {
-        ForEach(dictVM.sources, id: \.self) { initialWord in
-            Text(initialWord)
+    private var wordsView: some View {
+        ForEach(dictVM.words, id: \.self) { word in
+            Text(word.source)
+                .font(.headline)
+                .foregroundStyle(.primary)
+            Text(word.target)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
         }
     }
-    
-    private var targetsView: some View {
-        ForEach(dictVM.targets, id: \.self) { translatedWord in
-            Text(translatedWord)
-        }
-    }
-}
-
-@available(iOS 18, *)
-#Preview {
-    ModernDictionaryView()
 }
