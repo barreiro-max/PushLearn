@@ -1,7 +1,7 @@
 import Foundation
 
-@MainActor
-@Observable final public class LegacyDictionaryVM: DictionaryVMProtocol {
+@Observable
+final public class LegacyDictionaryVM: DictionaryVMProtocol {
     var sources: [String] = []
     var targets: [String] = []
     
