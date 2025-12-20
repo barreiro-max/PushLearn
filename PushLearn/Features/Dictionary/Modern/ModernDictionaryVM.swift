@@ -1,19 +1,22 @@
 import Translation
+import FirebaseAuth
 
 @available(iOS 18.0, *)
-@MainActor
-@Observable final public class ModernDictionaryVM {
-    var words: [Word] = []
+@Observable final public class ModernDictionaryVM: DictionaryVMProtocol {
+    private(set) var words: [Word] = []
     var configuration: TranslationSession.Configuration?
     
     var errorTranslationMessage: String?
     
     private let facade: any TranslationFacadeProtocol
+    private let repository: any UserWordsRepositoryProtocol
     
     init(
-        facade: some TranslationFacadeProtocol = TranslationFacade()
+        facade: some TranslationFacadeProtocol,
+        repository: some UserWordsRepositoryProtocol
     ) {
         self.facade = facade
+        self.repository = repository
     }
     
     public func prepareOrRebuildConfiguration() {
@@ -22,7 +25,9 @@ import Translation
     
     public func translateAllSources(using session: TranslationSession) async {
         do {
-            words = try await facade.translate(for: words, using: session)
+            guard let id = Auth.auth().currentUser?.uid else { return }
+            let sourceWords = try await repository.getWords(for: id)
+            words = try await facade.translate(for: sourceWords, using: session)
         } catch {
             errorTranslationMessage = error.translationErrorMessage
         }
