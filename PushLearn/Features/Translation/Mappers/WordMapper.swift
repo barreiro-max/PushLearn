@@ -20,3 +20,24 @@ enum WordMapper: Mapper {
         domain.map(WordMapper.toDTO(domain:))
     }
 }
+
+enum WordSourceMapper: Mapper {
+    typealias Domain = WordSource
+    typealias DTO = WordSourceDTO
+    
+    static func toDomain(dto: WordSourceDTO) -> WordSource {
+        WordSource(dto: dto)
+    }
+    
+    static func toDTO(domain: WordSource) -> WordSourceDTO {
+        WordSourceDTO(domain: domain)
+    }
+    
+    static func toDomains(dto: [WordSourceDTO]) -> [WordSource] {
+        dto.map(WordSourceMapper.toDomain(dto:))
+    }
+    
+    static func toDTOs(domain: [WordSource]) -> [WordSourceDTO] {
+        domain.map(WordSourceMapper.toDTO(domain:))
+    }
+}
