@@ -2,7 +2,9 @@ import SwiftUI
 
 struct ForgetPasswordView: View {
     @State private var email = ""
-    @State private var forgetPasswordVM = ForgetPasswordVM()
+    @State private var forgetPasswordVM = ForgetPasswordVM(
+        service: ForgetPasswordService()
+    )
     var body: some View {
         ZStack {
             background
