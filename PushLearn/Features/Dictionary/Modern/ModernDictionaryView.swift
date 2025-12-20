@@ -24,29 +24,19 @@ struct ModernDictionaryView: View {
     ]
     
     var body: some View {
-        if isEmptyDictionary {
-            ContentUnavailableView(
-                "Пуш нові слова!",
-                systemImage: "tray.and.arrow.down"
+        dictionary
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
+                LinearGradient(
+                    colors: background,
+                    startPoint: .top,
+                    endPoint: .bottom
+                ),
+                ignoresSafeAreaEdges: .top
             )
-        } else {
-            dictionary
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(
-                    LinearGradient(
-                        colors: background,
-                        startPoint: .top,
-                        endPoint: .bottom
-                    ),
-                    ignoresSafeAreaEdges: .top
-                )
-                .onChangeConfiguration(with: dictVM)
-                .translateTextOnPage(with: dictVM)
-        }
-    }
-    
-    private var isEmptyDictionary: Bool {
-        dictVM.words.isEmpty
+            .onChangeConfiguration(with: dictVM)
+            .translateTextOnPage(with: dictVM)
+        
     }
     
     private var dictionary: some View {
