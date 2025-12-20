@@ -2,10 +2,11 @@ struct UserWordsRepository: UserWordsRepositoryProtocol {
     private let database: any Database
     
     init(
-        database: some Database = FirestoreDataSource()
+        database: some Database
     ) {
         self.database = database
     }
+    
     // MARK: - UserProfile
     func create(userProfile: UserProfile) async throws {
         let profileDTO = UserMapper.toDTO(domain: userProfile)
@@ -27,18 +28,18 @@ struct UserWordsRepository: UserWordsRepositoryProtocol {
     }
     
     // MARK: - Words
-    func add(word: Word, to profileId: String) async throws {
-        let wordDTO = WordMapper.toDTO(domain: word)
+    func add(word: WordSource, to profileId: String) async throws {
+        let wordDTO = WordSourceMapper.toDTO(domain: word)
         try await database.addWord(wordDTO, to: profileId)
     }
     
-    func getWords(for profileId: String) async throws -> [Word] {
+    func getWords(for profileId: String) async throws -> [WordSource] {
         let fetchedWordDTOs = try await database.getWords(for: profileId)
-        return WordMapper.toDomains(dto: fetchedWordDTOs)
+        return WordSourceMapper.toDomains(dto: fetchedWordDTOs)
     }
     
-    func update(word: Word, for profileId: String) async throws {
-        let wordDTO = WordMapper.toDTO(domain: word)
+    func update(word: WordSource, for profileId: String) async throws {
+        let wordDTO = WordSourceMapper.toDTO(domain: word)
         try await database.updateWord(wordDTO, for: profileId)
     }
     

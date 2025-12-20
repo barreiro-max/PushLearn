@@ -42,20 +42,22 @@ struct FirestoreDataSource: Database {
         return profileDocumentRef.collection("words")
     }
     
-    func addWord(_ wordDTO: WordDTO, to profileId: String) async throws {
+    func addWord(_ wordDTO: WordSourceDTO, to profileId: String) async throws {
         guard let id = wordDTO.id else { return }
         let wordRef = wordsRef(for: profileId).document(id)
         try await wordRef.setData(from: wordDTO)
     }
 
-    func getWords(for profileId: String) async throws -> [WordDTO] {
+    func getWords(for profileId: String) async throws -> [WordSourceDTO] {
         let snapshot = try await wordsRef(for: profileId).getDocuments()
 
-        let wordDTOs = try snapshot.documents.compactMap { try $0.data(as: WordDTO.self) }
+        let wordDTOs = try snapshot.documents.compactMap {
+            try $0.data(as: WordSourceDTO.self)
+        }
         return wordDTOs
     }
     
-    func updateWord(_ wordDTO: WordDTO, for profileId: String) async throws {
+    func updateWord(_ wordDTO: WordSourceDTO, for profileId: String) async throws {
         guard let id = wordDTO.id else { return }
         try await wordsRef(for: profileId).document(id).setData(from: wordDTO)
     }
