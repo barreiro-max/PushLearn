@@ -14,23 +14,21 @@ struct PushLearnApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    @AppStorage("isLoggedIn") private var isLoggedIn = false
-    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         configureFirebaseApp()
         return true
-    }
-    
-    private func configureFirebaseApp() {
-        FirebaseApp.configure()
-        updateAuthState()
-    }
-    
-    private func updateAuthState() {
-        let firebaseUser = Auth.auth().currentUser
-        isLoggedIn = firebaseUser != nil
+        // MARK: - Embedded func
+        func configureFirebaseApp() {
+            FirebaseApp.configure()
+            updateAuthState()
+        }
+        
+        func updateAuthState() {
+            let firebaseUser = Auth.auth().currentUser
+            UserDefaults.standard.set(firebaseUser != nil, forKey: "isLoggedIn")
+        }
     }
 }
