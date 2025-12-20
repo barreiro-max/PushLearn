@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PushTextField: View {
-    @Bindable var pushVM: PushVM
+    let pushVM: PushVM
     
     @FocusState var pushWordinFocus: Bool
     @Binding var currentText: String
@@ -40,8 +40,4 @@ struct PushTextField: View {
             }
         }
     }
-}
-
-#Preview {
-    PushTextField(pushVM: PushVM(), currentText: .constant(""))
 }

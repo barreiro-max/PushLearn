@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SignUpButton: View {
-    @Bindable var signUpVM: SignUpVM
+    let signUpVM: SignUpVM
     
     @Binding var email: String
     @Binding var password: String
@@ -36,12 +36,4 @@ struct SignUpButton: View {
         email = ""
         password = ""
     }
-}
-
-#Preview {
-    SignUpButton(
-        signUpVM: SignUpVM(),
-        email: Binding.constant("dsfdsf@dfsfd.sdfs"),
-        password: Binding.constant("fsefsf3f2")
-    )
 }

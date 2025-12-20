@@ -32,9 +32,3 @@ struct UNQuietModeView: View {
         )
     }
 }
-
-#Preview {
-    UNQuietModeView(
-        notificationVM: UserNotificationVM()
-    )
-}

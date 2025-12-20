@@ -76,9 +76,3 @@ struct SignInView: View {
         ShowSignUpSheet()
     }
 }
-
-#Preview("Success SignIn") {
-    SignInView(
-        signInVM: SignInVM()
-    )
-}

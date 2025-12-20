@@ -1,9 +1,14 @@
 import SwiftUI
-
 // MARK: — PushView
 
 struct PushView: View {
-    @State private var pushVM = PushVM()
+    @State var pushVM = PushVM(
+        validator: WordValidator(),
+        repository: UserWordsRepository(
+            database: FirestoreDataSource()
+        ),
+        store: LanguageStore()
+    )
         
     @State private var currentText = ""
 
@@ -36,6 +41,3 @@ struct PushView: View {
     }
 }
 
-#Preview {
-    PushView()
-}

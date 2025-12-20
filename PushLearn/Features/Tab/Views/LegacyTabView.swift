@@ -4,8 +4,8 @@ import SwiftUI
 
 struct LegacyTabView: View {
     @Bindable var tabBarVM: TabBarVM
-    @Bindable var notificationVM: UserNotificationVM
-    @Bindable var signInVM: SignInVM
+    let signInVM: SignInVM
+    let notificationVM: UserNotificationVM
 
     var body: some View {
         TabView(selection: $tabBarVM.currentScreen) {

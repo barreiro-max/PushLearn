@@ -33,8 +33,3 @@ struct UNFrequencyPicker: View {
     }
 }
 
-#Preview {
-    UNFrequencyPicker(
-        notificationVM: UserNotificationVM()
-    )
-}

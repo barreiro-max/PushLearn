@@ -1,7 +1,13 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @State var signUpVM = SignUpVM() 
+    @State var signUpVM = SignUpVM(
+        authValidator: AuthValidator(),
+        service: SignUpService(),
+        repository: UserWordsRepository(
+            database: FirestoreDataSource()
+        )
+    )
     
     @State private var email = ""
     @State private var password = ""
@@ -64,6 +70,3 @@ struct SignUpView: View {
     }
 }
 
-#Preview {
-    SignUpView()
-}

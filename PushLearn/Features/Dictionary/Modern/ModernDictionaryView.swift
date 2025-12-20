@@ -4,8 +4,17 @@ import SwiftUI
 
 @available(iOS, introduced: 18.0)
 struct ModernDictionaryView: View {
-    @State private var dictVM = ModernDictionaryVM(
-        service: TranslationFactory.makeService()
+    @State var dictVM = ModernDictionaryVM(
+        facade: TranslationFacade(
+            configurator: TranslationConfigurator(),
+            languageChecker: LanguageAvailabilityChecker(),
+            prepareTranslator: TranslationPreparer(),
+            languageStore: LanguageStore(),
+            translator: ModernTranslationService()
+        ),
+        repository: UserWordsRepository(
+            database: FirestoreDataSource()
+        )
     )
     
     private let background: [Color] = [

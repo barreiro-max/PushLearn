@@ -6,8 +6,8 @@ struct SettingsView: View {
     @AppStorage("isNotificationEnabled") private var isNotificationEnabled =
         false
 
-    @Bindable var signInVM: SignInVM
-    @Bindable var notificationVM: UserNotificationVM
+    let signInVM: SignInVM
+    let notificationVM: UserNotificationVM
 
     private let background: [Color] = [
         .backgroundSecondary,
@@ -88,11 +88,4 @@ struct SettingsView: View {
             PrivacyPolicyLink()
         }
     }
-}
-
-#Preview {
-    SettingsView(
-        signInVM: SignInVM(),
-        notificationVM: UserNotificationVM()
-    )
 }

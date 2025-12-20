@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SignInButton: View {
-    @Bindable var signInVM: SignInVM
+    let signInVM: SignInVM
     
     @Binding var email: String
     @Binding var password: String
