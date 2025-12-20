@@ -1,14 +1,11 @@
 import Translation
 
-@available(
-    iOS 18.0,
-    *
-)
+@available(iOS 18.0, *)
 protocol TranslationConfigurating {
-    func prepare(
+    @MainActor func prepare(
         configuration: inout TranslationSession.Configuration?,
         languageStore: LanguageStoreSettings
-    ) -> TranslationSession.Configuration?
+    )
 }
 
 @available(iOS 18.0, *)
@@ -17,14 +14,16 @@ struct TranslationConfigurator: TranslationConfigurating {
     func prepare(
         configuration: inout TranslationSession.Configuration?,
         languageStore: LanguageStoreSettings
-    ) -> TranslationSession.Configuration? {
-        guard configuration == nil else {
-            return rebuild(
+    )  {
+        guard configuration == nil
+        else {
+            rebuild(
                 configuration: &configuration,
                 languageStore: languageStore
             )
+            return
         }
-        return trigger(
+        trigger(
             configuration: &configuration,
             languageStore: languageStore
         )
@@ -34,13 +33,8 @@ struct TranslationConfigurator: TranslationConfigurating {
     private func trigger(
         configuration: inout TranslationSession.Configuration?,
         languageStore: LanguageStoreSettings
-    ) -> TranslationSession.Configuration? {
-        guard configuration == nil else {
-            configuration?
-                .invalidate()
-            return nil
-        }
-        return .init(
+    ) {
+        configuration = .init(
             source: languageStore.source,
             target: languageStore.target
         )
@@ -49,12 +43,7 @@ struct TranslationConfigurator: TranslationConfigurating {
     private func rebuild(
         configuration: inout TranslationSession.Configuration?,
         languageStore: LanguageStoreSettings
-    ) -> TranslationSession.Configuration? {
-        configuration?
-            .invalidate()
-        return .init(
-            source: languageStore.source,
-            target: languageStore.target
-        )
+    ) {
+        configuration?.invalidate()
     }
 }

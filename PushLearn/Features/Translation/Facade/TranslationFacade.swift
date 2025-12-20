@@ -2,8 +2,8 @@ import Translation
 
 @available(iOS 18.0, *)
 protocol TranslationFacadeProtocol {
-    func prepareOrRebuild(configuration: inout TranslationSession.Configuration?) -> TranslationSession.Configuration?
-    func translate(for words: [Word], using session: TranslationSession) async throws -> [Word]
+    @MainActor func prepareOrRebuild(configuration: inout TranslationSession.Configuration?) 
+    func translate(for: [WordSource], using session: TranslationSession) async throws -> [Word]
 }
 
 @available(iOS 18.0, *)
@@ -30,12 +30,12 @@ struct TranslationFacade: TranslationFacadeProtocol {
     }
     
     // MARK: - Configuration
-    func prepareOrRebuild(configuration: inout TranslationSession.Configuration?) -> TranslationSession.Configuration? {
-        let preparedResult =  configurator.prepare(
+    func prepareOrRebuild(configuration: inout TranslationSession.Configuration?) {
+       configurator.prepare(
             configuration: &configuration,
             languageStore: languageStore
         )
-        return preparedResult
+        
     }
     
     // MARK: - Translation

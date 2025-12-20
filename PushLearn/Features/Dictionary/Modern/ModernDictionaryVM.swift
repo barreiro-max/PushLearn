@@ -17,7 +17,7 @@ import Translation
     }
     
     public func prepareOrRebuildConfiguration() {
-        configuration = facade.prepareOrRebuild(configuration: &configuration)
+        facade.prepareOrRebuild(configuration: &configuration)
     }
     
     public func translateAllSources(using session: TranslationSession) async {
