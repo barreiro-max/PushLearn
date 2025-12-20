@@ -30,6 +30,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		84F8BC832EF48B0B00985A57 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		840EE7382E8A91940004D495 /* PushLearn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushLearn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		840EE7482E8A91960004D495 /* PushLearnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLearnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +134,7 @@
 				840EE7342E8A91940004D495 /* Sources */,
 				840EE7352E8A91940004D495 /* Frameworks */,
 				840EE7362E8A91940004D495 /* Resources */,
+				84F8BC832EF48B0B00985A57 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
