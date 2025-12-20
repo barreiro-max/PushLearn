@@ -9,8 +9,8 @@ struct LanguageStore: LanguageStoreSettings {
     private let targetkey = "selectedLanguage"
     
     var source: Locale.Language {
-        let prefferedLanguage = Locale.preferredLanguages[0].prefix(2).description
-        let value = UserDefaults.standard.string(forKey: sourceKey) ?? prefferedLanguage
+        let preferedLanguage = Locale.preferredLanguages[0].prefix(2)
+        let value = UserDefaults.standard.string(forKey: sourceKey) ?? String(preferedLanguage)
         return .init(identifier: value)
     }
     
