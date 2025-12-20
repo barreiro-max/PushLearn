@@ -9,7 +9,7 @@ public class UserNotificationVM {
     var quietInterval: UNInterval
     
     init(
-        manager: some Notificated = UNService(),
+        manager: some Notificated,
         frequeuncy: UNFrequency = .sixHours,
         quietInterval: UNInterval =  .init()
     ) {

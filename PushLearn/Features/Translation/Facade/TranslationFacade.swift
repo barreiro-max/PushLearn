@@ -16,11 +16,11 @@ struct TranslationFacade: TranslationFacadeProtocol {
     private let translator: any Translating
     
     init(
-        configurator: some TranslationConfigurating = TranslationConfigurator(),
-        languageChecker: some LanguageAvailabilityChecking = LanguageAvailabilityChecker(),
-        prepareTranslator: some TranslationPreparing = TranslationPreparer(),
-        languageStore: some LanguageStoreSettings = LanguageStore(),
-        translator: some Translating = ModernTranslationService()
+        configurator: TranslationConfigurating,
+        languageChecker: LanguageAvailabilityChecking,
+        prepareTranslator: TranslationPreparing,
+        languageStore: LanguageStoreSettings,
+        translator: Translating
     ) {
         self.configurator = configurator
         self.prepareTranslator = prepareTranslator

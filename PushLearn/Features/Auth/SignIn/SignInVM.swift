@@ -12,8 +12,8 @@ import FirebaseAuth
     
     // MARK: - Init
     init(
-        authValidator: some AuthValidated = AuthValidator(),
-        service: some SignInProtocol = SignInService()
+        authValidator: some AuthValidated,
+        service: some SignInProtocol
     ) {
         self.authValidator = authValidator
         self.service = service
