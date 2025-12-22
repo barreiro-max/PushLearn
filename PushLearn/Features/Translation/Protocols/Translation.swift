@@ -1,4 +1,0 @@
-import Translation
-protocol Translation {
-    
-}

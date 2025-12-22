@@ -1,11 +1,9 @@
 import Translation
 
-@available(iOS 18.0, *)
-protocol Translating: Translation {
+protocol Translating {
     func translate(for words: [WordSource], using session: TranslationSession) async throws -> [TranslationSession.Response]
 }
 
-@available(iOS, introduced: 18.0)
 public struct ModernTranslationService: Translating {
     func translate(for words: [WordSource], using session: TranslationSession) async throws -> [TranslationSession.Response] {
         let requests: [TranslationSession.Request] = words.map {

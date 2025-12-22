@@ -3,7 +3,6 @@ import SwiftUI
 struct PushTextField: View {
     let pushVM: PushVM
     
-    @FocusState var pushWordinFocus: Bool
     @Binding var currentText: String
     
     var body: some View {
@@ -12,7 +11,6 @@ struct PushTextField: View {
             text: $currentText,
             prompt: Text("Push the word")
         )
-        .focused($pushWordinFocus)
         .font(.system(size: 42, weight: .medium))
         .frame(
             width: 350,
@@ -32,12 +30,6 @@ struct PushTextField: View {
         .onSubmit {
             pushVM.push(sourceText: currentText)
             currentText.removeAll()
-        }
-        .task {
-            try? await Task.sleep(nanoseconds: 200_000_000)
-            await MainActor.run {
-                pushWordinFocus.toggle()
-            }
         }
     }
 }

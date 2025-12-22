@@ -1,8 +1,8 @@
 import Translation
 import FirebaseAuth
 
-@available(iOS 18.0, *)
-@Observable final public class ModernDictionaryVM: DictionaryVMProtocol {
+@MainActor
+@Observable final public class DictionaryVM {
     private(set) var words: [Word] = []
     var configuration: TranslationSession.Configuration?
     

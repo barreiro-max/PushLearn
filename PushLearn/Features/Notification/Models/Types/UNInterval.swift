@@ -4,7 +4,7 @@ public struct UNInterval {
     var endQuietDate: Date
     
     init(
-        startQuietDate: Date = .now,
+        startQuietDate: Date = .now.addingTimeInterval(60 * 60 * 4),
         endQuietDate: Date = .now.addingTimeInterval(60 * 60 * 8)
     ) {
         self.startQuietDate = startQuietDate
