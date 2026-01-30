@@ -6,11 +6,11 @@ struct UserInfo: View {
         if let user {
             LabeledContent(
                 "Ім'я",
-                value: user.displayName ?? "Ім'я відсутнє"
+                value: user.displayName ?? String(localized: "Ім'я відсутнє")
             )
             LabeledContent(
                 "Електронна пошта",
-                value: user.email ?? "Невідома електронна пошта"
+                value: user.email ?? String(localized: "Невідома електронна пошта")
             )
         }
         else {

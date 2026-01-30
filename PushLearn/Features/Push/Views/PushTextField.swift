@@ -7,9 +7,9 @@ struct PushTextField: View {
     
     var body: some View {
         TextField(
-            "Word",
+            "Слово",
             text: $currentText,
-            prompt: Text("Push the word")
+            prompt: Text("Додати слово")
         )
         .font(.system(size: 42, weight: .medium))
         .frame(

@@ -28,7 +28,7 @@ extension AuthSecureField {
                     .font(.headline)
             }
             SecureField(
-                "Password",
+                "Пароль",
                 text: $password,
                 prompt: Text("Введіть пароль")
             )

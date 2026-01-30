@@ -7,13 +7,13 @@ struct CustomTabView: View {
 
     var body: some View {
         TabView(selection: $tabBarVM.currentScreen) {
-            Tab("Learn", systemImage: "list.bullet.clipboard", value: 0) {
+            Tab("Вивчати", systemImage: "list.bullet.clipboard", value: 0) {
                 DictionaryView()
             }
-            Tab("Push", systemImage: "paperplane", value: 1) {
+            Tab("Пуш", systemImage: "paperplane", value: 1) {
                 PushView()
             }
-            Tab("Settings", systemImage: "gearshape", value: 2) {
+            Tab("Налаштування", systemImage: "gearshape", value: 2) {
                 SettingsView(signInVM: signInVM, notificationVM: notificationVM)
             }
         }

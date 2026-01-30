@@ -6,11 +6,11 @@ struct LanguagePicker: View {
     
     typealias LanguageTuple = (name: String, code: String)
     private let languages: [LanguageTuple] = [
-        ("Українська", "uk"),
-        ("Англійська", "en"),
-        ("Іспанська", "es"),
-        ("Німецька", "de"),
-        ("Французька", "fr"),
+        (String(localized: "Українська"), "uk"),
+        (String(localized: "Англійська"), "en"),
+        (String(localized: "Іспанська"), "es"),
+        (String(localized: "Німецька"), "de"),
+        (String(localized: "Французька"), "fr")
     ]
     
     var body: some View {

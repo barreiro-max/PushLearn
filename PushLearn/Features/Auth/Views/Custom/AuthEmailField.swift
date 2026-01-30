@@ -26,7 +26,7 @@ extension AuthEmailField {
             }
             
             TextField(
-                "Email",
+                "Електронна пошта",
                 text: $email,
                 prompt: Text("Введіть електронну пошту")
             )
