@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844C0BBF2F2B828400D292EF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 844C0BBE2F2B828400D292EF /* README.md */; };
 		846AD63D2EC3833D002652C6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 846AD63C2EC3833D002652C6 /* FirebaseAuth */; };
 		846AD63F2EC3833D002652C6 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 846AD63E2EC3833D002652C6 /* FirebaseCore */; };
 		846AD6412EC3833D002652C6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 846AD6402EC3833D002652C6 /* FirebaseDatabase */; };
@@ -47,6 +48,7 @@
 		840EE7382E8A91940004D495 /* PushLearn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushLearn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		840EE7482E8A91960004D495 /* PushLearnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLearnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		840EE7522E8A91960004D495 /* PushLearnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLearnUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		844C0BBE2F2B828400D292EF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -63,6 +65,11 @@
 		840EE7552E8A91960004D495 /* PushLearnUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PushLearnUITests;
+			sourceTree = "<group>";
+		};
+		844C0BC02F2B8AFA00D292EF /* Assets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -99,6 +106,8 @@
 		840EE72F2E8A91940004D495 = {
 			isa = PBXGroup;
 			children = (
+				844C0BC02F2B8AFA00D292EF /* Assets */,
+				844C0BBE2F2B828400D292EF /* README.md */,
 				840EE73A2E8A91940004D495 /* PushLearn */,
 				840EE74B2E8A91960004D495 /* PushLearnTests */,
 				840EE7552E8A91960004D495 /* PushLearnUITests */,
@@ -142,6 +151,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				840EE73A2E8A91940004D495 /* PushLearn */,
+				844C0BC02F2B8AFA00D292EF /* Assets */,
 			);
 			name = PushLearn;
 			packageProductDependencies = (
@@ -224,7 +234,7 @@
 				};
 			};
 			buildConfigurationList = 840EE7332E8A91940004D495 /* Build configuration list for PBXProject "PushLearn" */;
-			developmentRegion = en;
+			developmentRegion = uk;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				fr,
@@ -256,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844C0BBF2F2B828400D292EF /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +383,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -428,6 +440,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
