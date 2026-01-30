@@ -12,7 +12,7 @@ The project prioritizes engineering decisions and code structure over UI polish 
 
 ![Settings form with Ukrainian localization](Assets/settings_uk_localize.png)
 ![Settings form with English localization](Assets/settings_en_localize.png)
-![Demo_App](Assets/demo_app.mov)
+![Demo_App](Assets/demo_app.MOV)
 
 ---
 
