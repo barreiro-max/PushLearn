@@ -8,23 +8,37 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-26
+
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.13.0
         with:
           access_token: ${{ github.token }}
-      # ----
+
       - name: Clone repo
         uses: actions/checkout@v4
-      # ----
+
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '16.2'
-      # ----
+          xcode-version: '26.3'
+
+      - name: Check IOS Devices
+        run: xcrun simctl list devices
+      
       - name: Build
-        run: xcodebuild -project PushLearn.xcodeproj -scheme PushLearn -destination 'platform=iOS Simulator,name=iPhone 16' build
-      # ----
+        run: |
+          xcodebuild \
+            -project PushLearn.xcodeproj \
+            -scheme PushLearn \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=26.2' \
+            build
+
       - name: Test
-        run: xcodebuild -project PushLearn.xcodeproj -scheme PushLearnTests -destination 'platform=iOS Simulator,name=iPhone 16' test
+        run: |
+          xcodebuild \
+            -project PushLearn.xcodeproj \
+            -scheme PushLearn \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=26.2' \
+            test
