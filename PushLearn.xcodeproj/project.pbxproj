@@ -16,14 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		840EE7492E8A91960004D495 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 840EE7302E8A91940004D495 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 840EE7372E8A91940004D495;
-			remoteInfo = PushLearn;
-		};
-		840EE7532E8A91960004D495 /* PBXContainerItemProxy */ = {
+		843CCE922F600C8A00DBCA54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 840EE7302E8A91940004D495 /* Project object */;
 			proxyType = 1;
@@ -47,8 +40,7 @@
 
 /* Begin PBXFileReference section */
 		840EE7382E8A91940004D495 /* PushLearn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushLearn.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		840EE7482E8A91960004D495 /* PushLearnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLearnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		840EE7522E8A91960004D495 /* PushLearnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLearnUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		843CCE8E2F600C8A00DBCA54 /* PushLearnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLearnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		844C0BBE2F2B828400D292EF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		84BFB2972F2CE5B200E42D21 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,14 +51,9 @@
 			path = PushLearn;
 			sourceTree = "<group>";
 		};
-		840EE74B2E8A91960004D495 /* PushLearnTests */ = {
+		843CCE8F2F600C8A00DBCA54 /* PushLearnTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PushLearnTests;
-			sourceTree = "<group>";
-		};
-		840EE7552E8A91960004D495 /* PushLearnUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PushLearnUITests;
 			sourceTree = "<group>";
 		};
 		844C0BC02F2B8AFA00D292EF /* Assets */ = {
@@ -88,14 +75,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		840EE7452E8A91960004D495 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		840EE74F2E8A91960004D495 /* Frameworks */ = {
+		843CCE8B2F600C8A00DBCA54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -112,8 +92,7 @@
 				844C0BC02F2B8AFA00D292EF /* Assets */,
 				844C0BBE2F2B828400D292EF /* README.md */,
 				840EE73A2E8A91940004D495 /* PushLearn */,
-				840EE74B2E8A91960004D495 /* PushLearnTests */,
-				840EE7552E8A91960004D495 /* PushLearnUITests */,
+				843CCE8F2F600C8A00DBCA54 /* PushLearnTests */,
 				846891252E9824A6001491BC /* Frameworks */,
 				840EE7392E8A91940004D495 /* Products */,
 			);
@@ -123,8 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				840EE7382E8A91940004D495 /* PushLearn.app */,
-				840EE7482E8A91960004D495 /* PushLearnTests.xctest */,
-				840EE7522E8A91960004D495 /* PushLearnUITests.xctest */,
+				843CCE8E2F600C8A00DBCA54 /* PushLearnTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,51 +145,28 @@
 			productReference = 840EE7382E8A91940004D495 /* PushLearn.app */;
 			productType = "com.apple.product-type.application";
 		};
-		840EE7472E8A91960004D495 /* PushLearnTests */ = {
+		843CCE8D2F600C8A00DBCA54 /* PushLearnTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 840EE75F2E8A91960004D495 /* Build configuration list for PBXNativeTarget "PushLearnTests" */;
+			buildConfigurationList = 843CCE942F600C8A00DBCA54 /* Build configuration list for PBXNativeTarget "PushLearnTests" */;
 			buildPhases = (
-				840EE7442E8A91960004D495 /* Sources */,
-				840EE7452E8A91960004D495 /* Frameworks */,
-				840EE7462E8A91960004D495 /* Resources */,
+				843CCE8A2F600C8A00DBCA54 /* Sources */,
+				843CCE8B2F600C8A00DBCA54 /* Frameworks */,
+				843CCE8C2F600C8A00DBCA54 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				840EE74A2E8A91960004D495 /* PBXTargetDependency */,
+				843CCE932F600C8A00DBCA54 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				840EE74B2E8A91960004D495 /* PushLearnTests */,
+				843CCE8F2F600C8A00DBCA54 /* PushLearnTests */,
 			);
 			name = PushLearnTests;
 			packageProductDependencies = (
 			);
 			productName = PushLearnTests;
-			productReference = 840EE7482E8A91960004D495 /* PushLearnTests.xctest */;
+			productReference = 843CCE8E2F600C8A00DBCA54 /* PushLearnTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		840EE7512E8A91960004D495 /* PushLearnUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 840EE7622E8A91960004D495 /* Build configuration list for PBXNativeTarget "PushLearnUITests" */;
-			buildPhases = (
-				840EE74E2E8A91960004D495 /* Sources */,
-				840EE74F2E8A91960004D495 /* Frameworks */,
-				840EE7502E8A91960004D495 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				840EE7542E8A91960004D495 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				840EE7552E8A91960004D495 /* PushLearnUITests */,
-			);
-			name = PushLearnUITests;
-			packageProductDependencies = (
-			);
-			productName = PushLearnUITests;
-			productReference = 840EE7522E8A91960004D495 /* PushLearnUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -226,12 +181,9 @@
 					840EE7372E8A91940004D495 = {
 						CreatedOnToolsVersion = 16.1;
 					};
-					840EE7472E8A91960004D495 = {
+					843CCE8D2F600C8A00DBCA54 = {
 						CreatedOnToolsVersion = 16.1;
-						TestTargetID = 840EE7372E8A91940004D495;
-					};
-					840EE7512E8A91960004D495 = {
-						CreatedOnToolsVersion = 16.1;
+						LastSwiftMigration = 1610;
 						TestTargetID = 840EE7372E8A91940004D495;
 					};
 				};
@@ -258,8 +210,7 @@
 			projectRoot = "";
 			targets = (
 				840EE7372E8A91940004D495 /* PushLearn */,
-				840EE7472E8A91960004D495 /* PushLearnTests */,
-				840EE7512E8A91960004D495 /* PushLearnUITests */,
+				843CCE8D2F600C8A00DBCA54 /* PushLearnTests */,
 			);
 		};
 /* End PBXProject section */
@@ -274,14 +225,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		840EE7462E8A91960004D495 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		840EE7502E8A91960004D495 /* Resources */ = {
+		843CCE8C2F600C8A00DBCA54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -298,14 +242,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		840EE7442E8A91960004D495 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		840EE74E2E8A91960004D495 /* Sources */ = {
+		843CCE8A2F600C8A00DBCA54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -315,15 +252,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		840EE74A2E8A91960004D495 /* PBXTargetDependency */ = {
+		843CCE932F600C8A00DBCA54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 840EE7372E8A91940004D495 /* PushLearn */;
-			targetProxy = 840EE7492E8A91960004D495 /* PBXContainerItemProxy */;
-		};
-		840EE7542E8A91960004D495 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 840EE7372E8A91940004D495 /* PushLearn */;
-			targetProxy = 840EE7532E8A91960004D495 /* PBXContainerItemProxy */;
+			targetProxy = 843CCE922F600C8A00DBCA54 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -519,75 +451,52 @@
 			};
 			name = Release;
 		};
-		840EE7602E8A91960004D495 /* Debug */ = {
+		843CCE952F600C8A00DBCA54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q3ZBJKTDC2;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxtp.PushLearnTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PushLearnTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PushLearn.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PushLearn";
 			};
 			name = Debug;
 		};
-		840EE7612E8A91960004D495 /* Release */ = {
+		843CCE962F600C8A00DBCA54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q3ZBJKTDC2;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxtp.PushLearnTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PushLearnTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PushLearn.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PushLearn";
-			};
-			name = Release;
-		};
-		840EE7632E8A91960004D495 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q3ZBJKTDC2;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxtp.PushLearnUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PushLearn;
-			};
-			name = Debug;
-		};
-		840EE7642E8A91960004D495 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q3ZBJKTDC2;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxtp.PushLearnUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PushLearn;
 			};
 			name = Release;
 		};
@@ -612,20 +521,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		840EE75F2E8A91960004D495 /* Build configuration list for PBXNativeTarget "PushLearnTests" */ = {
+		843CCE942F600C8A00DBCA54 /* Build configuration list for PBXNativeTarget "PushLearnTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				840EE7602E8A91960004D495 /* Debug */,
-				840EE7612E8A91960004D495 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		840EE7622E8A91960004D495 /* Build configuration list for PBXNativeTarget "PushLearnUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				840EE7632E8A91960004D495 /* Debug */,
-				840EE7642E8A91960004D495 /* Release */,
+				843CCE952F600C8A00DBCA54 /* Debug */,
+				843CCE962F600C8A00DBCA54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
