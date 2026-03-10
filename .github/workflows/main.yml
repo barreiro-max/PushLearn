@@ -39,6 +39,6 @@ jobs:
         run: |
           xcodebuild \
             -project PushLearn.xcodeproj \
-            -scheme PushLearn \
+            -scheme PushLearnTests \
             -destination 'id=AE1B743D-A3CC-4A1E-BFC9-ED56C5BE12F5' \
             test
