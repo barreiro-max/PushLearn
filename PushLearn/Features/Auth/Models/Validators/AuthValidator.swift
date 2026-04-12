@@ -28,7 +28,6 @@ extension AuthValidator {
     func getValidationState(email: String, password: String) -> AuthState {
         guard isEmailValid(email) else {
             return .failure(email: "Невалідна електронна пошта")
-
         }
         guard isPasswordValid(password) else {
             return .failure(password: "Невалідний пароль")

@@ -31,7 +31,6 @@ struct LanguagePicker: View {
                     .tag(language.code)
             }
         }
-
     }
 
     private var targetPicker: some View {

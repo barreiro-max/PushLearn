@@ -21,7 +21,7 @@ extension AuthSecureField {
         password: String,
         passwordError: String? = nil
     ) -> some View {
-    VStack(spacing: 4) {
+        VStack(spacing: 4) {
             if let passwordError {
                 Text(passwordError)
                     .foregroundStyle(.red)

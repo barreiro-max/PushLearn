@@ -40,7 +40,6 @@ opt_in_rules:
 
   # 🟢 Style / SwiftUI friendly
   - trailing_closure
-  - sorted_imports
   - closure_end_indentation
   - closure_spacing
   - unneeded_parentheses_in_closure_argument
@@ -51,8 +50,7 @@ opt_in_rules:
   - vertical_whitespace_closing_braces
 
 disabled_rules:
-   - trailing_whitespace
-  - line_length
+  - trailing_whitespace
   - todo
 
 line_length:

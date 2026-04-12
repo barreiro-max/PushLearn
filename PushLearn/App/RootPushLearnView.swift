@@ -19,7 +19,6 @@ struct RootPushLearnView: View {
 
         let manager: Notificated = UNService()
         _notificationVM = State(wrappedValue: UserNotificationVM(manager: manager))
-
     }
 
     var body: some View {

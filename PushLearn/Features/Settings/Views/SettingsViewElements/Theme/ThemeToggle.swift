@@ -9,7 +9,6 @@ struct ThemeToggle: View {
             systemImage: "moon",
             isOn: $isDarkMode
         )
-
     }
 }
 

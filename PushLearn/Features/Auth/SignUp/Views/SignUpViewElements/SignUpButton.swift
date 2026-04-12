@@ -29,7 +29,6 @@ struct SignUpButton: View {
         Text("Створити")
             .font(.system(size: 20))
             .frame(width: 90, height: 50)
-
     }
 
     private func cleanFields() {

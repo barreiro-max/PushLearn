@@ -8,7 +8,6 @@ struct RateLink: View {
         }
         .bold()
     }
-
 }
 
 #Preview {

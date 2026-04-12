@@ -35,7 +35,6 @@ struct DictionaryView: View {
             )
             .onChangeConfiguration(with: dictVM)
             .translateTextOnPage(with: dictVM)
-
     }
 
     private var dictionary: some View {

@@ -35,7 +35,6 @@ struct TranslationFacade: TranslationFacadeProtocol {
             configuration: &configuration,
             languageStore: languageStore
         )
-
     }
 
     // MARK: - Translation
