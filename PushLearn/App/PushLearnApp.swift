@@ -16,7 +16,7 @@ struct PushLearnApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(
         _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         configureFirebaseApp()
         return true
@@ -25,7 +25,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             FirebaseApp.configure()
             updateAuthState()
         }
-        
+
         func updateAuthState() {
             let firebaseUser = Auth.auth().currentUser
             UserDefaults.standard.set(firebaseUser != nil, forKey: "isLoggedIn")

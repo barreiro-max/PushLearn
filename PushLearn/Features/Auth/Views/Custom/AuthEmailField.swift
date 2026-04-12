@@ -2,9 +2,9 @@ import SwiftUI
 
 struct AuthEmailField: View {
     @Binding var email: String
-    
+
     @Binding var state: AuthState
-    
+
     var body: some View {
         switch state {
         case .failure(let emailError, _, _):
@@ -24,7 +24,7 @@ extension AuthEmailField {
                     .foregroundStyle(.red)
                     .font(.headline)
             }
-            
+
             TextField(
                 "Електронна пошта",
                 text: $email,

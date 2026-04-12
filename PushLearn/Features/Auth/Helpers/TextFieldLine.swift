@@ -6,7 +6,7 @@ struct TextFieldLine: View {
         .textPrimary,
         .clear
     ]
-    
+
     var body: some View {
         Rectangle()
             .frame(width: 350, height: 1)

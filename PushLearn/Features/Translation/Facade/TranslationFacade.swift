@@ -2,19 +2,19 @@ import Translation
 
 @available(iOS 18.0, *)
 protocol TranslationFacadeProtocol {
-    @MainActor func prepareOrRebuild(configuration: inout TranslationSession.Configuration?) 
+    @MainActor func prepareOrRebuild(configuration: inout TranslationSession.Configuration?)
     func translate(for: [WordSource], using session: TranslationSession) async throws -> [Word]
 }
 
 @available(iOS 18.0, *)
 struct TranslationFacade: TranslationFacadeProtocol {
     private let configurator: any TranslationConfigurating
-    
+
     private let languageChecker: any LanguageAvailabilityChecking
     private let prepareTranslator: any TranslationPreparing
     private let languageStore: any LanguageStoreSettings
     private let translator: any Translating
-    
+
     init(
         configurator: TranslationConfigurating,
         languageChecker: LanguageAvailabilityChecking,
@@ -28,16 +28,16 @@ struct TranslationFacade: TranslationFacadeProtocol {
         self.languageStore = languageStore
         self.translator = translator
     }
-    
+
     // MARK: - Configuration
     func prepareOrRebuild(configuration: inout TranslationSession.Configuration?) {
        configurator.prepare(
             configuration: &configuration,
             languageStore: languageStore
         )
-        
+
     }
-    
+
     // MARK: - Translation
     func translate(
         for sourceWords: [WordSource],
@@ -47,9 +47,9 @@ struct TranslationFacade: TranslationFacadeProtocol {
             from: languageStore.source,
             to: languageStore.target
         ), isAvailable else { return [] }
-        
+
         try await prepareTranslator.prepareTranslation(using: session)
-        
+
         let responses = try await translator.translate(for: sourceWords, using: session)
         let translatedSources = zip(sourceWords, responses).map { wordSource, response in
             Word(source: wordSource.source, target: response.targetText)
@@ -57,4 +57,3 @@ struct TranslationFacade: TranslationFacadeProtocol {
         return translatedSources
     }
 }
-

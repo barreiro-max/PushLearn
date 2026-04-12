@@ -12,20 +12,19 @@ struct UserInfo: View {
                 "Електронна пошта",
                 value: user.email ?? String(localized: "Невідома електронна пошта")
             )
-        }
-        else {
+        } else {
             Text("Помилка завантаження даних").bold()
                 .foregroundStyle(.red)
         }
     }
-    
+
     private var user: User? {
         if isLoggedIn {
             return Auth.auth().currentUser
         }
         return nil
     }
-    
+
     private var isLoggedIn: Bool {
         UserDefaults.standard.bool(forKey: "isLoggedIn")
     }

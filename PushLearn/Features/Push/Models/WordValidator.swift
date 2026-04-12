@@ -5,12 +5,12 @@ protocol WordValidated {
         for word: String,
         for languageCode: String
     ) -> Bool
-    
+
     func isReal(
         word: String,
         for languageCode: String
     ) -> Bool
-    
+
     func getWordState(
         word: String,
         for languageCode: String
@@ -39,10 +39,10 @@ struct WordValidator: WordValidated {
         }
         return word.firstMatch(of: regex) != nil
     }
-    
+
     func isReal(word: String, for languageCode: String) -> Bool {
         let checker = UITextChecker()
-        
+
         let range = NSRange(location: 0, length: word.utf16.count)
         let misspelledRange = checker.rangeOfMisspelledWord(
             in: word,

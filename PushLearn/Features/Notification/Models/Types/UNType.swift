@@ -3,7 +3,7 @@ public enum UNType: CaseIterable {
     case motivation
     case progress
     case comeBack
-    
+
     var mappedValue: UNTemplate {
         switch self {
         case .daily:      return .dailyMessage
@@ -12,7 +12,7 @@ public enum UNType: CaseIterable {
         case .comeBack:   return .comebackMessage
         }
     }
-    
+
     static var randomType: Self {
         return .allCases.randomElement() ?? .daily
     }

@@ -10,4 +10,3 @@ struct ForgetPasswordService: ForgetPasswordServiceProtocol {
         try await Auth.auth().sendPasswordReset(withEmail: email)
     }
 }
-

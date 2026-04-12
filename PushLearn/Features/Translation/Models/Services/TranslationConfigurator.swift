@@ -14,7 +14,7 @@ struct TranslationConfigurator: TranslationConfigurating {
     func prepare(
         configuration: inout TranslationSession.Configuration?,
         languageStore: LanguageStoreSettings
-    )  {
+    ) {
         guard configuration == nil
         else {
             rebuild(
@@ -28,7 +28,7 @@ struct TranslationConfigurator: TranslationConfigurating {
             languageStore: languageStore
         )
     }
-    
+
     // MARK: - Configuration Settings
     private func trigger(
         configuration: inout TranslationSession.Configuration?,
@@ -39,7 +39,7 @@ struct TranslationConfigurator: TranslationConfigurating {
             target: languageStore.target
         )
     }
-    
+
     private func rebuild(
         configuration: inout TranslationSession.Configuration?,
         languageStore: LanguageStoreSettings

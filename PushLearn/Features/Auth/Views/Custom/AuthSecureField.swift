@@ -2,9 +2,9 @@ import SwiftUI
 
 struct AuthSecureField: View {
     @Binding var password: String
-    
+
     @Binding var state: AuthState
-    
+
     var body: some View {
         switch state {
         case .failure(_, let passwordError, _):
@@ -43,4 +43,3 @@ extension AuthSecureField {
         }
     }
 }
-

@@ -2,13 +2,13 @@ import FirebaseFirestore
 
 struct FirestoreDataSource: Database {
     private let firestore: Firestore
-    
+
     init(
         firestore: Firestore = .firestore()
     ) {
         self.firestore = firestore
     }
-    
+
     private var usersRef: CollectionReference {
         firestore.collection("users")
     }
@@ -24,7 +24,7 @@ struct FirestoreDataSource: Database {
         let userDTO = try await profileDocumentRef.getDocument(as: UserProfileDTO.self)
         return userDTO
     }
-    
+
     func updateUserProfile(_ profileDTO: UserProfileDTO) async throws {
         guard let id = profileDTO.id else { return }
         let profileDocumentRef = usersRef.document(id)
@@ -36,12 +36,12 @@ struct FirestoreDataSource: Database {
         try await profileDocumentRef.delete()
     }
     // MARK: - Words
-    
+
     private func wordsRef(for profileId: String) -> CollectionReference {
         let profileDocumentRef = usersRef.document(profileId)
         return profileDocumentRef.collection("words")
     }
-    
+
     func addWord(_ wordDTO: WordSourceDTO, to profileId: String) async throws {
         guard let id = wordDTO.id else { return }
         let wordRef = wordsRef(for: profileId).document(id)
@@ -56,7 +56,7 @@ struct FirestoreDataSource: Database {
         }
         return wordDTOs
     }
-    
+
     func updateWord(_ wordDTO: WordSourceDTO, for profileId: String) async throws {
         guard let id = wordDTO.id else { return }
         try await wordsRef(for: profileId).document(id).setData(from: wordDTO)

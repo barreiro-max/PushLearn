@@ -6,7 +6,6 @@ protocol LanguageAvailabilityChecking {
         from source: Locale.Language,
         to target: Locale.Language
     ) async -> Bool?
-
 }
 
 @available(iOS 18.0, *)

@@ -8,10 +8,10 @@ struct SignUpView: View {
             database: FirestoreDataSource()
         )
     )
-    
+
     @State private var email = ""
     @State private var password = ""
-    
+
     var body: some View {
         ZStack {
             background
@@ -24,7 +24,7 @@ struct SignUpView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private var background: some View {
         Color.backgroundPrimary.ignoresSafeArea()
@@ -34,13 +34,13 @@ struct SignUpView: View {
             alignment: .topTrailing
         )
     }
-    
+
     private var headerView: some View {
         Text("Реєстрація")
             .font(.system(size: 36).bold())
             .offset(x: 0, y: -150)
     }
-    
+
     @ViewBuilder
     private var stateErrorView: some View {
         switch signUpVM.state {
@@ -52,7 +52,7 @@ struct SignUpView: View {
             EmptyView()
         }
     }
-    
+
     private var authFields: some View {
         AuthFields(
             email: $email,
@@ -60,7 +60,7 @@ struct SignUpView: View {
             state: $signUpVM.state
         )
     }
-    
+
     private var signUpButton: some View {
         SignUpButton(
             signUpVM: signUpVM,
@@ -69,4 +69,3 @@ struct SignUpView: View {
         )
     }
 }
-

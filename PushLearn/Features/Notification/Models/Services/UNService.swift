@@ -1,38 +1,37 @@
 import UserNotifications
 
 protocol Notificated {
-    func requestAuthorization() -> Bool
-    
+    func requestAuthorization() async -> Bool
+
     func authStatus() -> UNAuthorizationStatus
-    
+
     func schedule(
         type: UNType,
         frequency: UNFrequency,
         interval: UNInterval
     )
-    
-    func cancelAll(clearDelivered: Bool) 
+
+    func cancelAll(clearDelivered: Bool)
 }
 
 public struct UNService: Notificated {
     // MARK: - Singleton
     private let center = UNUserNotificationCenter.current()
-    
+
     // MARK: - API Calls
-    func requestAuthorization() -> Bool {
+    func requestAuthorization() async -> Bool {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-        
-        Task {
-            do {
-                let granted = try await center.requestAuthorization(options: options)
-                return granted
-            } catch {
-                return false
-            }
+
+        do {
+            let granted = try await center.requestAuthorization(
+                options: options
+            )
+            return granted
+        } catch {
+            return false
         }
-        return false
     }
-    
+
     func authStatus() -> UNAuthorizationStatus {
         var status: UNAuthorizationStatus = .notDetermined
         Task {
@@ -40,7 +39,7 @@ public struct UNService: Notificated {
         }
         return status
     }
-    
+
     func schedule(
         type: UNType,
         frequency: UNFrequency,
@@ -48,25 +47,25 @@ public struct UNService: Notificated {
     ) {
         let start = interval.startQuietDate
         let end = interval.endQuietDate
-        
+
         guard !(start...end).contains(.now) else { return }
-        
+
         let trigger = UNTimeIntervalNotificationTrigger(
             timeInterval: TimeInterval(frequency.seconds),
             repeats: true
         )
-        
+
         let template = type.mappedValue
         let content = template.content
-        
+
         let request = UNNotificationRequest(
             identifier: content.categoryIdentifier,
             content: content,
             trigger: trigger
         )
-        
+
         center.removeAllDeliveredNotifications()
-        
+
         Task {
             do {
                 try await center.add(request)
@@ -75,7 +74,7 @@ public struct UNService: Notificated {
             }
         }
     }
-    
+
     func cancelAll(clearDelivered: Bool = false) {
         center.removeAllPendingNotificationRequests()
 

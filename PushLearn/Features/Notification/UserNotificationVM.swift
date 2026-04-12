@@ -4,10 +4,10 @@ import UserNotifications
 @Observable
 public class UserNotificationVM {
     private let manager: any Notificated
-    
+
     var frequeuncy: UNFrequency
     var quietInterval: UNInterval
-    
+
     init(
         manager: some Notificated,
         frequeuncy: UNFrequency = .sixHours,
@@ -17,14 +17,16 @@ public class UserNotificationVM {
         self.frequeuncy = frequeuncy
         self.quietInterval = quietInterval
     }
-    
+
     func requestAuth() {
-        _ = manager.requestAuthorization()
+        Task {
+            await manager.requestAuthorization()
+        }
     }
     func authStatus() -> UNAuthorizationStatus {
         return manager.authStatus()
     }
-    
+
     func cancelAllAndSchedule(type: UNType) {
         manager.cancelAll(clearDelivered: false)
         manager.schedule(
@@ -34,4 +36,3 @@ public class UserNotificationVM {
         )
     }
 }
-

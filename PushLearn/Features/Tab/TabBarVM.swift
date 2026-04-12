@@ -4,4 +4,3 @@ import Foundation
 public class TabBarVM {
     var currentScreen: Int = 1
 }
-

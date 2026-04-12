@@ -2,9 +2,9 @@ import SwiftUI
 
 struct PushTextField: View {
     let pushVM: PushVM
-    
+
     @Binding var currentText: String
-    
+
     var body: some View {
         TextField(
             "Слово",
@@ -20,7 +20,7 @@ struct PushTextField: View {
         .padding()
         .clipShape(Capsule())
         .shadow(radius: 1.1)
-        
+
         .multilineTextAlignment(.center)
         .lineLimit(1)
         .textFieldStyle(.roundedBorder)

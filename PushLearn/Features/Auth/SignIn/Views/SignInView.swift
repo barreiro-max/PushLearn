@@ -2,12 +2,12 @@ import SwiftUI
 
 struct SignInView: View {
     @Bindable var signInVM: SignInVM
-    
+
     @State private var email = ""
     @State private var password = ""
-    
+
     @State private var showSignUp = false
-    
+
     var body: some View {
         ZStack {
             background
@@ -22,24 +22,24 @@ struct SignInView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private var background: some View {
         Color.backgroundPrimary.ignoresSafeArea()
-        
+
         BackgroundRadialGradient(
             startRadius: 50,
             endRadius: 450,
             alignment: .topLeading
         )
     }
-    
+
     private var headerView: some View {
         Text("Авторизація")
             .font(.system(size: 36).bold())
             .offset(y: -170)
     }
-    
+
     @ViewBuilder
     private var stateErrorView: some View {
         switch signInVM.state {
@@ -51,7 +51,7 @@ struct SignInView: View {
             EmptyView()
         }
     }
-    
+
     private var authFields: some View {
         AuthFields(
             email: $email,
@@ -59,11 +59,11 @@ struct SignInView: View {
             state: $signInVM.state
         )
     }
-    
+
     private var forgetPasswordButton: some View {
         ForgotPasswordButton()
     }
-    
+
     private var signInButton: some View {
         SignInButton(
             signInVM: signInVM,
@@ -71,7 +71,7 @@ struct SignInView: View {
             password: $password
         )
     }
-    
+
     private var showSignUpSheet: some View {
         ShowSignUpSheet()
     }

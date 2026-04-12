@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ForgotPasswordButton: View {
     @State private var showForgetPassword = false
-    
+
     var body: some View {
         Button(action: {
             showForgetPassword.toggle()
@@ -14,7 +14,7 @@ struct ForgotPasswordButton: View {
             ForgetPasswordView()
         }
     }
-    
+
     private var buttonLabel: some View {
         Text("Забули пароль?")
             .font(.system(size: 24))

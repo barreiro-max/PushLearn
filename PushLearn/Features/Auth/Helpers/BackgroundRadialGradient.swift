@@ -4,7 +4,7 @@ struct BackgroundRadialGradient: View {
     private let startRadius: CGFloat
     private let endRadius: CGFloat
     private let alignment: UnitPoint
-    
+
     init(
         startRadius: CGFloat = 0,
         endRadius: CGFloat = 100,
@@ -14,12 +14,12 @@ struct BackgroundRadialGradient: View {
         self.endRadius = endRadius
         self.alignment = alignment
     }
-    
+
     private let colors: [Color] = [
         .backgroundSecondary,
         .clear
     ]
-    
+
     var body: some View {
         VStack {
             RadialGradient(

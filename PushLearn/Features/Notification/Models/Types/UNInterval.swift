@@ -2,7 +2,7 @@ import Foundation
 public struct UNInterval {
     var startQuietDate: Date
     var endQuietDate: Date
-    
+
     init(
         startQuietDate: Date = .now.addingTimeInterval(60 * 60 * 4),
         endQuietDate: Date = .now.addingTimeInterval(60 * 60 * 8)

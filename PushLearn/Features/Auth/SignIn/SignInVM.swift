@@ -6,10 +6,10 @@ import FirebaseAuth
     // MARK: - Dependencies
     private let authValidator: any AuthValidated
     private let service: any SignInProtocol
-    
+
     // MARK: - UI State
     var state: AuthState = .idle
-    
+
     // MARK: - Init
     init(
         authValidator: some AuthValidated,
@@ -18,22 +18,22 @@ import FirebaseAuth
         self.authValidator = authValidator
         self.service = service
     }
-    
+
     // MARK: - Methods
     func signIn(email: String, password: String) {
         state = .idle
-        
+
         state = authValidator.getValidationState(
             email: email,
             password: password
         )
-        
+
         guard case .validationSuccess = state else {
             return
         }
-        
+
         state = .loading
-        
+
         Task { @MainActor in
             do {
                 let result = try await service.signIn(
@@ -47,7 +47,7 @@ import FirebaseAuth
             UserDefaults.setLoggedIn()
         }
     }
-    
+
     func signOut() {
         state = .loading
         do {

@@ -9,7 +9,7 @@ struct PushView: View {
         ),
         store: LanguageStore()
     )
-        
+
     @State private var currentText = ""
 
     private let background: [Color] = [
@@ -17,7 +17,7 @@ struct PushView: View {
         .backgroundSecondary,
         .backgroundPrimary
     ]
-    
+
     var body: some View {
         VStack {
             pushTextField
@@ -32,7 +32,7 @@ struct PushView: View {
             ignoresSafeAreaEdges: .top
         )
     }
-    
+
     private var pushTextField: some View {
         PushTextField(
             pushVM: pushVM,
@@ -40,4 +40,3 @@ struct PushView: View {
         )
     }
 }
-

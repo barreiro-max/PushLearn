@@ -3,4 +3,3 @@ enum WordState: Equatable {
     case validationSuccess
     case failure(error: String)
 }
-

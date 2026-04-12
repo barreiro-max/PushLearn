@@ -2,12 +2,12 @@ import SwiftUI
 
 struct SignUpButton: View {
     let signUpVM: SignUpVM
-    
+
     @Binding var email: String
     @Binding var password: String
-    
+
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
         Button(action: {
             signUpVM.signUp(email: email, password: password)
@@ -18,20 +18,20 @@ struct SignUpButton: View {
         .padding(.horizontal, 16)
         .buttonStyle(.borderedProminent)
         .onChange(of: signUpVM.state) { _, newState in
-            if case .success(user: _) = newState {
+            if case .success = newState {
                 cleanFields()
                 dismiss()
             }
         }
     }
-    
+
     private var buttonLabel: some View {
         Text("Створити")
             .font(.system(size: 20))
             .frame(width: 90, height: 50)
-        
+
     }
-    
+
     private func cleanFields() {
         email = ""
         password = ""

@@ -1,0 +1,83 @@
+excluded:
+  - .git
+  - .github
+  - .DS_Store
+  - LICENSE.txt
+  - README.md
+  - PushLearn.xcodeproj
+  - Assets
+  - DerivedData
+  - build
+  - Pods
+
+included:
+  - PushLearn
+  - PushLearnTests
+
+opt_in_rules:
+  # 🔴 Safety / correctness
+  - force_unwrapping
+  - force_try
+  - overridden_super_call
+  - identical_operands
+
+  # 🟡 Swift idioms
+  - empty_count
+  - empty_string
+  - empty_collection_literal
+
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - contains_over_range_nil_comparison
+
+  - first_where
+  - last_where
+  - flatmap_over_map_reduce
+
+  - toggle_bool
+  - yoda_condition
+
+  # 🟢 Style / SwiftUI friendly
+  - trailing_closure
+  - sorted_imports
+  - closure_end_indentation
+  - closure_spacing
+  - unneeded_parentheses_in_closure_argument
+
+  - multiline_arguments
+  - multiline_parameters
+  - collection_alignment
+  - vertical_whitespace_closing_braces
+
+disabled_rules:
+   - trailing_whitespace
+  - line_length
+  - todo
+
+line_length:
+  warning: 120
+  error: 200
+
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1
+  excluded:
+    - id
+    - x
+    - y
+    - i
+    - j
+
+type_body_length:
+  warning: 300
+  error: 500
+
+function_body_length:
+  warning: 60
+  error: 120
+
+file_length:
+  warning: 500
+  error: 1000

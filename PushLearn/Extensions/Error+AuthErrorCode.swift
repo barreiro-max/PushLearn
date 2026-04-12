@@ -4,7 +4,7 @@ extension Error {
     var signInErrorDescription: String {
         if let err = self as NSError?,
            let authCode = AuthErrorCode(rawValue: err.code) {
-            
+
             switch authCode {
             case .userDisabled:
                 return "Обліковий запис заблоковано"
@@ -19,9 +19,9 @@ extension Error {
             }
         } else {
             return "Невідома помилка"
-        }        
+        }
     }
-    
+
     var signUpErrorDescription: String {
         if let err = self as NSError?,
            let authCode = AuthErrorCode(rawValue: err.code) {
@@ -40,11 +40,11 @@ extension Error {
             return "Невідома помилка"
         }
     }
-    
+
     var resetPasswordDescription: String {
         if let err = self as NSError?,
            let authCode = AuthErrorCode(rawValue: err.code) {
-            
+
             switch authCode {
             case .invalidEmail:
                 return "Невалідна електронна пошта."
@@ -72,4 +72,3 @@ extension Error {
         }
     }
 }
-

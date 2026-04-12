@@ -3,7 +3,7 @@ import SwiftUI
 struct UNToggle: View {
     @AppStorage("isNotificationEnabled") private var isNotificationEnabled = false
     let notificationVM: UserNotificationVM
-    
+
     var body: some View {
         Toggle(
             "Увімкнути повідомлення",
@@ -16,7 +16,7 @@ struct UNToggle: View {
             }
         }
     }
-    
+
     private var notDeterminedAuthStatus: Bool {
         notificationVM.authStatus() == .notDetermined
     }

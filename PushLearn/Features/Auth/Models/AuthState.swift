@@ -6,14 +6,12 @@ enum AuthState: Equatable {
     case validationSuccess
     case loading
     case success(user: User)
-    
+
     case failure(
         email: String = "",
         password: String = "",
         global: String = ""
     )
-    
+
     case out
 }
-
-

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct UNFrequencyPicker: View {
     @Bindable var notificationVM: UserNotificationVM
-    
+
     var body: some View {
         Picker(
             "Частота повідомлень",
@@ -16,12 +16,12 @@ struct UNFrequencyPicker: View {
             notificationVM.cancelAllAndSchedule(type: .randomType)
         }
     }
-    
+
     private var oneHourOption: some View {
         Text("Раз в 1 годину")
             .tag(UNFrequency.oneHour)
     }
-    
+
     private var sixHoursOption: some View {
         Text("Раз в 6 годин")
             .tag(UNFrequency.sixHours)
@@ -32,4 +32,3 @@ struct UNFrequencyPicker: View {
             .tag(UNFrequency.twentyFourHours)
     }
 }
-

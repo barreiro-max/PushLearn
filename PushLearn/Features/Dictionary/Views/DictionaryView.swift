@@ -15,13 +15,13 @@ struct DictionaryView: View {
             database: FirestoreDataSource()
         )
     )
-    
+
     private let background: [Color] = [
         .backgroundSecondary,
         .backgroundSecondary,
         .backgroundPrimary
     ]
-    
+
     var body: some View {
         dictionary
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -35,9 +35,9 @@ struct DictionaryView: View {
             )
             .onChangeConfiguration(with: dictVM)
             .translateTextOnPage(with: dictVM)
-        
+
     }
-    
+
     private var dictionary: some View {
         List {
             if let error = dictVM.errorTranslationMessage {
@@ -48,7 +48,7 @@ struct DictionaryView: View {
         }
         .listStyle(.inset)
     }
-    
+
     private var wordsView: some View {
         ForEach(dictVM.words, id: \.self) { word in
             Text(word.source)

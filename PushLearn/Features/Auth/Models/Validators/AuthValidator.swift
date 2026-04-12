@@ -14,7 +14,7 @@ struct AuthValidator: AuthValidated {
         let res = try? regex?.wholeMatch(in: email)
         return res != nil
     }
-    
+
     func isPasswordValid(_ password: String) -> Bool {
         let pwRegexPattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
         let regex = try? Regex(pwRegexPattern)
@@ -28,7 +28,7 @@ extension AuthValidator {
     func getValidationState(email: String, password: String) -> AuthState {
         guard isEmailValid(email) else {
             return .failure(email: "Невалідна електронна пошта")
-            
+
         }
         guard isPasswordValid(password) else {
             return .failure(password: "Невалідний пароль")

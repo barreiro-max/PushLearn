@@ -11,7 +11,7 @@ struct SettingsView: View {
 
     private let background: [Color] = [
         .backgroundSecondary,
-        .backgroundPrimary,
+        .backgroundPrimary
     ]
 
     var body: some View {

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct UNQuietModeView: View {
     @Bindable var notificationVM: UserNotificationVM
-    
+
     var body: some View {
         VStack {
             headerView
@@ -11,11 +11,11 @@ struct UNQuietModeView: View {
         }
         .padding()
     }
-    
+
     private var headerView: some View {
         Text("Тихий режим").bold()
     }
-    
+
     private var startHourDatePicker: some View {
         DatePicker(
             "З цього часу: ",
@@ -23,7 +23,7 @@ struct UNQuietModeView: View {
             displayedComponents: .hourAndMinute
         )
     }
-    
+
     private var endHourDatePicker: some View {
         DatePicker(
             "До цього часу: ",
