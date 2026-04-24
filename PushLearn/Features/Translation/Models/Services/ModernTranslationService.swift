@@ -1,6 +1,7 @@
 import Translation
 
-protocol Translating {
+protocol Translating: Sendable {
+
     func translate(
         for words: [WordSource],
         using session: TranslationSession
