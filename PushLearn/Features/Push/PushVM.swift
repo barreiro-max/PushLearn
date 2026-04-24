@@ -1,46 +1,57 @@
 import Foundation
-import FirebaseAuth
 
 @MainActor
-@Observable final public class PushVM {
-    private let validator: any WordValidated
-    private let repository: any UserWordsRepositoryProtocol
-    private let store: any LanguageStoreSettings
+@Observable
+final class PushVM {
 
     var state: WordState = .idle
 
+    private let validator: WordValidated
+    private let repository: WordRepository
+    private let languageProvider: LanguageProviderSettings
+    private let userProvider: AuthUserProvider
+
     init(
-        validator: some WordValidated,
-        repository: some UserWordsRepositoryProtocol,
-        store: some LanguageStoreSettings
+        validator: WordValidated,
+        repository: WordRepository,
+        languageProvider: LanguageProviderSettings,
+        userProvider: AuthUserProvider
     ) {
         self.validator = validator
         self.repository = repository
-        self.store = store
+        self.languageProvider = languageProvider
+        self.userProvider = userProvider
     }
 
     func push(sourceText: String) {
         state = .idle
 
-        state = validator.getWordState(
-            word: sourceText,
-            for: store.source.minimalIdentifier
-        )
+        Task {
+            let result = await validator.getWordState(
+                word: sourceText,
+                for: languageProvider.source.minimalIdentifier
+            )
 
-        guard case .validationSuccess = state
-        else { return }
+            state = result
 
-        Task { @MainActor in
+            guard case .validated = result else {
+                return
+            }
+
             do {
-                guard let user = Auth.auth().currentUser
-                else { return }
+                guard let user = userProvider.currentUser else {
+                    return
+                }
 
                 let word = WordSource(
                     id: sourceText,
                     source: sourceText
                 )
 
-                try await repository.add(word: word, to: user.uid)
+                try await repository.add(
+                    word: word,
+                    to: user.uid
+                )
             } catch {
                 state = .failure(error: error.repositoryErrorMessage)
             }
