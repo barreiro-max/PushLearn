@@ -1,6 +1,15 @@
 import Foundation
 
+@MainActor
 @Observable
-public class TabBarVM {
-    var currentScreen: Int = 1
+final class TabBarVM {
+
+    enum Screen: Hashable, Sendable {
+
+        case dictionary
+        case push
+        case settings
+    }
+
+    var screen: Screen = .push
 }
