@@ -1,14 +1,15 @@
 import SwiftUI
 
 struct PushTextField: View {
+
     let pushVM: PushVM
 
-    @Binding var currentText: String
+    @State private var text = ""
 
     var body: some View {
         TextField(
             "Слово",
-            text: $currentText,
+            text: $text,
             prompt: Text("Додати слово")
         )
         .font(.system(size: 42, weight: .medium))
@@ -19,17 +20,14 @@ struct PushTextField: View {
         )
         .padding()
         .clipShape(Capsule())
-        .shadow(radius: 1.1)
-
         .multilineTextAlignment(.center)
         .lineLimit(1)
         .textFieldStyle(.roundedBorder)
-        .autocorrectionDisabled(true)
         .textInputAutocapitalization(.words)
         .submitLabel(.send)
         .onSubmit {
-            pushVM.push(sourceText: currentText)
-            currentText.removeAll()
+            pushVM.push(sourceText: text)
+            text.removeAll()
         }
     }
 }
