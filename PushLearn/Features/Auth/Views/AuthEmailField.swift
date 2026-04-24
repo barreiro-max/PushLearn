@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AuthEmailField: View {
+
     @Binding var email: String
 
     @Binding var state: AuthState
@@ -16,8 +17,12 @@ struct AuthEmailField: View {
 }
 
 extension AuthEmailField {
+    
     @ViewBuilder
-    func makeEmailField(email: String, emailError: String? = nil) -> some View {
+    func makeEmailField(
+        email: String,
+        emailError: String? = nil
+    ) -> some View {
         VStack(spacing: 4) {
             if let emailError {
                 Text(emailError)

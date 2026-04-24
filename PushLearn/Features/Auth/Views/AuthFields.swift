@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AuthFields: View {
+
     @Binding var email: String
     @Binding var password: String
     @Binding var state: AuthState

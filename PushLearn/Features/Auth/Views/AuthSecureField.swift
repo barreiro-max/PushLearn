@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AuthSecureField: View {
+
     @Binding var password: String
 
     @Binding var state: AuthState
@@ -16,6 +17,7 @@ struct AuthSecureField: View {
 }
 
 extension AuthSecureField {
+
     @ViewBuilder
     private func makeSecureField(
         password: String,
