@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct LanguagePicker: View {
-    @AppStorage("sourceLanguage") private var sourceLanguage = "nil"
-    @AppStorage("selectedLanguage") private var selectedLanguage = "nil"
+    
+    @AppStorage("sourceLanguage") private var sourceLanguage = "en"
+    @AppStorage("selectedLanguage") private var selectedLanguage = "uk"
 
     typealias LanguageTuple = (name: String, code: String)
 
