@@ -1,16 +1,15 @@
 import SwiftUI
-// MARK: — PushView
 
 struct PushView: View {
+
     @State var pushVM = PushVM(
         validator: WordValidator(),
-        repository: UserWordsRepository(
-            database: FirestoreDataSource()
+        repository: WordRepositoryImpl(
+            datasource: FirestoreWordDataSource()
         ),
-        store: LanguageStore()
+        languageProvider: LanguageProvider(),
+        userProvider: FirebaseAuthUserProvider()
     )
-
-    @State private var currentText = ""
 
     private let background: [Color] = [
         .backgroundSecondary,
@@ -34,9 +33,6 @@ struct PushView: View {
     }
 
     private var pushTextField: some View {
-        PushTextField(
-            pushVM: pushVM,
-            currentText: $currentText
-        )
+        PushTextField(pushVM: pushVM)
     }
 }
