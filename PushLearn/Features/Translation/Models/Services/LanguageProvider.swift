@@ -25,3 +25,8 @@ struct LanguageProvider: LanguageProviderSettings {
         return .init(identifier: value)
     }
 }
+
+//  UserDefaults commonly used across threads for simple get/set operations,
+//  therefore we accept manual responsibility
+//  and mark it @unchecked Sendable.
+extension UserDefaults: @unchecked @retroactive Sendable {}
