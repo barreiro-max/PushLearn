@@ -1,7 +1,7 @@
-import Foundation
 import FirebaseAuth
 
 enum UserMapper: Mapper {
+
     typealias Domain = UserProfile
     typealias DTO = UserProfileDTO
 
