@@ -1,33 +1,46 @@
 import Translation
-import FirebaseAuth
 
 @MainActor
-@Observable final public class DictionaryVM {
-    private(set) var words: [Word] = []
-    var configuration: TranslationSession.Configuration?
+@Observable
+final class DictionaryVM {
 
     var errorTranslationMessage: String?
 
-    private let facade: any TranslationFacadeProtocol
-    private let repository: any UserWordsRepositoryProtocol
+    private(set) var words: [Word] = []
+    private(set) var configuration: TranslationSession.Configuration?
+
+    private let facade: TranslationFacadeProtocol
+    private let repository: WordRepository
+    private let provider: AuthUserProvider
 
     init(
-        facade: some TranslationFacadeProtocol,
-        repository: some UserWordsRepositoryProtocol
+        facade: TranslationFacadeProtocol,
+        repository: WordRepository,
+        provider: AuthUserProvider
     ) {
         self.facade = facade
         self.repository = repository
+        self.provider = provider
     }
 
-    public func prepareOrRebuildConfiguration() {
+    func prepareOrRebuildConfiguration() {
         facade.prepareOrRebuild(configuration: &configuration)
     }
 
-    public func translateAllSources(using session: TranslationSession) async {
+    func translateAllSources(using session: sending TranslationSession) async {
         do {
-            guard let id = Auth.auth().currentUser?.uid else { return }
+            guard let id = provider.currentUser?.uid else {
+                return
+            }
+
             let sourceWords = try await repository.getWords(for: id)
-            words = try await facade.translate(for: sourceWords, using: session)
+
+            let result = try await facade.translate(
+                for: sourceWords,
+                using: session
+            )
+
+            words = result
         } catch {
             errorTranslationMessage = error.translationErrorMessage
         }
