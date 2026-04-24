@@ -1,19 +1,17 @@
 import SwiftUI
 
-// MARK: — DictionaryView
-
 struct DictionaryView: View {
+
     @State var dictVM = DictionaryVM(
         facade: TranslationFacade(
             configurator: TranslationConfigurator(),
-            languageChecker: LanguageAvailabilityChecker(),
-            prepareTranslator: TranslationPreparer(),
-            languageStore: LanguageStore(),
+            checker: LanguageAvailabilityChecker(),
+            provider: LanguageProvider(),
             translator: ModernTranslationService()
         ),
-        repository: UserWordsRepository(
-            database: FirestoreDataSource()
-        )
+        repository: WordRepositoryImpl(
+            datasource: FirestoreWordDataSource()
+        ), provider: FirebaseAuthUserProvider()
     )
 
     private let background: [Color] = [
@@ -49,10 +47,9 @@ struct DictionaryView: View {
     }
 
     private var wordsView: some View {
-        ForEach(dictVM.words, id: \.self) { word in
+        ForEach(dictVM.words) { word in
             Text(word.source)
                 .font(.headline)
-                .foregroundStyle(.primary)
             Text(word.target)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
