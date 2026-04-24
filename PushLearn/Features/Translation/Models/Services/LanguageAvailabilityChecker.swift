@@ -1,7 +1,8 @@
 import Foundation
 import Translation
 
-protocol LanguageAvailabilityChecking {
+protocol LanguageAvailabilityChecking: Sendable {
+
     func checkLanguageSupport(
         from source: Locale.Language,
         to target: Locale.Language
