@@ -1,7 +1,10 @@
 import SwiftUI
 
-struct UNToggle: View {
-    @AppStorage("isNotificationEnabled") private var isNotificationEnabled = false
+struct UserNotificationToggle: View {
+
+    @AppStorage("isNotificationEnabled")
+    private var isNotificationEnabled = false
+
     let notificationVM: UserNotificationVM
 
     var body: some View {
@@ -10,14 +13,13 @@ struct UNToggle: View {
             systemImage: "bell.badge",
             isOn: $isNotificationEnabled
         )
+        .onAppear {
+            notificationVM.loadAuthStatus()
+        }
         .onChange(of: isNotificationEnabled) { _, activatedToggle in
-            if activatedToggle, notDeterminedAuthStatus {
+            if activatedToggle, notificationVM.notDeterminedAuthStatus {
                 notificationVM.requestAuth()
             }
         }
-    }
-
-    private var notDeterminedAuthStatus: Bool {
-        notificationVM.authStatus() == .notDetermined
     }
 }
