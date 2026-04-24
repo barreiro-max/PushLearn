@@ -1,26 +1,25 @@
-import UserNotifications
+@preconcurrency import UserNotifications
 
-struct UNTemplate {
+struct UNTemplate: Sendable {
+
     var content: UNMutableNotificationContent
 
     init(
         title: String,
         body: String,
         sound: UNNotificationSound = .default,
-        categoryIdentifier: String = UUID().uuidString
     ) {
-
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
         content.sound = sound
-        content.categoryIdentifier = categoryIdentifier
+        content.categoryIdentifier = UUID().uuidString
         self.content = content
     }
 }
 
 extension UNTemplate {
-    // MARK: - Notification Templates
+
     static let dailyMessage = UNTemplate(
         title: "Час для практики!",
         body: "Виділи кілька хвилин на нові слова — маленькі кроки дають результат."
