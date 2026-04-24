@@ -1,12 +1,15 @@
 import FirebaseAuth
 
-protocol ForgetPasswordServiceProtocol {
+protocol ForgetPasswordServiceProtocol: Sendable {
+
     func sendPasswordReset(for email: String) async throws
 }
 
 struct ForgetPasswordService: ForgetPasswordServiceProtocol {
-    // MARK: - Auth Actions
+
     func sendPasswordReset(for email: String) async throws {
-        try await Auth.auth().sendPasswordReset(withEmail: email)
+        try await Auth
+            .auth()
+            .sendPasswordReset(withEmail: email)
     }
 }
