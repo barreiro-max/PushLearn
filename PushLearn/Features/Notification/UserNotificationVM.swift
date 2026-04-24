@@ -1,38 +1,51 @@
 import Foundation
-import UserNotifications
 
+@MainActor
 @Observable
-public class UserNotificationVM {
-    private let manager: any Notificated
+final class UserNotificationVM {
 
-    var frequeuncy: UNFrequency
-    var quietInterval: UNInterval
+    var context: UserNotificationContext
+
+    var notDeterminedAuthStatus: Bool {
+        context.authorizationStatus == .notDetermined
+    }
+
+    private let manager: Notificated
 
     init(
-        manager: some Notificated,
-        frequeuncy: UNFrequency = .sixHours,
-        quietInterval: UNInterval =  .init()
+        context: UserNotificationContext,
+        manager: Notificated,
     ) {
+        self.context = context
         self.manager = manager
-        self.frequeuncy = frequeuncy
-        self.quietInterval = quietInterval
     }
 
     func requestAuth() {
         Task {
-            await manager.requestAuthorization()
+            let result = await manager.requestAuthorization()
+            context.isAuthorizationRequested = result
         }
     }
-    func authStatus() -> UNAuthorizationStatus {
-        return manager.authStatus()
+
+    func loadAuthStatus() {
+        Task {
+            let result = await manager.authStatus()
+            context.authorizationStatus = result
+        }
     }
 
-    func cancelAllAndSchedule(type: UNType) {
+    func schedule(type: UNType) {
+        context.isScheduled = false
         manager.cancelAll(clearDelivered: false)
-        manager.schedule(
-            type: type,
-            frequency: frequeuncy,
-            interval: quietInterval
-        )
+
+        Task {
+            let result = await manager.schedule(
+                type: type,
+                frequency: context.frequency,
+                interval: context.quietInterval
+            )
+
+            context.isScheduled = result
+        }
     }
 }
