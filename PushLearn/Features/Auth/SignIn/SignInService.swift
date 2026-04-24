@@ -1,6 +1,6 @@
 import FirebaseAuth
 
-protocol SignInProtocol {
+protocol SignInProtocol: Sendable {
 
     func signIn(
         email: String,
