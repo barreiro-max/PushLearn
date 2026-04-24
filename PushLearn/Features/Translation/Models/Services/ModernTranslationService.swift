@@ -9,6 +9,7 @@ protocol Translating: Sendable {
 }
 
 public struct ModernTranslationService: Translating {
+
     func translate(
         for words: [WordSource],
         using session: TranslationSession
@@ -16,6 +17,7 @@ public struct ModernTranslationService: Translating {
         let requests: [TranslationSession.Request] = words.map {
             TranslationSession.Request(sourceText: $0.source)
         }
+
         let responses = try await session.translations(from: requests)
         return responses
     }
