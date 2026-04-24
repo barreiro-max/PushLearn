@@ -4,8 +4,8 @@ struct SignUpView: View {
     @State var signUpVM = SignUpVM(
         authValidator: AuthValidator(),
         service: SignUpService(),
-        repository: UserWordsRepository(
-            database: FirestoreDataSource()
+        repository: UserRepositoryImpl(
+            datasource: FirestoreUserDataSource()
         )
     )
 
@@ -23,11 +23,13 @@ struct SignUpView: View {
                 signUpButton
             }
         }
+        .onDisappear(perform: signUpVM.onDisappearSignUp)
     }
 
     @ViewBuilder
     private var background: some View {
         Color.backgroundPrimary.ignoresSafeArea()
+        
         BackgroundRadialGradient(
             startRadius: 25,
             endRadius: 750,

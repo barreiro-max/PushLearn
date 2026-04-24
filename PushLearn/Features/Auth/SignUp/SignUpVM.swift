@@ -1,28 +1,29 @@
-import FirebaseAuth
+import Foundation
 
 @MainActor
-@Observable public class SignUpVM {
-    // MARK: - Dependencies
-    private let authValidator: any AuthValidated
-    private let service: any SignUpProtocol
-    private let repository: any UserWordsRepositoryProtocol
+@Observable
+final class SignUpVM {
 
-    // MARK: - UI State
     var state: AuthState = .idle
 
-    // MARK: - Init
+    private let authValidator: AuthValidated
+    private let service: SignUpProtocol
+    private let repository: UserRepository
+
+    private var signUpTask: Task<Void, Never>?
+
     init(
-        authValidator: some AuthValidated,
-        service: some SignUpProtocol,
-        repository: some UserWordsRepositoryProtocol
+        authValidator: AuthValidated,
+        service: SignUpProtocol,
+        repository: UserRepository
     ) {
         self.authValidator = authValidator
         self.service = service
         self.repository = repository
     }
 
-    // MARK: - Methods
     func signUp(email: String, password: String) {
+        signUpTask?.cancel()
         state = .idle
 
         state = authValidator.getValidationState(
@@ -30,29 +31,34 @@ import FirebaseAuth
             password: password
         )
 
-        guard case .validationSuccess = state else {
+        guard case .validated = state else {
             return
         }
 
         state = .loading
-
-        Task { @MainActor in
+        signUpTask = Task {
             do {
-                let authDataResult = try await service.signUp(
+                let result = try await service.signUp(
                     email: email,
                     password: password
                 )
-                try await createAndUpdateStatus(user: authDataResult.user)
+
+                try Task.checkCancellation()
+
+                let userProfile = UserMapper.toDomain(firebaseUser: result.user)
+                try await repository.create(userProfile: userProfile)
+                state = .success(profile: userProfile)
             } catch {
+                guard !Task.isCancelled else {
+                    return
+                }
+                
                 state = .failure(global: error.signUpErrorDescription)
             }
         }
     }
 
-    private func createAndUpdateStatus(user: User) async throws {
-        let userProfile = UserMapper.toDomain(firebaseUser: user)
-        try await repository.create(userProfile: userProfile)
-
-        state = .success(user: user)
+    func onDisappearSignUp() {
+        signUpTask?.cancel()
     }
 }
