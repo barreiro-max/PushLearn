@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct ResetPasswordButton: View {
+
     @Bindable var forgetPasswordVM: ForgetPasswordVM
     @Binding var email: String
+    
     var body: some View {
         Button {
             forgetPasswordVM.resetPassword(email: email)

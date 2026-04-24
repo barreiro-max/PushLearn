@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ForgotPasswordButton: View {
+
     @State private var showForgetPassword = false
 
     var body: some View {
