@@ -1,10 +1,9 @@
 import SwiftUI
 
-// MARK: — SettingsView
-
 struct SettingsView: View {
-    @AppStorage("isNotificationEnabled") private var isNotificationEnabled =
-        false
+
+    @AppStorage("isNotificationEnabled")
+    private var isNotificationEnabled = false
 
     let signInVM: SignInVM
     let notificationVM: UserNotificationVM
@@ -57,12 +56,12 @@ struct SettingsView: View {
 
     private var sectionNotification: some View {
         Section("Повідомлення") {
-            UNToggle(notificationVM: notificationVM)
+            UserNotificationToggle(notificationVM: notificationVM)
             if isNotificationEnabled {
-                UNFrequencyPicker(
+                UserNotificationFrequencyPicker(
                     notificationVM: notificationVM
                 )
-                UNQuietModeView(
+                UserNotificationQuietModeView(
                     notificationVM: notificationVM
                 )
             }
