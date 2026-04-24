@@ -1,11 +1,13 @@
 import UIKit
 
-protocol WordValidated {
+protocol WordValidated: Sendable {
+
     func isCorrectLanguage(
         for word: String,
         for languageCode: String
     ) -> Bool
 
+    @MainActor
     func isReal(
         word: String,
         for languageCode: String
@@ -14,11 +16,11 @@ protocol WordValidated {
     func getWordState(
         word: String,
         for languageCode: String
-    ) -> WordState
+    ) async -> WordState
 }
 
 struct WordValidator: WordValidated {
-    // MARK: - Validation Methods
+
     func isCorrectLanguage(
         for word: String,
         for languageCode: String
@@ -37,13 +39,17 @@ struct WordValidator: WordValidated {
         default:
             /nil/
         }
+
         return word.firstMatch(of: regex) != nil
     }
 
-    func isReal(word: String, for languageCode: String) -> Bool {
+    func isReal(
+        word: String,
+        for languageCode: String
+    ) -> Bool {
         let checker = UITextChecker()
-
         let range = NSRange(location: 0, length: word.utf16.count)
+
         let misspelledRange = checker.rangeOfMisspelledWord(
             in: word,
             range: range,
@@ -57,17 +63,23 @@ struct WordValidator: WordValidated {
 }
 
 extension WordValidator {
-    // MARK: - State Management
-    func getWordState(word: String, for languageCode: String) -> WordState {
+
+    func getWordState(
+        word: String,
+        for languageCode: String
+    ) async -> WordState {
         guard !word.isEmpty, word.count > 2 else {
             return .failure(error: "Слово має містити щонайменше 3 літери")
         }
+
         guard isCorrectLanguage(for: word, for: languageCode) else {
             return .failure(error: "Слово не відповідає обраній мові" )
         }
-        guard isReal(word: word, for: languageCode) else {
+
+        guard await isReal(word: word, for: languageCode) else {
             return .failure(error: "Такого слова не існує")
         }
-        return .validationSuccess
+
+        return .validated
     }
 }
