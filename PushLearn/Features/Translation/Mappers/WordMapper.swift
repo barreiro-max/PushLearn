@@ -1,6 +1,7 @@
 import Foundation
 
 enum WordMapper: Mapper {
+
     typealias Domain = Word
     typealias DTO = WordDTO
 
@@ -22,6 +23,7 @@ enum WordMapper: Mapper {
 }
 
 enum WordSourceMapper: Mapper {
+
     typealias Domain = WordSource
     typealias DTO = WordSourceDTO
 
