@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SignInView: View {
+
     @Bindable var signInVM: SignInVM
 
     @State private var email = ""
@@ -21,6 +22,7 @@ struct SignInView: View {
                 showSignUpSheet
             }
         }
+        .onDisappear(perform: signInVM.onDisappearSignIn)
     }
 
     @ViewBuilder
