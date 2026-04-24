@@ -1,12 +1,12 @@
 import Foundation
-protocol LanguageStoreSettings {
+
+protocol LanguageProviderSettings: Sendable {
+
     var source: Locale.Language { get }
     var target: Locale.Language { get }
 }
 
-struct LanguageStore: LanguageStoreSettings {
-    private let sourceKey = "sourceLanguage"
-    private let targetkey = "selectedLanguage"
+struct LanguageProvider: LanguageProviderSettings {
 
     private let defaults: UserDefaults
 
@@ -16,12 +16,12 @@ struct LanguageStore: LanguageStoreSettings {
 
     var source: Locale.Language {
         let preferedLanguage = Locale.preferredLanguages[0].prefix(2)
-        let value = defaults.string(forKey: sourceKey) ?? String(preferedLanguage)
+        let value = defaults.string(forKey: "sourceLanguage") ?? String(preferedLanguage)
         return .init(identifier: value)
     }
 
     var target: Locale.Language {
-        let value = defaults.string(forKey: targetkey) ?? "en"
+        let value = defaults.string(forKey: "selectedLanguage") ?? "uk"
         return .init(identifier: value)
     }
 }
