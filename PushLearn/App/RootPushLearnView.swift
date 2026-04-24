@@ -1,30 +1,33 @@
 import SwiftUI
 
 struct RootPushLearnView: View {
-    @AppStorage("isLoggedIn") private var isLoggedIn = false
-    @AppStorage("isDarkMode") private var isDarkMode = false
 
-    @State var signInVM: SignInVM
-    @State var notificationVM: UserNotificationVM
+    @AppStorage("isLoggedIn")
+    private var isLoggedIn = false
 
-    init() {
-        let validator: AuthValidated = AuthValidator()
-        let service: SignInProtocol = SignInService()
-        _signInVM = State(
-            wrappedValue: SignInVM(
-                authValidator: validator,
-                service: service
-            )
-        )
+    @AppStorage("isDarkMode")
+    private var isDarkMode = false
 
-        let manager: Notificated = UNService()
-        _notificationVM = State(wrappedValue: UserNotificationVM(manager: manager))
-    }
+    @State var tabBarVM = TabBarVM()
+
+    @State var signInVM = SignInVM(
+        authValidator: AuthValidator(),
+        service: SignInService()
+    )
+
+    @State var notificationVM = UserNotificationVM(
+        context: UserNotificationContext(),
+        manager: UserNotificationService()
+    )
 
     var body: some View {
         Group {
             if isLoggedIn {
-                PushLearnView(signInVM: signInVM, notificationVM: notificationVM)
+                CustomTabView(
+                    tabBarVM: tabBarVM,
+                    signInVM: signInVM,
+                    notificationVM: notificationVM
+                )
             } else {
                 SignInView(signInVM: signInVM)
             }
