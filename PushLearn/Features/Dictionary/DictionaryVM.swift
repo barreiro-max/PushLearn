@@ -7,7 +7,7 @@ final class DictionaryVM {
     var errorTranslationMessage: String?
 
     private(set) var words: [Word] = []
-    private(set) var configuration: TranslationSession.Configuration?
+    var configuration: TranslationSession.Configuration?
 
     private let facade: TranslationFacadeProtocol
     private let repository: WordRepository
