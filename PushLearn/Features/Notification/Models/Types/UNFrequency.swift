@@ -1,13 +1,17 @@
-enum UNFrequency {
+enum UNFrequency: Sendable {
+
     case oneHour
     case sixHours
     case twentyFourHours
 
     var seconds: Int {
         switch self {
-        case .oneHour: return 3600
-        case .sixHours: return 6 * 3600
-        case .twentyFourHours: return 24 * 3600
+        case .oneHour:
+            3600
+        case .sixHours:
+            6 * 3600
+        case .twentyFourHours:
+            24 * 3600
         }
     }
 }
