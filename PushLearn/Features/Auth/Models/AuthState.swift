@@ -1,11 +1,10 @@
-import FirebaseAuth
-import Foundation
-
 enum AuthState: Equatable {
+
     case idle
-    case validationSuccess
+    case validated
     case loading
-    case success(user: User)
+    case sendResetPassword
+    case success(profile: UserProfile)
 
     case failure(
         email: String = "",
