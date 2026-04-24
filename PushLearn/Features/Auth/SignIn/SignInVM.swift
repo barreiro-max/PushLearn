@@ -1,55 +1,66 @@
 import Foundation
-import FirebaseAuth
 
 @MainActor
-@Observable final public class SignInVM {
-    // MARK: - Dependencies
-    private let authValidator: any AuthValidated
-    private let service: any SignInProtocol
+@Observable
+final class SignInVM {
 
-    // MARK: - UI State
     var state: AuthState = .idle
 
-    // MARK: - Init
+    private let authValidator: AuthValidated
+    private let service: SignInProtocol
+
+    private var signInTask: Task<Void, Never>?
+
     init(
-        authValidator: some AuthValidated,
-        service: some SignInProtocol
+        authValidator: AuthValidated,
+        service: SignInProtocol
     ) {
         self.authValidator = authValidator
         self.service = service
     }
 
-    // MARK: - Methods
     func signIn(email: String, password: String) {
+        signInTask?.cancel()
         state = .idle
 
-        state = authValidator.getValidationState(
+        let result = authValidator.getValidationState(
             email: email,
             password: password
         )
 
-        guard case .validationSuccess = state else {
+        state = result
+
+        guard case .validated = result else {
             return
         }
 
         state = .loading
 
-        Task { @MainActor in
+        signInTask = Task {
             do {
                 let result = try await service.signIn(
                     email: email,
                     password: password
                 )
-                state = .success(user: result.user)
+
+                try Task.checkCancellation()
+
+                let userProfile = UserMapper.toDomain(firebaseUser: result.user)
+                state = .success(profile: userProfile)
+                UserDefaults.setLoggedIn()
             } catch {
+                guard !Task.isCancelled else {
+                    return
+                }
+
                 state = .failure(global: error.signInErrorDescription)
             }
-            UserDefaults.setLoggedIn()
         }
     }
 
     func signOut() {
         state = .loading
+
         do {
             try service.signOut()
             state = .out
@@ -57,5 +68,9 @@ import FirebaseAuth
         } catch {
             state = .failure(global: error.signInErrorDescription)
         }
+    }
+
+    func onDisappearSignIn() {
+        signInTask?.cancel()
     }
 }
