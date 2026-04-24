@@ -1,26 +1,41 @@
 import Foundation
-import FirebaseAuth
 
 @MainActor
-@Observable final public class ForgetPasswordVM {
-    private let service: ForgetPasswordServiceProtocol
-
-    init(
-        service: ForgetPasswordServiceProtocol
-    ) {
-        self.service = service
-    }
+@Observable
+final class ForgetPasswordVM {
 
     var state: AuthState = .idle
 
+    private let service: ForgetPasswordServiceProtocol
+
+    private var resetPasswordTask: Task<Void, Never>?
+
+    init(service: ForgetPasswordServiceProtocol) {
+        self.service = service
+    }
+
     func resetPassword(email: String) {
+        resetPasswordTask?.cancel()
         state = .idle
-        Task { @MainActor in
+
+        resetPasswordTask = Task {
             do {
                 try await service.sendPasswordReset(for: email)
+
+                try Task.checkCancellation()
+
+                state = .sendResetPassword
             } catch {
+                guard !Task.isCancelled else {
+                    return
+                }
+
                 state = .failure(global: error.resetPasswordDescription)
             }
         }
+    }
+
+    func onDisappearResetPassword() {
+        resetPasswordTask?.cancel()
     }
 }
