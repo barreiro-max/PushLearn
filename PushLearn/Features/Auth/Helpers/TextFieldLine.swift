@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TextFieldLine: View {
+
     private let colors: [Color] = [
         .clear,
         .textPrimary,

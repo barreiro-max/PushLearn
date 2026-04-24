@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct BackgroundRadialGradient: View {
+
     private let startRadius: CGFloat
     private let endRadius: CGFloat
     private let alignment: UnitPoint
