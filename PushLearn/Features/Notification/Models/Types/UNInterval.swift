@@ -1,11 +1,13 @@
 import Foundation
-public struct UNInterval {
+
+struct UNInterval: Sendable {
+
     var startQuietDate: Date
     var endQuietDate: Date
 
     init(
-        startQuietDate: Date = .now.addingTimeInterval(60 * 60 * 4),
-        endQuietDate: Date = .now.addingTimeInterval(60 * 60 * 8)
+        startQuietDate: Date = .now.addingTimeInterval(3600 * 4),
+        endQuietDate: Date = .now.addingTimeInterval(3600 * 8)
     ) {
         self.startQuietDate = startQuietDate
         self.endQuietDate = endQuietDate
