@@ -2,12 +2,14 @@ import SwiftUI
 import FirebaseAuth
 
 struct UserInfo: View {
+
     var body: some View {
         if let user {
             LabeledContent(
                 "Ім'я",
                 value: user.displayName ?? String(localized: "Ім'я відсутнє")
             )
+            
             LabeledContent(
                 "Електронна пошта",
                 value: user.email ?? String(localized: "Невідома електронна пошта")
@@ -22,6 +24,7 @@ struct UserInfo: View {
         if isLoggedIn {
             return Auth.auth().currentUser
         }
+
         return nil
     }
 

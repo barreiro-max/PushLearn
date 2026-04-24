@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct ThemeToggle: View {
-    @AppStorage("isDarkMode") private var isDarkMode = false
+
+    @AppStorage("isDarkMode")
+    private var isDarkMode = false
 
     var body: some View {
         Toggle(

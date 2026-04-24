@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct VersionProgramView: View {
-    let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+
+    private let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 
     var body: some View {
         LabeledContent {

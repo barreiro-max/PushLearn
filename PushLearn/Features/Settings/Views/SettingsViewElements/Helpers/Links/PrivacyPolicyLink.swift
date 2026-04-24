@@ -1,16 +1,16 @@
 import SwiftUI
 
 struct PrivacyPolicyLink: View {
-    let privacyPolicyURL = URL(string: "https://example.com")!
 
     var body: some View {
-
-        Link(destination: privacyPolicyURL) {
-            Label(
-                "Політика конфіденційності",
-                systemImage: "person"
-            )
-            .bold()
+        if let url = URL(string: "https://example.com") {
+            Link(destination: url) {
+                Label(
+                    "Політика конфіденційності",
+                    systemImage: "person"
+                )
+                .bold()
+            }
         }
     }
 }
