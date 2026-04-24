@@ -1,5 +1,5 @@
-enum WordState: Equatable {
+enum WordState: Equatable, Sendable {
     case idle
-    case validationSuccess
+    case validated
     case failure(error: String)
 }
