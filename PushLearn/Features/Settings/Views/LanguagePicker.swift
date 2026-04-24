@@ -5,6 +5,7 @@ struct LanguagePicker: View {
     @AppStorage("selectedLanguage") private var selectedLanguage = "nil"
 
     typealias LanguageTuple = (name: String, code: String)
+
     private let languages: [LanguageTuple] = [
         (String(localized: "Українська"), "uk"),
         (String(localized: "Англійська"), "en"),
@@ -48,15 +49,8 @@ struct LanguagePicker: View {
 
     private func filteredLanguages(with languageCode: String) -> [LanguageTuple] {
         languages.filter {
-            !isCurrentLanguage(
-                for: $0.code,
-                with: languageCode
-            )
+            $0.code != languageCode
         }
-    }
-
-    private func isCurrentLanguage(for code: String, with languageCode: String) -> Bool {
-        languageCode == code
     }
 }
 
