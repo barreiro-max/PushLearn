@@ -32,7 +32,7 @@ jobs:
           xcodebuild \
             -project PushLearn.xcodeproj \
             -scheme PushLearn \
-            -destination 'id=AE1B743D-A3CC-4A1E-BFC9-ED56C5BE12F5' \
+            -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1' \
             build
 
       - name: Test
@@ -40,5 +40,5 @@ jobs:
           xcodebuild \
             -project PushLearn.xcodeproj \
             -scheme PushLearnTests \
-            -destination 'id=AE1B743D-A3CC-4A1E-BFC9-ED56C5BE12F5' \
+            -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1' \
             test
