@@ -1,12 +1,15 @@
 import Translation
 
-@available(iOS 18.0, *)
-protocol TranslationFacadeProtocol {
-    @MainActor func prepareOrRebuild(configuration: inout TranslationSession.Configuration?)
-    func translate(for: [WordSource], using session: TranslationSession) async throws -> [Word]
+protocol TranslationFacadeProtocol: Sendable {
+
+    func prepareOrRebuild(configuration: inout TranslationSession.Configuration?)
+
+    func translate(
+        for: [WordSource],
+        using session: TranslationSession
+    ) async throws -> [Word]
 }
 
-@available(iOS 18.0, *)
 struct TranslationFacade: TranslationFacadeProtocol {
     private let configurator: any TranslationConfigurating
 
