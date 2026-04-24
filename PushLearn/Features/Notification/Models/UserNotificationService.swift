@@ -1,54 +1,53 @@
-import UserNotifications
+@preconcurrency import UserNotifications
 
-protocol Notificated {
+protocol Notificated: Sendable {
     func requestAuthorization() async -> Bool
 
-    func authStatus() -> UNAuthorizationStatus
+    func authStatus() async -> UNAuthorizationStatus
 
     func schedule(
         type: UNType,
         frequency: UNFrequency,
         interval: UNInterval
-    )
+    ) async -> Bool
 
     func cancelAll(clearDelivered: Bool)
 }
 
-public struct UNService: Notificated {
-    // MARK: - Singleton
+struct UserNotificationService: Notificated {
+
     private let center = UNUserNotificationCenter.current()
 
-    // MARK: - API Calls
     func requestAuthorization() async -> Bool {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
 
         do {
-            let granted = try await center.requestAuthorization(
-                options: options
-            )
-            return granted
+            return try await center.requestAuthorization(options: options)
         } catch {
+            print(error.localizedDescription)
             return false
         }
     }
 
-    func authStatus() -> UNAuthorizationStatus {
-        var status: UNAuthorizationStatus = .notDetermined
-        Task {
-            status = await center.notificationSettings().authorizationStatus
-        }
-        return status
+    func authStatus() async -> UNAuthorizationStatus {
+        await center
+            .notificationSettings()
+            .authorizationStatus
     }
 
     func schedule(
         type: UNType,
         frequency: UNFrequency,
         interval: UNInterval
-    ) {
+    ) async -> Bool {
         let start = interval.startQuietDate
         let end = interval.endQuietDate
 
-        guard !(start...end).contains(.now) else { return }
+        let isOutsideRange = Date() < start || Date() > end
+
+        guard isOutsideRange else {
+            return false
+        }
 
         let trigger = UNTimeIntervalNotificationTrigger(
             timeInterval: TimeInterval(frequency.seconds),
@@ -64,14 +63,12 @@ public struct UNService: Notificated {
             trigger: trigger
         )
 
-        center.removeAllDeliveredNotifications()
-
-        Task {
-            do {
-                try await center.add(request)
-            } catch {
-                print(error.localizedDescription)
-            }
+        do {
+            try await center.add(request)
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
         }
     }
 

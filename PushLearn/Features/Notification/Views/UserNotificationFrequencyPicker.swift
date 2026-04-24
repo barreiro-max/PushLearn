@@ -1,19 +1,22 @@
 import SwiftUI
 
-struct UNFrequencyPicker: View {
+struct UserNotificationFrequencyPicker: View {
+
     @Bindable var notificationVM: UserNotificationVM
 
     var body: some View {
         Picker(
             "Частота повідомлень",
-            selection: $notificationVM.frequeuncy
+            selection: $notificationVM.context.frequency
         ) {
             oneHourOption
             sixHoursOption
             twentyFourHoursOption
         }
-        .onChange(of: notificationVM.frequeuncy) { _, _ in
-            notificationVM.cancelAllAndSchedule(type: .randomType)
+        .onChange(of: notificationVM.context.frequency) { _, _ in
+            if !notificationVM.context.isScheduled {
+                notificationVM.schedule(type: .randomType)
+            }
         }
     }
 

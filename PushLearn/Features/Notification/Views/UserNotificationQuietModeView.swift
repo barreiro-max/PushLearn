@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct UNQuietModeView: View {
+struct UserNotificationQuietModeView: View {
+
     @Bindable var notificationVM: UserNotificationVM
 
     var body: some View {
@@ -19,7 +20,7 @@ struct UNQuietModeView: View {
     private var startHourDatePicker: some View {
         DatePicker(
             "З цього часу: ",
-            selection: $notificationVM.quietInterval.startQuietDate,
+            selection: $notificationVM.context.quietInterval.startQuietDate,
             displayedComponents: .hourAndMinute
         )
     }
@@ -27,7 +28,7 @@ struct UNQuietModeView: View {
     private var endHourDatePicker: some View {
         DatePicker(
             "До цього часу: ",
-            selection: $notificationVM.quietInterval.endQuietDate,
+            selection: $notificationVM.context.quietInterval.endQuietDate,
             displayedComponents: .hourAndMinute
         )
     }
