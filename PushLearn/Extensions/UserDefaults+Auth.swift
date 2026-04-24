@@ -1,5 +1,7 @@
 import Foundation
+
 extension UserDefaults {
+
     static func setLoggedIn() {
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
     }

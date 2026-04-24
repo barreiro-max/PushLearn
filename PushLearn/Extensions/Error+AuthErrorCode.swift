@@ -1,6 +1,8 @@
 import Foundation
 import FirebaseAuth
+
 extension Error {
+
     var signInErrorDescription: String {
         if let err = self as NSError?,
            let authCode = AuthErrorCode(rawValue: err.code) {

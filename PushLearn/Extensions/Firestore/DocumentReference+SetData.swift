@@ -1,6 +1,7 @@
 import FirebaseFirestore
 
 extension DocumentReference {
+
     func setData<T: Encodable>(
         from value: T,
         merge: Bool = true,

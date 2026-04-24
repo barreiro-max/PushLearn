@@ -1,6 +1,7 @@
 import FirebaseFirestore
 
 extension Error {
+
     var repositoryErrorMessage: String {
         let nsError = self as NSError
         let firestoreCode = FirestoreErrorCode(_nsError: nsError).code

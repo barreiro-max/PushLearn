@@ -1,5 +1,7 @@
 import Translation
+
 extension Error {
+
     var translationErrorMessage: String {
         switch self {
         case .nothingToTranslate:
