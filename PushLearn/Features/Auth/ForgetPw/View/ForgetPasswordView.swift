@@ -1,10 +1,13 @@
 import SwiftUI
 
 struct ForgetPasswordView: View {
+    
     @State private var email = ""
+
     @State private var forgetPasswordVM = ForgetPasswordVM(
         service: ForgetPasswordService()
     )
+    
     var body: some View {
         ZStack {
             background
@@ -17,11 +20,13 @@ struct ForgetPasswordView: View {
                 resetPasswordButton
             }
         }
+        .onDisappear(perform: forgetPasswordVM.onDisappearResetPassword)
     }
 
     @ViewBuilder
     private var background: some View {
         Color.backgroundPrimary.ignoresSafeArea()
+
         BackgroundRadialGradient(
             startRadius: 50,
             endRadius: 450,
