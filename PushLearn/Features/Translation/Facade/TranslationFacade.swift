@@ -11,51 +11,57 @@ protocol TranslationFacadeProtocol: Sendable {
 }
 
 struct TranslationFacade: TranslationFacadeProtocol {
-    private let configurator: any TranslationConfigurating
 
-    private let languageChecker: any LanguageAvailabilityChecking
-    private let prepareTranslator: any TranslationPreparing
-    private let languageStore: any LanguageStoreSettings
-    private let translator: any Translating
+    private let configurator: TranslationConfigurating
+    private let checker: LanguageAvailabilityChecking
+    private let provider: LanguageProviderSettings
+    private let translator: Translating
 
     init(
         configurator: TranslationConfigurating,
-        languageChecker: LanguageAvailabilityChecking,
-        prepareTranslator: TranslationPreparing,
-        languageStore: LanguageStoreSettings,
+        checker: LanguageAvailabilityChecking,
+        provider: LanguageProviderSettings,
         translator: Translating
     ) {
         self.configurator = configurator
-        self.prepareTranslator = prepareTranslator
-        self.languageChecker = languageChecker
-        self.languageStore = languageStore
+        self.checker = checker
+        self.provider = provider
         self.translator = translator
     }
 
-    // MARK: - Configuration
     func prepareOrRebuild(configuration: inout TranslationSession.Configuration?) {
        configurator.prepare(
             configuration: &configuration,
-            languageStore: languageStore
+            languageProvider: provider
         )
     }
 
-    // MARK: - Translation
     func translate(
         for sourceWords: [WordSource],
         using session: TranslationSession
     ) async throws -> [Word] {
-        guard let isAvailable = await languageChecker.checkLanguageSupport(
-            from: languageStore.source,
-            to: languageStore.target
-        ), isAvailable else { return [] }
+        guard let isAvailable = await checker.checkLanguageSupport(
+            from: provider.source,
+            to: provider.target
+        ) else {
+            return []
+        }
 
-        try await prepareTranslator.prepareTranslation(using: session)
+        guard isAvailable else {
+            return []
+        }
 
-        let responses = try await translator.translate(for: sourceWords, using: session)
+        try await session.prepareTranslation()
+
+        let responses = try await translator.translate(
+            for: sourceWords,
+            using: session
+        )
+
         let translatedSources = zip(sourceWords, responses).map { wordSource, response in
             Word(source: wordSource.source, target: response.targetText)
         }
+
         return translatedSources
     }
 }
